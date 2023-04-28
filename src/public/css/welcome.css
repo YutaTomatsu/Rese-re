@@ -1,0 +1,189 @@
+
+
+.body {
+    background-color: white;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+
+}
+
+.header__left {
+    display: flex;
+    flex-direction: row;
+    width: 150px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 7px;
+    border: none;
+    background-color: rgb(72, 72, 255);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.icon::before {
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 10px;
+    width: 25%;
+    height: 1px;
+    background-color: white;
+    
+}
+
+.icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 50%;
+    height: 1px;
+    background-color: white;
+    
+}
+
+.icon .third-line {
+    content: "";
+    position: absolute;
+    top: 70%;
+    left: 10px;
+    width: 12.5%;
+    height: 1px;
+    background-color: white;
+}
+
+.header__title {
+    color: rgb(72, 72, 255);
+    font-weight: bolder;
+    font-size: 25px;
+    margin: 0 15px;
+
+}
+
+.header__right {
+}
+
+.header__right__form {
+    border: none;
+    width: 500px;
+    display: flex;
+    align-items: stretch;
+    height: 45px;
+    border-radius: 7px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+}
+
+.header__right__select1{
+    border: none;
+    border-radius:7px 0 0 7px;
+}
+
+.header__right__select2 {
+    border: none;
+}
+
+.header__right__img {
+    width: 17px;
+}
+
+.header__right__text {
+    border: none;
+    width: 400px;
+    border-radius: 0 7px 7px 0;
+}
+
+.header__right__button {
+    background-color: white;
+    border: none;
+}
+
+.card__row {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* 追加 */
+}
+
+.card {
+    width: 270px;
+    height: 270px;
+    border-radius: 10px;
+    background-color: white;
+    /* float: left; 削除 */
+    margin: 0 10px 10px 0;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.img {
+    width: 100%;
+    height: 135px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.shopname {
+    font-size: 18px ;
+    font-weight: bold;
+}
+
+.hashtag {
+    display: flex;
+    flex-direction: row;
+}
+
+.under__item{
+    
+    margin: 13px 13px 13px 13px;
+}
+
+.between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail {
+    text-decoration: none;
+    background-color: rgb(65, 65, 255);
+    color: white;
+    border-radius: 5px;
+    margin: 5px 5px ;
+    font-size: 13px;
+    text-align: center;
+    width: 80px;
+    height: 23px;
+   
+}
+
+.favorite {
+    margin: 5px 5px;
+}
+
+.heart {
+  cursor: pointer;
+}
+
+.heart img {
+  width: 24px;
+  height: 24px;
+}
+
+.heart-image.red {
+  display: none;
+}
+
+.heart-image.hidden {
+  display: none;
+}
+
+.liked {
+    color: pink;
+}
