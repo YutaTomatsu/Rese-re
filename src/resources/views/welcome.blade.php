@@ -30,7 +30,7 @@
     @csrf
     <button type="submit" class="menu__item">Logout</button>
 </form>
-    <a href="{{route('login')}}" class="menu__item">Mypage</a>
+    <a href="{{route('mypage')}}" class="menu__item">Mypage</a>
   </div>
 @else
 <div class="header__left">

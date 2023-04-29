@@ -14,6 +14,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\MypageController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Area;
@@ -111,3 +112,7 @@ Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('f
 
 
 Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorite');
+
+Route::get('/mypage', [MypageController::class, 'mypage'])->name('mypage');
+
+
