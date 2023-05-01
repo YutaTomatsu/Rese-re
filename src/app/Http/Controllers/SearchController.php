@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
+
+  
     public function search(Request $request)
 {
   $area_name = $request->input('area_name');
@@ -39,7 +42,13 @@ if ($area_name) {
             ->leftJoin('genres', 'shops_genres.genre_id', '=', 'genres.id')
             ->get();
 
+  $favorite_shops = array();
+        if (Auth::check()) {
+            $favorite_shops = Auth::user()->favoriteShops()->pluck('shop_id')->toArray();
+        }
 
-  return view('welcome', compact('shops','areas','genres'));
+
+
+  return view('welcome', compact('shops','areas','genres','favorite_shops'));
 }
 }

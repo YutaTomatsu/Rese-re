@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +11,7 @@
 </head>
 <body>
     
+<header class="header">
 
 @if (Auth::check())
 <div class="header__left">
@@ -113,17 +116,40 @@ button.addEventListener('click', toggleMenu);
   closeButton.addEventListener('click', toggleMenu);
 </script>
 
-<div class="name" >{{ Auth::user()->name }}</div>
+<div class="header__right">
+<a class="visit" href="{{route('visit')}}">来店履歴</a>
+</div>
+
+</header>
+
+<h2 class="name" >{{ Auth::user()->name }}さん</h2>
+
+<div class="mypage">
 
 <div class="reserve">
     <div class="reserve__title">予約状況</div>
-    <div class="reserve__box">
-        <img src="" alt="time">
-        <div>予約</div>
-        <button class="close-button" type="button">X</button>
 
-@foreach ($reservations as $reservation)
+    
+@foreach ($reservations as $key => $reservation)
+<div class="reserve__box">
+
 <div class="confirm">
+    <div class="reserve__item__top">
+     <div class="reserve__item__top__left">
+    <img class="time__img" src="/img/time.svg" alt="time">
+        <div class="reserve__number">予約{{ $key+1 }}</div>
+     </div>
+
+     <div class="reserve__right">
+     <a class="reserve__edit" href="{{route('edit', ['id' => $reservation->id])}}">予約日時を変更する</a>
+     
+        <a class="reserve__delete" href="{{route('delete', ['id' => $reservation->id])}}" onclick="return confirm('本当に予約を削除しますか？')"><img class="delete__img" src="/img/reserve_delete.svg" alt="delete"></a>
+      </div>
+
+
+
+    </div>
+    <div class="reserve__item__bottom">
         <div class="confirm__left">
         <div class="confirm__item" >Shop</div>
         <div class="confirm__item">Date</div>
@@ -132,20 +158,86 @@ button.addEventListener('click', toggleMenu);
         </div>
 
         <div class="confirm__right">
-        <div class="confirm__item">{{ $reservation->shop->name }}<div>
+        <div class="confirm__item">{{ $reservation->shop->name }}</div>
         <div class="confirm__item">{{ $reservation->date }}</div>
-        <div class="confirm__item"><td>{{ $reservation->time }}</td></div>
-        <div class="confirm__item">{{ $reservation->number_of_people }}人<</div>
+        <div class="confirm__item">{{ $reservation->time }}</div>
+        <div class="confirm__item">{{ $reservation->number_of_people }}人</div>
         </div>
-</div>
-@endforeach
-
     </div>
 </div>
-
+</div>
+@endforeach
 </div>
 
 
+<div class="favorite">
+<div class="favorite__title">お気に入り店舗</div>
+<div class="card__row">
+   @foreach ($shops as $shop)
+    <div class="card">
+        <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
+        <div class="under__item">
+        <div class="shopname">{{ $shop->name }}</div>
+        <div class="hashtag">
+        <p class="tag" > #{{ $shop->area_name }}</p>
+        <p class="tag" >#{{ $shop->genre_name }}</p>
+        </div>
+        <div class="between">
+        <a class="detail" href="{{route('detail', ['id' => $shop->shop_id])}}">詳しく見る</a>
+
+        
+@if (in_array($shop->shop_id, $favorite_shops))
+                <div class="heart">
+                  <img class="toggle_img" src="{{ asset('img/redheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
+                </div>
+              @else
+                <div class="heart">
+                  <img class="toggle_img" src="{{ asset('img/grayheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
+                </div>
+              @endif
+        </div>
+        </div>
+    </div>
+
+    
+@endforeach
+</div>
+</div>
+
+</div>
+
+<script>
+$(document).on('click', '.toggle_img', function(e){
+    e.preventDefault();
+    
+    var shop_id = $(this).data('shopid');
+    var user_id = $(this).data('userid');
+    var img = $(this).attr('src');
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN':  '{{ csrf_token() }}'
+        }
+    });
+
+    $.ajax({
+        url: "{{ route('favorite') }}",
+        method: "POST",
+        data:{shop_id:shop_id, user_id:user_id},
+    }).done(function(data){
+        if(data.status == 'success'){
+            if(img.includes('grayheart.svg')){
+                $('.toggle_img[data-shopid="'+shop_id+'"]').attr('src', "{{ asset('img/redheart.svg') }}");
+            }else{
+                $('.toggle_img[data-shopid="'+shop_id+'"]').attr('src', "{{ asset('img/grayheart.svg') }}");
+            }
+            console.log(data.message);
+        }
+    }).fail(function(){
+        console.log('Error: the request was not sent!!!.');
+    });
+});
+</script>
 
 
 

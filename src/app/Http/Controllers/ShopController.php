@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
-
+use App\Models\Favorite;
 
 class ShopController extends Controller
 {
@@ -33,6 +34,11 @@ class ShopController extends Controller
             ->leftJoin('genres', 'shops_genres.genre_id', '=', 'genres.id')
             ->get();
 
-        return view('welcome', compact('shops','areas','genres'));
+            $favorite_shops = array();
+        if (Auth::check()) {
+            $favorite_shops = Auth::user()->favoriteShops()->pluck('shop_id')->toArray();
+        }
+
+        return view('welcome', compact('shops','areas','genres','favorite_shops'));
     }
 }

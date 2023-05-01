@@ -126,6 +126,8 @@ button.addEventListener('click', toggleMenu);
 
     <div class="header__right">
  <div class="search__form">
+
+ 
   <form class="header__right__form" method="GET" action="{{ route('search') }}">
     <select name="area_name" class="header__right__select1">
       <option value="">All area</option>
@@ -150,32 +152,34 @@ button.addEventListener('click', toggleMenu);
 
 
 <div class="card__row">
-   @foreach ($shops as $shop)
+  @foreach ($shops as $shop)
     <div class="card">
-        <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
-        <div class="under__item">
+      <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
+      <div class="under__item">
         <div class="shopname">{{ $shop->name }}</div>
         <div class="hashtag">
-        <p class="tag" > #{{ $shop->area_name }}</p>
-        <p class="tag" >#{{ $shop->genre_name }}</p>
+          <p class="tag">#{{ $shop->area_name }}</p>
+          <p class="tag">#{{ $shop->genre_name }}</p>
         </div>
         <div class="between">
-        <a class="detail" href="{{route('detail', ['id' => $shop->shop_id])}}">詳しく見る</a>
-
-
-
-
-@if (Auth::check())
-<div class="heart">
-    <img class="toggle_img" src="{{ $shop->isFavoritedBy(Auth::user()) ? asset('img/redheart.svg') : asset('img/grayheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
-</div>
-@endif
-
-
+          <a class="detail" href="{{ route('detail', ['id' => $shop->shop_id]) }}">詳しく見る</a>
+          <div>
+            @if (Auth::check())
+              @if (in_array($shop->shop_id, $favorite_shops))
+                <div class="heart">
+                  <img class="toggle_img" src="{{ asset('img/redheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
+                </div>
+              @else
+                <div class="heart">
+                  <img class="toggle_img" src="{{ asset('img/grayheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
+                </div>
+              @endif
+            @endif
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-@endforeach
+  @endforeach
 </div>
 
 
@@ -186,6 +190,12 @@ $(document).on('click', '.toggle_img', function(e){
     var shop_id = $(this).data('shopid');
     var user_id = $(this).data('userid');
     var img = $(this).attr('src');
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN':  '{{ csrf_token() }}'
+        }
+    });
 
     $.ajax({
         url: "{{ route('favorite') }}",

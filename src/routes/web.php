@@ -15,7 +15,11 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\VisitController;
+use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Area;
 use App\Models\Genre;
@@ -31,20 +35,31 @@ use App\Models\Shop;
 |
 */
 
+
+
 Route::get('/', [ShopController::class, 'index'])->name('Home');
+
+
+Gate::define('admin', function ($user) {
+    return Admin::where('user_id', $user->id)->value('role') == 'admin';
+});
+
+Gate::define('owner', function ($user) {
+    return Admin::where('user_id', $user->id)->value('role') == 'owner';
+});
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
+
     Route::get('/dashboard', function () {
         $areas=Area::all();
         $genres=Genre::all();
 
         
          // ショップ情報を取得し、area_name と genre_name を関連付ける
-
         $shops = Shop::select(
                 'shops.id as shop_id',
                 'shops.name',
@@ -58,8 +73,21 @@ Route::middleware([
             ->leftJoin('genres', 'shops_genres.genre_id', '=', 'genres.id')
             ->get();
 
-        return view('welcome', compact('shops','areas','genres'));
+            $favorite_shops = array();
+        if (Auth::check()) {
+            $favorite_shops = Auth::user()->favorites()->pluck('shop_id')->toArray();
+        }
+
+        return view('welcome', compact('shops','areas','genres','favorite_shops'));
     })->name('dashboard');
+
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    })->middleware(['can:admin'])->name('admin');
+
+    Route::get('/owner', function () {
+        return view('owner.dashboard');
+    })->middleware(['can:owner'])->name('owner');
 });
 
 
@@ -97,6 +125,12 @@ Route::get('search', [SearchController::class, 'search'])->name('search');
 
 Route::post('reserve', [ReserveController::class, 'reserve']);
 
+Route::get('delete', [ReserveController::class, 'delete'])->name('delete');
+
+Route::get('edit', [ReserveController::class, 'edit'])->name('edit');
+
+Route::put('update', [ReserveController::class, 'update'])->name('reservation.update');
+
 
 
 Route::post('/favorites', 'FavoriteController@store')->name('favorites.store');
@@ -115,4 +149,6 @@ Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorit
 
 Route::get('/mypage', [MypageController::class, 'mypage'])->name('mypage');
 
+Route::get('/visit', [VisitController::class, 'visit'])->name('visit');
 
+Route::get('/reservations/{id}/qr', [QrCodeController::class, 'generate'])->name('reservations.qr');

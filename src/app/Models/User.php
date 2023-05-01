@@ -9,6 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Shop;
+use App\Models\Admin;
+use App\Models\Owner;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -60,7 +63,29 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public function favorites()
-    {
-        return $this->hasMany('App\Favorite');
-    }
+{
+    return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
+}
+
+public function favoriteShops()
+{
+    return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
+}
+
+public function admin()
+{
+    return $this->hasOne(Admin::class, 'user_id');
+}
+
+public function isAdmin()
+{
+    return $this->admin && $this->admin->role === 'admin';
+}
+
+public function isOwner()
+{
+    return $this->admin && $this->admin->role === 'owner';
+}
+
+
 }

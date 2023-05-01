@@ -26,7 +26,7 @@
     @csrf
     <button type="submit" class="menu__item">Logout</button>
 </form>
-    <a href="{{route('login')}}" class="menu__item">Mypage</a>
+    <a href="{{route('mypage')}}" class="menu__item">Mypage</a>
   </div>
 @else
 <div class="header__left">
@@ -142,18 +142,29 @@ button.addEventListener('click', toggleMenu);
         $selected_date = date('Y-m-d', strtotime(request('date', 'now')));
         $is_today = ($selected_date == date('Y-m-d'));
         $time_range = $is_today ? range(date('H')+1, 23) : range(0, 23);
-if ($is_today && date('H') == 20) {
-    array_push($time_range, 21);
-}
+        if ($is_today && date('H') == 20) {
+            array_push($time_range, 21);
+        }
     @endphp
     @foreach ($time_range as $i)
-        @for ($j = 0; $j < 60; $j += 30)
+        @for ($j = 0; $j < 60; $j += 15)
             @php
                 $time = str_pad($i, 2, '0', STR_PAD_LEFT) . ':' . str_pad($j, 2, '0', STR_PAD_LEFT);
             @endphp
-            <option value="{{ $time }}" {{ old('time') == $time ? 'selected' : '' }} {{ $is_today && ($i >= 21 || ($i == 20 && $j >= 30)) ? 'disabled' : '' }}>
+
+
+            <option value="{{ $time }}" {{ old('time') == $time ? 'selected' : '' }} {{ $is_today && ($i > 21 || ($i === 21 && $j > 00)) || $i < 17 ? 'disabled' : '' }}>
                 {{ $time }}
             </option>
+
+            timeRange = timeRange.filter(time => {
+    const hour = Math.floor(time / 4);
+    const minute = (time % 4) * 15;
+    return hour >= 17 && (hour < 21 || (hour === 21 && minute <= 00));
+});
+            
+
+
         @endfor
     @endforeach
 </select>
@@ -194,6 +205,7 @@ if ($is_today && date('H') == 20) {
     <button class="button" type="submit" >予約する</button>
 </form>
 </div>
+
 
 <script>
 document.querySelector('.date').addEventListener('change', function() {
