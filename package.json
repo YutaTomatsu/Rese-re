@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "vue": "^3.2.47",
+    "vue-star-rating": "^1.7.0"
+  }
+}

@@ -31,6 +31,26 @@ class Reserve extends Model
         return $this->belongsTo(Shop::class);
     }
 
+    public function shops_area()
+    {
+        return $this->belongsTo(Shops_area::class);
+    }
+
+    public function shops_genre()
+    {
+        return $this->belongsTo(Shops_genre::class);
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(area::class);
+    }
+
+    public function genre()
+    {
+        return $this->belongsTo(genre::class);
+    }
+
     protected static function booted()
     {
         static::created(function($reserve){

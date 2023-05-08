@@ -6,6 +6,6 @@
 </head>
 <body>
     <h2>予約情報のリマインダー</h2>
-    <p>{{ $message }}</p>
+    <p>{!!$text!!}</p>
 </body>
 </html>

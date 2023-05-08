@@ -11,10 +11,19 @@ class ShopFactory extends Factory
 
     public function definition()
     {
+        $pictureUrls = [
+            'public/shops/sushi.jpeg',
+            'public/shops/izakaya.jpeg',
+            'public/shops/yakiniku.jpeg',
+            'public/shops/italian.jpeg',
+            'public/shops/ramen.jpeg',
+        ];
+
+
         return [
             'name' => $this->faker->company(),
-            'about' => $this->faker->sentence(30),
-            'picture' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg'
+            'about' => $this->faker->sentence(20),
+            'picture' => $this->faker->randomElement($pictureUrls),
         ];
     }
 }

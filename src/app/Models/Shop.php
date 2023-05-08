@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Shops_area;
+use App\Models\Shops_genre;
 use App\Models\Reserve;
 use App\Models\Favorite;
+use App\Models\Review;
 
 class Shop extends Model
 {
@@ -64,6 +67,21 @@ public function reserve()
     //後でViewで使う、いいねされているかを判定するメソッド。
     public function isLikedBy($user): bool {
         return Favorite::where('user_id', $user->id)->where('shop_id', $this->id)->first() !==null;
+    }
+
+    public function shops_areas()
+    {
+        return $this->belongsToMany(Area::class, 'shops_areas');
+    }
+
+    public function shops_genres()
+    {
+        return $this->belongsToMany(Genre::class,'shops_genres');
+    }
+
+    public function reviews()
+    {
+        return $this->hasmany(Review::class);
     }
 
 

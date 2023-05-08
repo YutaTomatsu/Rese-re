@@ -14,7 +14,7 @@ class GenreFactory extends Factory
         $genreNames = ['寿司', '焼肉', '居酒屋','イタリアン','ラーメン'];
 
         return [
-            'genre_name' => $this->faker->randomElement($genreNames)
+            'genre_name' => $this->faker->unique()->randomElement($genreNames)
         ];
     }
 }

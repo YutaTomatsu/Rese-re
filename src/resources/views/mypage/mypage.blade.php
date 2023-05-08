@@ -117,7 +117,7 @@ button.addEventListener('click', toggleMenu);
 </script>
 
 <div class="header__right">
-<a class="visit" href="{{route('visit')}}">来店履歴</a>
+<a class="visit" href="{{ route('reserves.past') }}">来店履歴</a>
 </div>
 
 </header>
@@ -175,7 +175,7 @@ button.addEventListener('click', toggleMenu);
 <div class="card__row">
    @foreach ($shops as $shop)
     <div class="card">
-        <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
+        <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
         <div class="under__item">
         <div class="shopname">{{ $shop->name }}</div>
         <div class="hashtag">
@@ -238,7 +238,6 @@ $(document).on('click', '.toggle_img', function(e){
     });
 });
 </script>
-
 
 
 </body>

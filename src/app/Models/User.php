@@ -87,5 +87,10 @@ public function isOwner()
     return $this->admin && $this->admin->role === 'owner';
 }
 
+public function reserves()
+{
+    return $this->belongsTo(Reserve::class);
+}
+
 
 }

@@ -13,12 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(5)->create();
-        \App\Models\Shop::factory(5)->create();
-        \App\Models\Area::factory(5)->create();
+        \App\Models\User::factory(20)->create();
+        \App\Models\Shop::factory(20)->create();
+        \App\Models\Area::factory(3)->create();
         \App\Models\Genre::factory(5)->create();
-        \App\Models\Shop_area::factory(5)->create();
-        \App\Models\Shop_genre::factory(5)->create();
+        \App\Models\Shops_area::factory(20)->create();
+        \App\Models\Shops_genre::factory(20)->create();
+        \App\Models\Review::factory(20)->create();
         
     }
 }

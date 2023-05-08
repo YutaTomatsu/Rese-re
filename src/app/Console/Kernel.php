@@ -25,12 +25,12 @@ class Kernel extends ConsoleKernel
         foreach ($reservations as $reservation) {
             $user = User::find($reservation->user_id);
             $shop = Shop::find($reservation->shop_id);
-            $message = "予約日時：{$reservation->date} {$reservation->time}\n";
-            $message .= "店名：{$shop->name}\n";
-            $message .= "予約人数：{$reservation->number_of_people}\n";
-            Mail::to($user->email)->send(new ReservationReminder($message));
+            $text = "予約日時：{$reservation->date} {$reservation->time}\n";
+            $text .= "店名：{$shop->name}\n";
+            $text .= "予約人数：{$reservation->number_of_people}\n";
+            Mail::to($user->email)->send(new ReservationReminder($text));
         }
-    })->dailyAt('09:00');
+    })->dailyAt('22:42');
 }
 
     /**

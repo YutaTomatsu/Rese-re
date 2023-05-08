@@ -14,7 +14,11 @@
 
         
     </head>
-    <body class="body">
+
+
+
+
+<body class="body">
 
 <header class="header">
 
@@ -154,7 +158,8 @@ button.addEventListener('click', toggleMenu);
 <div class="card__row">
   @foreach ($shops as $shop)
     <div class="card">
-      <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
+      <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
+      <div class="under__box">
       <div class="under__item">
         <div class="shopname">{{ $shop->name }}</div>
         <div class="hashtag">
@@ -163,8 +168,9 @@ button.addEventListener('click', toggleMenu);
         </div>
         <div class="between">
           <a class="detail" href="{{ route('detail', ['id' => $shop->shop_id]) }}">詳しく見る</a>
-          <div>
-            @if (Auth::check())
+          <div class="between__right">
+
+          @if (Auth::check())
               @if (in_array($shop->shop_id, $favorite_shops))
                 <div class="heart">
                   <img class="toggle_img" src="{{ asset('img/redheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
@@ -174,8 +180,15 @@ button.addEventListener('click', toggleMenu);
                   <img class="toggle_img" src="{{ asset('img/grayheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
                 </div>
               @endif
-            @endif
+              @else
+  <a href="{{ route('login') }}">
+      <div class="heart">
+        <img src="img/grayheart.svg" alt="heart">
+      </div>
+  </a>
+@endif
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -215,11 +228,5 @@ $(document).on('click', '.toggle_img', function(e){
     });
 });
 </script>
-
-
-
-
-
-
 </body>
 

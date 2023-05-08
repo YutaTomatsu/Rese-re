@@ -1,14 +1,14 @@
-
-
 .body {
     background-color: white;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     margin: 25px 0;
-
+    align-items: center;
 }
 
 .header__left {
@@ -105,66 +105,85 @@
     border: none;
 }
 
+
+
 .card__row {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    /* 追加 */
+    flex-wrap: wrap;
+    align-items: stretch;
 }
 
 .card {
-    width: 270px;
-    height: 270px;
+    flex-basis: calc(25% - 6px);
+    margin: 10px 3px;
     border-radius: 10px;
-    background-color: white;
-    /* float: left; 削除 */
-    margin: 0 10px 10px 0;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    height: 23vw;
 }
 
 .img {
     width: 100%;
-    height: 135px;
+    height: 50%;
+    object-fit: cover;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
 
+.under__box {
+    height: 100%;
+}
+
+.under__item {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    width:  90%;
+    margin: 0 auto;
+}
+
 .shopname {
-    font-size: 18px ;
+    font-size: 1.8vw;
     font-weight: bold;
+    margin: auto 0; 
 }
 
 .hashtag {
     display: flex;
     flex-direction: row;
+    height: 20%;
 }
 
-.under__item{
-    
-    margin: 13px 13px 13px 13px;
+.tag {
+    font-size: 1vw;
 }
 
 .between {
     display: flex;
     justify-content: space-between;
+    height: 50%;
 }
 
+
+
 .detail {
+    display: flex;
     text-decoration: none;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(65, 65, 255);
     color: white;
     border-radius: 5px;
-    margin: 5px 5px ;
-    font-size: 13px;
-    text-align: center;
-    width: 80px;
-    height: 23px;
-   
+    font-size: 1vw;
+    width: 7vw;
+    height: 2.5vw;
+    margin: auto 0;
 }
 
-.favorite {
-    margin: 5px 5px;
+.between__right{
+    margin: auto 0;
 }
 
 .heart {
@@ -172,8 +191,9 @@
 }
 
 .heart img {
-  width: 24px;
-  height: 24px;
+  width: 2.5vw;
+  height: 2.5vw;
+
 }
 
 .heart-image.red {
@@ -184,6 +204,424 @@
   display: none;
 }
 
-.liked {
-    color: pink;
+
+@media screen and (max-width: 768px) {
+    .body {
+            background-color: white;
+            width: 90%;
+            margin: 0 auto;
+            min-width: 375px;
+        }
+    
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin: 25px 0;
+            align-items: center;
+    
+        }
+    
+        .header__left {
+            display: flex;
+            flex-direction: row;
+            width: 150px;
+        }
+    
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 7px;
+            border: none;
+            background-color: rgb(72, 72, 255);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+    
+        .icon::before {
+            content: "";
+            position: absolute;
+            top: 30%;
+            left: 10px;
+            width: 25%;
+            height: 1px;
+            background-color: white;
+    
+        }
+    
+        .icon::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            width: 50%;
+            height: 1px;
+            background-color: white;
+    
+        }
+    
+        .icon .third-line {
+            content: "";
+            position: absolute;
+            top: 70%;
+            left: 10px;
+            width: 12.5%;
+            height: 1px;
+            background-color: white;
+        }
+    
+        .header__title {
+            color: rgb(72, 72, 255);
+            font-weight: bolder;
+            font-size: 25px;
+            margin: 0 15px;
+    
+        }
+    
+        .header__right {}
+    
+        .header__right__form {
+            border: none;
+            width: 300px;
+            display: flex;
+            align-items: stretch;
+            height: 35px;
+            border-radius: 7px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    
+        }
+    
+        .header__right__select1 {
+            border: none;
+            border-radius: 7px 0 0 7px;
+        }
+    
+        .header__right__select2 {
+            border: none;
+        }
+    
+        .header__right__img {
+            width: 17px;
+        }
+    
+        .header__right__text {
+            border: none;
+            width: 400px;
+            border-radius: 0 7px 7px 0;
+        }
+    
+        .header__right__button {
+            background-color: white;
+            border: none;
+        }
+    
+    
+    
+        .card__row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: stretch;
+        }
+    
+        .card {
+            flex-basis: calc(50% - 10px);
+            margin: 10px 3px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            background-color: white;
+            height: 40vw;
+        }
+    
+        .img {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+        }
+    
+        .under__box {
+            height: 100%;
+        }
+    
+        .under__item {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin: 0 auto;
+        }
+    
+        .shopname {
+            font-size: 3vw;
+            font-weight: bold;
+            margin: auto 0;
+        }
+    
+        .hashtag {
+            display: flex;
+            flex-direction: row;
+            height: 20%;
+        }
+    
+        .tag {
+            font-size: 1vw;
+        }
+    
+        .between {
+            display: flex;
+            justify-content: space-between;
+            height: 50%;
+        }
+    
+    
+    
+        .detail {
+            display: flex;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(65, 65, 255);
+            color: white;
+            border-radius: 5px;
+            font-size: 1vw;
+            width: 15vw;
+            height: 4vw;
+            margin: auto 0;
+        }
+    
+        .between__right {
+            margin: auto 0;
+        }
+    
+        .heart {
+            cursor: pointer;
+        }
+    
+        .heart img {
+            width: 4vw;
+            height: 4vw;
+    
+        }
+    
+        .heart-image.red {
+            display: none;
+        }
+    
+        .heart-image.hidden {
+            display: none;
+        }
+    }
+
+    
+
+        @media screen and (max-width: 480px) {
+            .body {
+                background-color: white;
+                width: 90%;
+                margin: 0 auto;
+            }
+    
+            .header {
+                display: flex;
+                justify-content: space-between;
+                margin: 25px 0;
+                align-items: center;
+    
+            }
+    
+            .header__left {
+                display: flex;
+                flex-direction: row;
+                width: 150px;
+            }
+    
+            .icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 7px;
+                border: none;
+                background-color: rgb(72, 72, 255);
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                position: relative;
+            }
+    
+            .icon::before {
+                content: "";
+                position: absolute;
+                top: 30%;
+                left: 10px;
+                width: 25%;
+                height: 1px;
+                background-color: white;
+    
+            }
+    
+            .icon::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 10px;
+                width: 50%;
+                height: 1px;
+                background-color: white;
+    
+            }
+    
+            .icon .third-line {
+                content: "";
+                position: absolute;
+                top: 70%;
+                left: 10px;
+                width: 12.5%;
+                height: 1px;
+                background-color: white;
+            }
+    
+            .header__title {
+                color: rgb(72, 72, 255);
+                font-weight: bolder;
+                font-size: 25px;
+                margin: 0 15px;
+    
+            }
+    
+            .header__right {}
+    
+            .header__right__form {
+                border: none;
+                width: 55vw;
+                display: flex;
+                align-items: stretch;
+                height: 8vw;
+                border-radius: 7px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    
+            }
+    
+            .header__right__select1 {
+                border: none;
+                border-radius: 7px 0 0 7px;
+                font-size: 2vw;
+            }
+    
+            .header__right__select2 {
+                border: none;
+                font-size: 2vw;
+            }
+    
+            .header__right__img {
+                width: 2vw;
+            }
+    
+            .header__right__text {
+                border: none;
+                width: 20vw;
+                border-radius: 0 7px 7px 0;
+            }
+    
+            .header__right__button {
+                background-color: white;
+                border: none;
+            }
+    
+            .card__row {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: stretch;
+            }
+    
+            .card {
+                flex-basis: calc(50% - 10px);
+                margin: 10px 3px;
+                border-radius: 10px;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+                background-color: white;
+                height: 40vw;
+            }
+    
+            .img {
+                width: 100%;
+                height: 50%;
+                object-fit: cover;
+                border-top-right-radius: 10px;
+                border-top-left-radius: 10px;
+            }
+    
+            .under__box {
+                height: 100%;
+            }
+    
+            .under__item {
+                height: 50%;
+                display: flex;
+                flex-direction: column;
+                width: 90%;
+                margin: 0 auto;
+            }
+    
+            .shopname {
+                font-size: 3vw;
+                font-weight: bold;
+                margin: auto 0;
+            }
+    
+            .hashtag {
+                display: flex;
+                flex-direction: row;
+                height: 20%;
+            }
+    
+            .tag {
+                font-size: 1vw;
+            }
+    
+            .between {
+                display: flex;
+                justify-content: space-between;
+                height: 50%;
+            }
+    
+    
+    
+            .detail {
+                display: flex;
+                text-decoration: none;
+                align-items: center;
+                justify-content: center;
+                background-color: rgb(65, 65, 255);
+                color: white;
+                border-radius: 5px;
+                font-size: 1vw;
+                width: 15vw;
+                height: 4vw;
+                margin: auto 0;
+            }
+    
+            .between__right {
+                margin: auto 0;
+            }
+    
+            .heart {
+                cursor: pointer;
+            }
+    
+            .heart img {
+                width: 4vw;
+                height: 4vw;
+    
+            }
+    
+            .heart-image.red {
+                display: none;
+            }
+    
+            .heart-image.hidden {
+                display: none;
+            }
 }
