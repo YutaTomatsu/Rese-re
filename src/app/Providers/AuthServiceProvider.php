@@ -36,8 +36,6 @@ class AuthServiceProvider extends ServiceProvider
         return $user->isOwner();
     });
 
-    User::with('admin')->get();
-
 
 }
 }
