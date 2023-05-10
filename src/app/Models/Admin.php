@@ -27,14 +27,4 @@ class Admin extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(User::class);
     }
-
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
-    public function isOwner()
-    {
-        return $this->role === 'owner';
-    }
 }
