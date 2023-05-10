@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 namespace App\Providers;
@@ -29,12 +32,14 @@ class AuthServiceProvider extends ServiceProvider
     $this->registerPolicies();
 
     Gate::define('admin', function ($user) {
-        return $user->isAdmin();
-    });
+    $admin = Admin::where('user_id', $user->id)->first();
+    return $admin && $admin->isAdmin();
+});
 
-    Gate::define('owner', function ($user) {
-        return $user->isOwner();
-    });
+Gate::define('owner', function ($user) {
+    $admin = Admin::where('user_id', $user->id)->first();
+    return $admin && $admin->isOwner();
+});
 
 
 }
