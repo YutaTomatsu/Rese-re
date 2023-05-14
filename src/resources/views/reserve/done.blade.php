@@ -116,7 +116,7 @@ button.addEventListener('click', toggleMenu);
 
         <div class="box">
 
-        <div class="qr">{!! QrCode::generate(route('detail', ['id' => $reserve->shop_id])) !!}</div>
+        <div class="qr" >{!! QrCode::size(150)->generate(route('detail', ['id' => $reserve->shop_id])) !!}</div>
 
         <div class="thanks">ご予約ありがとうございます。こちらのQRコードを店舗で提示して下さい。</div>
 

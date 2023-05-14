@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
          <link rel="stylesheet" href="{{asset('css/detail.css')}}">
 
         <title>Laravel</title>
@@ -119,6 +119,8 @@ button.addEventListener('click', toggleMenu);
 </script>
 </div>
 
+<div class="content__box">
+
 <div class="between">
 
 
@@ -129,16 +131,18 @@ button.addEventListener('click', toggleMenu);
 
 <div class="detail">
     <div class="detail__top">
-    <h2>{{ $shop->name }}</h2>
+    <h2 class="detail__title">{{ $shop->name }}</h2>
     <div clss="rating__avg">
     <p class="star-rating" data-rate="{{ round($reviews->avg('evaluate')) }}"></p>
     </div>
+
+
     <div class="rating__detail">
     <p>{{ round($reviewsAvg,1) }}/5</p>
     <p>({{ $totalReviews }}件のレビュー)</p>
     </div>
     </div>
-    <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
+    <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
     <div class="hashtag">
     <p>#{{ $shop->area_name }}</p>
     <p>#{{ $shop->genre_name }}</p>
@@ -146,71 +150,6 @@ button.addEventListener('click', toggleMenu);
     <p>紹介文: {{ $shop->about }}</p>
 </div>
 
-<div class="review">
-
-
-<form class="review__write" action="{{route('review')}}" method="get">
-    @csrf
-    <input type="hidden" name="shop_id" value="{{ request()->query('id') }}">
-    <button type="submit">レビューを書く</button>
-</form>
-
-@if($errors->has('message'))
-    <div class="alert alert-danger">{{ $errors->first('message') }}</div>
-@endif
-
-
-<h3>レビュー一覧</h3>
-
-
-
-    @foreach($reviews as $review)
-        <div class="review__item">
-            <p>投稿者: {{ $review->user->name }}</p>
-            <p class="star-rating" data-rate="{{ $review->evaluate }}"></p>
-            <p class="comment" data-full-comment="{{ $review->comment }}">{{ $review->comment }}</p>
-            <p>投稿日時: {{ $review->created_at }}</p>
-            <button class="toggle-comment">全文を表示</button>
-        </div>
-    @endforeach
-
-    {{ $reviews->appends($query_params)->links() }}
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    const truncateComment = (comment) => {
-        if (comment.length > 20) {
-            return comment.substr(0, 20) + '...';
-        }
-        return comment;
-    }
-
-    $('.comment').each(function() {
-        const $this = $(this);
-        const fullComment = $this.data('full-comment');
-        $this.text(truncateComment(fullComment));
-    });
-
-    $('.toggle-comment').on('click', function() {
-        const $this = $(this);
-        const $comment = $this.prevAll('.comment');
-        const fullComment = $comment.data('full-comment');
-        const isTruncated = $comment.text().length < fullComment.length;
-
-        if (isTruncated) {
-            $comment.text(fullComment);
-            $this.text('一部を表示');
-        } else {
-            $comment.text(truncateComment(fullComment));
-            $this.text('全文を表示');
-        }
-    });
-});
-</script>
-
-
-</div>
 </div>
 
 
@@ -359,12 +298,85 @@ document.querySelector('.date').addEventListener('change', function() {
   timeSelect.addEventListener('change', displayValues);
   numberOfPeopleSelect.addEventListener('change', displayValues);
 </script>
-</div>
 
 <script>
     const starRating = document.querySelector('.star-rating');
 const rate = starRating.getAttribute('data-rate');
 console.log(rate); // レートの平均値が表示される
 </script>
+</div>
+</div>
+</div>
+</div>
+
+<div class="review__center">
+<div class="review">
+
+<form class="review__write" action="{{route('review')}}" method="get">
+    @csrf
+    <input type="hidden" name="shop_id" value="{{ request()->query('id') }}">
+    <button type="submit">レビューを書く</button>
+</form>
+
+@if($errors->has('message'))
+    <div class="alert alert-danger">{{ $errors->first('message') }}</div>
+@endif
+
+
+<h3>レビュー一覧</h3>
+
+
+
+    @foreach($reviews as $review)
+        <div class="review__item">
+            <p>投稿者: {{ $review->user->name }}</p>
+            <p class="star-rating" data-rate="{{ $review->evaluate }}"></p>
+            <p class="comment" data-full-comment="{{ $review->comment }}">{{ $review->comment }}</p>
+            <p>投稿日時: {{ $review->created_at }}</p>
+            <button class="toggle-comment">全文を表示</button>
+        </div>
+    @endforeach
+
+    {{ $reviews->appends(array_merge($query_params, ['reviews_page' => $reviews->currentPage()]))->links('owner.reviews') }}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    const truncateComment = (comment) => {
+        if (comment.length > 20) {
+            return comment.substr(0, 20) + '...';
+        }
+        return comment;
+    }
+
+    $('.comment').each(function() {
+        const $this = $(this);
+        const fullComment = $this.data('full-comment');
+        $this.text(truncateComment(fullComment));
+    });
+
+    $('.toggle-comment').on('click', function() {
+        const $this = $(this);
+        const $comment = $this.prevAll('.comment');
+        const fullComment = $comment.data('full-comment');
+        const isTruncated = $comment.text().length < fullComment.length;
+
+        if (isTruncated) {
+            $comment.text(fullComment);
+            $this.text('一部を表示');
+        } else {
+            $comment.text(truncateComment(fullComment));
+            $this.text('全文を表示');
+        }
+    });
+});
+</script>
+
+</div>
+</div>
+
+</div>
 
 </body>
+
+

@@ -145,7 +145,7 @@
 }
 
 .shopname {
-    font-size: 1.8vw;
+    font-size: 1vw;
     font-weight: bold;
     margin: auto 0; 
 }
@@ -326,12 +326,12 @@
         }
     
         .card {
-            flex-basis: calc(50% - 10px);
+            flex-basis: 100%;
             margin: 10px 3px;
             border-radius: 10px;
             box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
             background-color: white;
-            height: 40vw;
+            height: 80vw;
         }
     
         .img {
@@ -355,7 +355,7 @@
         }
     
         .shopname {
-            font-size: 3vw;
+            font-size: 4vw;
             font-weight: bold;
             margin: auto 0;
         }
@@ -367,7 +367,7 @@
         }
     
         .tag {
-            font-size: 1vw;
+            font-size: 2vw;
         }
     
         .between {
@@ -386,9 +386,9 @@
             background-color: rgb(65, 65, 255);
             color: white;
             border-radius: 5px;
-            font-size: 1vw;
-            width: 15vw;
-            height: 4vw;
+            font-size: 2vw;
+            width: 17vw;
+            height: 5vw;
             margin: auto 0;
         }
     
@@ -401,8 +401,8 @@
         }
     
         .heart img {
-            width: 4vw;
-            height: 4vw;
+            width: 5vw;
+            height: 5vw;
     
         }
     
@@ -537,12 +537,12 @@
             }
     
             .card {
-                flex-basis: calc(50% - 10px);
+                flex-basis: calc(100%);
                 margin: 10px 3px;
                 border-radius: 10px;
                 box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
                 background-color: white;
-                height: 40vw;
+                height: 80vw;
             }
     
             .img {
@@ -566,7 +566,7 @@
             }
     
             .shopname {
-                font-size: 3vw;
+                font-size: 4vw;
                 font-weight: bold;
                 margin: auto 0;
             }
@@ -578,7 +578,7 @@
             }
     
             .tag {
-                font-size: 1vw;
+                font-size: 2vw;
             }
     
             .between {
@@ -597,9 +597,9 @@
                 background-color: rgb(65, 65, 255);
                 color: white;
                 border-radius: 5px;
-                font-size: 1vw;
-                width: 15vw;
-                height: 4vw;
+                font-size: 2vw;
+                width: 17vw;
+                height: 5vw;
                 margin: auto 0;
             }
     
@@ -612,8 +612,8 @@
             }
     
             .heart img {
-                width: 4vw;
-                height: 4vw;
+                width: 5vw;
+                height: 5vw;
     
             }
     

@@ -24,12 +24,11 @@
     <div class="menu">
         <button class="close-button" type="button">X</button>
   <div class="menu__all">
-    <a href="{{ url('/dashboard') }}" class="menu__item">Home</a>
+    <a href="{{ route('admin') }}" class="menu__item">Home</a>
     <form class="logout" action="{{ route('logout') }}" method="POST">
     @csrf
     <button type="submit" class="menu__item">Logout</button>
 </form>
-    <a href="{{route('mypage')}}" class="menu__item">Mypage</a>
     <a href="{{route('mail')}}" class="menu__item">Send Mail</a>
 </div>
 </div>
@@ -111,51 +110,67 @@ button.addEventListener('click', toggleMenu);
 </script>
 
 
+<form class="form" method="get" action="{{ route('users.store') }}">
+    @csrf
 
-<form method="get" action="{{ route('users.store') }}">
-  @csrf
+        <div class="center">
+        <div class="item">
+            <div class="column">
 
-  <div>
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" value="{{ old('name') }}" required>
-    @error('name')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
+            <div class="title">店舗代表者の作成</div>
+
+  <div class="item__all">
+
+    <div class="line">
+        <label class="item__name" for="name">Name</label>
+        <input class="shop__name__text" type="text" name="name" id="name" value="{{ old('name') }}" required>
   </div>
 
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" value="{{ old('email') }}" required>
-    @error('email')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
+  @error('name')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+
+    <div class="line">
+        <label class="item__name" for="email">Email</label>
+    <input class="shop__name__text" type="email" name="email" id="email" value="{{ old('email') }}" required>
   </div>
 
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required>
-    @error('password')
-        <div class="text-red-500">{{ $message }}</div>
+  @error('email')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+
+
+    <div class="line">
+    <label class="item__name" for="password">Password</label>
+    <input class="shop__name__text" type="password" name="password" id="password" required>
+  </div>
+  @error('password')
+        <div class="text-danger">{{ $message }}</div>
     @enderror
+
+
+  <div class="line">
+    <label class="item__name" for="password_confirmation">Confirm Password</label>
+    <input class="shop__name__text" type="password" name="password_confirmation" id="password_confirmation" required>
+  </div>
+      @error('password_confirmation')
+        <div class="text-danger">{{ $message }}</div>
+    @enderror
+
+
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <label for="password_confirmation">Confirm Password:</label>
-    <input type="password" name="password_confirmation" id="password_confirmation" required>
-    @error('password_confirmation')
-        <div class="text-red-500">{{ $message }}</div>
-    @enderror
-  </div>
-
-  <button type="submit">Create User</button>
-</form>
-@if (session('success'))
+  @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
 
-
+    <button class="button" type="submit">create user</button>
+</form>
 
 </body>
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('css/owner-dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/owner-create.css') }}" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -22,7 +22,6 @@
     @csrf
     <button type="submit" class="menu__item">Logout</button>
 </form>
-    <a href="{{route('mypage')}}" class="menu__item">Mypage</a>
     <a href="{{route('owner-create')}}" class="menu__item">Create New Shop</a>
   </div>
 
@@ -119,71 +118,89 @@ button.addEventListener('click', toggleMenu);
 
 
 
-<form method="POST" action="/owner/shop/create" enctype="multipart/form-data">
+<form class="form" method="POST" action="/owner/shop/create" enctype="multipart/form-data">
     @csrf
 
-    <div>
-        <label for="name">店名</label>
-        <input type="text" name="name" id="name" value="{{ old('name') }}" required>
+        <div class="center">
+        <div class="item">
+            <div class="column">
 
-        @error('name')
+            <div class="title">ショップ情報</div>
+
+  <div class="item__all">
+
+    <div class="line">
+        <label class="item__name" for="name">店名</label>
+        <input class="shop__name__text" type="text" name="name" id="name" value="{{ old('name') }}" required>
+  </div>
+
+  @error('name')
             <p class="text-danger">{{ $message }}</p>
         @enderror
-    </div>
 
-    <div>
-        <label for="about">店舗紹介文</label>
-        <textarea name="about" id="about" required>{{ old('about') }}</textarea>
-
-        @error('about')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
-    </div>
-
-    <div>
-        <label for="picture">画像</label>
-        <input type="file" name="picture" id="picture" required>
-
-        @error('picture')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
-    </div>
-
-    <div>
-        <label for="area_id">エリア</label>
-        <select name="area_id" id="area_id" required>
+    <div class="line">
+        <label class="item__name" for="area_id">エリア</label>
+        <select class="text" name="area_id" id="area_id" required>
             <option value="">-- 選択してください --</option>
             @foreach ($areas as $area)
                 <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area_name }}</option>
             @endforeach
         </select>
+  </div>
 
-        @error('area_id')
+  @error('area_id')
             <p class="text-danger">{{ $message }}</p>
         @enderror
-    </div>
 
-    <div>
-        <label for="genre_id">ジャンル</label>
-        <select name="genre_id" id="genre_id" required>
+    <div class="line">
+        <label class="item__name" for="genre_id">ジャンル</label>
+        <select class="text" name="genre_id" id="genre_id" required>
             <option value="">-- 選択してください --</option>
             @foreach ($genres as $genre)
                 <option value="{{ $genre->id }}" {{ old('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre_name }}</option>
             @endforeach
         </select>
+  </div>
 
-        @error('genre_id')
+  @error('genre_id')
             <p class="text-danger">{{ $message }}</p>
         @enderror
+
+    <div class="line">
+        <label class="item__name" for="picture">画像</label>
+        <input class="picture" type="file" name="picture" id="picture" required>
     </div>
 
-    <button type="submit">登録する</button>
-</form>
-@if (session('success'))
+    @error('picture')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+
+    <div class="about">
+        <label class="about__name" for="about">店舗紹介文</label>
+        <textarea name="about" id="about" required>{{ old('about') }}</textarea>
+    </div>
+
+    @error('about')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
+
+    <button class="button" type="submit">登録する</button>
+</form>
+
+
+
 
 
 

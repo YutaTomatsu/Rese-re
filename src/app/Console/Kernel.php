@@ -4,9 +4,15 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\Batch;
 
 class Kernel extends ConsoleKernel
 {
+
+    protected $commands = [
+        //
+        Batch::class,
+    ];
     /**
      * Define the application's command schedule.
      *
@@ -15,22 +21,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
 {
-    // 予約情報のリマインダーを送信するタスクを定義
-    $schedule->call(function () {
-        // 予約当日の日付を取得
-        $today = Carbon::today();
-
-        // 予約当日の朝9時に予約情報のリマインダーを送信する
-        $reservations = Reserve::where('date', $today)->get();
-        foreach ($reservations as $reservation) {
-            $user = User::find($reservation->user_id);
-            $shop = Shop::find($reservation->shop_id);
-            $text = "予約日時：{$reservation->date} {$reservation->time}\n";
-            $text .= "店名：{$shop->name}\n";
-            $text .= "予約人数：{$reservation->number_of_people}\n";
-            Mail::to($user->email)->send(new ReservationReminder($text));
-        }
-    })->dailyAt('22:42');
+    $schedule->command('command:sendmail')->everyMinute();
 }
 
     /**

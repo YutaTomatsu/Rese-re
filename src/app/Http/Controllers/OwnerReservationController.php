@@ -34,8 +34,15 @@ class OwnerReservationController extends Controller
 
         $query_params = $request->query();
     $reserves_query = Reserve::query();
-        $reserves = Reserve::where('shop_id', $id)->Paginate(5, ["*"], 'reserve-page');
+
+
+    
+        $reserves = Reserve::join('users', 'reserves.user_id', '=', 'users.id')
+    ->where('reserves.shop_id', $id)
+    ->paginate(5, ['*'], 'reserve-page');
         $reserves_paginator = $reserves->appends($query_params);
+
+
 
         return view('owner.owner-reserve', compact('shop','reviews','reserves','reviewsAvg', 'totalReviews', 'reserves_paginator', 'query_params'));
 }

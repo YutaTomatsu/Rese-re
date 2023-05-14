@@ -23,7 +23,13 @@ class ReserveController extends Controller
             'date' => 'required|date',
             'time' => 'required',
             'number_of_people' => 'required|integer',
-        ]);
+        ], [
+        'date.required' => '日付を入力してください。',
+        'date.date' => '日付の形式が無効です。',
+        'time.required' => '時間を入力してください。',
+        'number_of_people.required' => '人数を入力してください。',
+        'number_of_people.integer' => '人数は整数で入力してください。',
+    ]);
 
     $is_reserved = Reserve::where([
         ['date', $request->input('date')],

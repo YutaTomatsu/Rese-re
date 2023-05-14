@@ -31,34 +31,44 @@ class OwnerShopController extends Controller
 
     public function store(Request $request)
     {
-        // バリデーションチェック
-         $this->validate($request, [
-        'name' => 'required|string|max:255',
-        'about' => 'required|string',
-        'picture' => 'required|image',
+        $this->validate($request, [
+        'name' => 'required|string|max:50',
+        'about' => 'required|string|max:255',
+        'picture' => 'required|image|max:2048', // 最大サイズを2MB（2048KB）に制限
         'area_id' => 'required|exists:areas,id',
         'genre_id' => 'required|exists:genres,id'
     ], [
         'name.required' => '店名を入力してください。',
+        'name.max' => '店名は50文字以内で入力してください。',
+        'name.max' => '店舗紹介文は255文字以内で入力してください。',
         'about.required' => '店舗紹介文を入力してください。',
+        'about.max' => '店舗紹介文は255文字以内で入力してください。',
         'picture.required' => '画像を選択してください。',
         'picture.image' => '画像ファイルを選択してください。',
+        'picture.max' => '画像サイズが大きすぎます。最大2MBまでの画像を選択してください。',
         'area_id.required' => 'エリアを選択してください。',
         'area_id.exists' => '選択されたエリアが存在しません。',
         'genre_id.required' => 'ジャンルを選択してください。',
         'genre_id.exists' => '選択されたジャンルが存在しません。'
     ]);
 
-    
+    // 画像サイズが大きすぎる場合にエラーメッセージを返す
+    if ($request->hasFile('picture')) {
+        $fileSize = $request->file('picture')->getSize(); // 画像ファイルのサイズを取得（単位: バイト）
+        $maxFileSize = 2048 * 1024; // 2MBの最大サイズ（単位: バイト）
 
+        if ($fileSize > $maxFileSize) {
+            return redirect()->back()->withErrors(['picture' => '画像サイズが大きすぎます。最大2MBまでの画像を選択してください。'])->withInput();
+        }
+    }
 
-        $path = Storage::putFile('public/shops', new File($request->file('picture')));
+        $path = Storage::disk('s3')->putFile('shops', new File($request->file('picture')));
 
         // Shopモデルを作成して保存する
         $shop = new Shop();
         $shop->name = $request->input('name');
         $shop->about = $request->input('about');
-        $shop->picture = $path; // 保存する画像のパスを指定する
+        $shop->picture = Storage::disk('s3')->url($path); // 保存する画像のパスを指定する
         $shop->save();
 
        $shop_area = new Shops_area();
@@ -121,8 +131,8 @@ $shop->shops_genres()->sync([$request->input('genre_id')]);
 
 if ($request->hasFile('picture')) {
     // 画像ファイルがアップロードされた場合は、画像を保存する
-    $path = Storage::putFile('public/shops', new File($request->file('picture')));
-    $shop->picture = $path;
+    $path = Storage::disk('s3')->putFile('shops', new File($request->file('picture')));
+    $shop->picture = Storage::disk('s3')->url($path);
 }
 $shop->save();
 

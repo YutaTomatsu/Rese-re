@@ -5,7 +5,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-         <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
+         <link href="{{ asset('css/owner-dashboard.css') }}" rel="stylesheet">
 
         <title>Laravel</title>
 
@@ -121,13 +121,13 @@ button.addEventListener('click', toggleMenu);
   closeButton.addEventListener('click', toggleMenu);
 </script>
 
-    <h1>マイショップ一覧</h1>
+    <h1 class="shop__title">マイショップ一覧</h1>
 
 
     <div class="card__row">
   @foreach ($shops as $shop)
     <div class="card">
-      <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}" >
+      <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}" >
       <div class="under__box">
       <div class="under__item">
         <div class="shopname">{{ $shop->name }}</div>
@@ -136,9 +136,9 @@ button.addEventListener('click', toggleMenu);
           <p class="tag">#{{ $shop->genre_name }}</p>
         </div>
         <div class="between">
-          <a class="detail" href="{{ route('owner-reserve', ['id' => $shop->shop_id]) }}">予約を確認する</a>
+          <a class="detail" href="{{ route('owner-reserve', ['id' => $shop->shop_id]) }}">予約確認</a>
           <div class="between__right">
-            <a class="" href="{{ route('owner-edit', ['id' => $shop->shop_id]) }}">ショップ情報の編集</a>
+            <a class="shop__edit" href="{{ route('owner-edit', ['id' => $shop->shop_id]) }}">ショップ編集</a>
           </div>
         </div>
         </div>

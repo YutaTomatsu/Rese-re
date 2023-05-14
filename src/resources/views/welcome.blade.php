@@ -158,7 +158,7 @@ button.addEventListener('click', toggleMenu);
 <div class="card__row">
   @foreach ($shops as $shop)
     <div class="card">
-      <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
+      <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
       <div class="under__box">
       <div class="under__item">
         <div class="shopname">{{ $shop->name }}</div>

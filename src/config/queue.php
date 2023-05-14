@@ -30,6 +30,13 @@ return [
 
     'connections' => [
 
+        'emails' => [
+        'driver' => 'database', // キュードライバの選択（database もしくは redis）
+        'table' => 'jobs', // ジョブテーブル名（database ドライバを使用する場合のみ）
+        'queue' => 'emails', // キュー名
+        'after_commit' => false, // 再試行までの待機時間（秒）
+    ],
+
         'sync' => [
             'driver' => 'sync',
         ],

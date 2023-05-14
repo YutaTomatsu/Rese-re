@@ -30,6 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'id',
     ];
 
     /**
@@ -71,6 +72,8 @@ public function favoriteShops()
 {
     return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
 }
+
+
 
 public function admin()
 {

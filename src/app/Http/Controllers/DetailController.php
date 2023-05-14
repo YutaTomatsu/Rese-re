@@ -13,7 +13,7 @@ class DetailController extends Controller
     $id =$request->input('id');
     $totalReviews = Review::where('shop_id', $id)->count();
     $reviewsAvg = Review::where('shop_id', $id)->avg('evaluate');
-    $reviews = Review::with('user')->where('shop_id', $id)->orderBy('created_at', 'desc')->Paginate(1);
+    $reviews = Review::with('user')->where('shop_id', $id)->orderBy('created_at', 'desc')->Paginate(5);
     $shop = Shop::select('name', 'picture', 'areas.area_name', 'genres.genre_name', 'about')
         ->leftJoin('shops_areas', 'shops.id', '=', 'shops_areas.shop_id')
         ->leftJoin('areas', 'shops_areas.area_id', '=', 'areas.id')

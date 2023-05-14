@@ -10,6 +10,8 @@ use App\Models\Admin;
 
 class CreateOwnerController extends Controller
 {
+
+
     public function store(Request $request)
 {
     $validatedData = $request->validate([
@@ -21,7 +23,7 @@ class CreateOwnerController extends Controller
     $user = User::create([
         'name' => $validatedData['name'],
         'email' => $validatedData['email'],
-        'password' => $validatedData['password'],
+        'password' => Hash::make($validatedData['password']),
     ]);
 
     Admin::create([

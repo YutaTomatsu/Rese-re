@@ -12,11 +12,11 @@ class ShopFactory extends Factory
     public function definition()
     {
         $pictureUrls = [
-            'public/shops/sushi.jpeg',
-            'public/shops/izakaya.jpeg',
-            'public/shops/yakiniku.jpeg',
-            'public/shops/italian.jpeg',
-            'public/shops/ramen.jpeg',
+            'https://rese-bucket.s3.ap-northeast-1.amazonaws.com/public/shops/AXWY9zzkB3YOYyckGkLK7SvMLhtNFdFXXoCaZ8nk.jpg',
+            'https://rese-bucket.s3.ap-northeast-1.amazonaws.com/shops/oCOdlZ8TZPo3ma8gsGFbU9srePSnIQvYMieSYQ1O.jpg',
+            'https://rese-bucket.s3.ap-northeast-1.amazonaws.com/shops/UacF9GLnzgQqmYLfltPzfUxCf2Yq7Sm92VIXZRvQ.jpg',
+            'https://rese-bucket.s3.ap-northeast-1.amazonaws.com/shops/R0q2nyBo3oOiYdlxIBEo1VUVOpGWxHh1KG2Ewcqd.jpg',
+            'https://rese-bucket.s3.ap-northeast-1.amazonaws.com/shops/kdirpe4iHdmRTsZRFqCbYuf1QUkelDf8ZqOzC0dw.jpg',
         ];
 
 

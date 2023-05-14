@@ -133,21 +133,64 @@ button.addEventListener('click', toggleMenu);
 <div class="detail">
     <div class="detail__top">
     <h2>{{ $shop->name }}</h2>
-    <div clss="rating__avg">
-    <p class="star-rating" data-rate="{{ round($reviewsAvg, 1) }}"></p>
-    </div>
     <div class="rating__detail">
+      <div clss="rating__avg">
+    <p class="star-rating" data-rate="{{ round($reviews->avg('evaluate')) }}"></p>
+    </div>
     <p>{{ round($reviewsAvg, 1) }}/5</p>
     <p>({{ $totalReviews }}件のレビュー)</p>
     </div>
     </div>
-    <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
+    <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
     <div class="hashtag">
     <p>#{{ $shop->area_name }}</p>
     <p>#{{ $shop->genre_name }}</p>
     </div>
     <p>紹介文: {{ $shop->about }}</p>
 </div>
+
+
+</div>
+
+
+
+
+
+<div class="reserve__right">
+
+
+<div class="reserve__list">
+    <h3 classa>予約一覧</h3>
+    <table>
+        <thead>
+            <tr>
+                <th class="reserve__item">予約者</th>
+                <th class="reserve__item">日付</th>
+                <th class="reserve__item">時間</th>
+                <th class="reserve__item">人数</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($reserves as $reserve)
+            <tr>
+                <td class="reserve__item">{{ $reserve->name }}</td>
+                <td class="reserve__item">{{ $reserve->date }}</td>
+                <td class="reserve__item">{{ $reserve->time }}</td>
+                <td class="reserve__item">{{ $reserve->number_of_people }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    {{ $reserves->appends(array_merge($query_params, ['reserves_page' => $reserves->currentPage()]))->links('owner.reserves') }}
+
+</div>
+
+</div>
+
+</div>
+
+
+
 
 <div class="review">
 
@@ -205,44 +248,6 @@ $(document).ready(function() {
 const rate = starRating.getAttribute('data-rate');
 console.log(rate); // レートの平均値が表示される
 </script>
-
-</div>
-</div>
-
-
-
-
-
-<div class="reserve__right">
-
-
-<div class="reserve-list">
-    <h3>予約一覧</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>予約者</th>
-                <th>日付</th>
-                <th>時間</th>
-                <th>人数</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($reserves as $reserve)
-            <tr>
-                <td>{{ $reserve->id }}</td>
-                <td>{{ $reserve->user_id }}</td>
-                <td>{{ $reserve->date }}</td>
-                <td>{{ $reserve->time }}</td>
-                <td>{{ $reserve->number_of_people }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {{ $reserves->appends(array_merge($query_params, ['reserves_page' => $reserves->currentPage()]))->links('owner.reserves') }}
-
-</div>
 
 </div>
 

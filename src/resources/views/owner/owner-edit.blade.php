@@ -116,71 +116,87 @@ button.addEventListener('click', toggleMenu);
 </script>
 
 
-    <form method="POST" action="/owner/shop/{{ $shop->id }}"  enctype="multipart/form-data">
+    <form class="form" method="POST" action="/owner/shop/{{ $shop->id }}"  enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div>
+            <div class="center">
+        <div class="item">
+            <div class="column">
 
-    <label for="name">店名</label>
-    <input type="text" name="name" id="name" value="{{ $shop->name }}" required>
+            <div class="title">ショップ情報</div>
 
-    @error('name')
-        <p class="text-danger">{{ $message }}</p>
-    @enderror
-</div>
+  <div class="item__all">
 
-<div>
-    <label for="about">店舗紹介文</label>
-    <textarea name="about" id="about" required>{{ $shop->about }}</textarea>
+    <div class="line">
+        <label class="item__name" for="name">店名</label>
+        <input class="shop__name__text" type="text" name="name" id="name" value="{{ old('name') }}" required>
+  </div>
 
-    @error('about')
-        <p class="text-danger">{{ $message }}</p>
-    @enderror
-</div>
+  @error('name')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
 
-<div>
-    <label for="picture">画像</label>
-    <input type="file" name="picture" id="picture">
+    <div class="line">
+        <label class="item__name" for="area_id">エリア</label>
+        <select class="text" name="area_id" id="area_id" required>
+            <option value="">-- 選択してください --</option>
+            @foreach ($areas as $area)
+                <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area_name }}</option>
+            @endforeach
+        </select>
+  </div>
+
+  @error('area_id')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+
+    <div class="line">
+        <label class="item__name" for="genre_id">ジャンル</label>
+        <select class="text" name="genre_id" id="genre_id" required>
+            <option value="">-- 選択してください --</option>
+            @foreach ($genres as $genre)
+                <option value="{{ $genre->id }}" {{ old('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre_name }}</option>
+            @endforeach
+        </select>
+  </div>
+
+  @error('genre_id')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
+
+    <div class="line">
+        <label class="item__name" for="picture">画像</label>
+        <input class="picture" type="file" name="picture" id="picture" required>
+    </div>
 
     @error('picture')
-        <p class="text-danger">{{ $message }}</p>
-    @enderror
-</div>
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
 
-<div>
-    <label for="area_id">エリア</label>
-    <select name="area_id" id="area_id" required>
-        <option value="">-- 選択してください --</option>
-        @foreach ($areas as $area)
-            <option value="{{ $area->id }}" {{ $shop->area_id == $area->id ? 'selected' : '' }}>{{ $area->area_name }}</option>
-        @endforeach
-    </select>
+    <div class="about">
+        <label class="about__name" for="about">店舗紹介文</label>
+        <textarea name="about" id="about" required>{{ old('about') }}</textarea>
+    </div>
 
-    @error('area_id')
-        <p class="text-danger">{{ $message }}</p>
-    @enderror
-</div>
+    @error('about')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
 
-<div>
-    <label for="genre_id">ジャンル</label>
-    <select name="genre_id" id="genre_id" required>
-        <option value="">-- 選択してください --</option>
-        @foreach ($genres as$genre)
-<option value="{{ $genre->id }}" {{ $shop->genre_id == $genre->id ? 'selected' : '' }}>{{ $genre->genre_name }}</option>
-@endforeach
-</select>
-@error('genre_id')
-    <p class="text-danger">{{ $message }}</p>
-@enderror
-</div>
-<button type="submit">更新する</button>
 
-</form>
-@if (session('success'))
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
+
+<button class="button" type="submit">更新する</button>
+
+</form>
 
 </body>
 </html>

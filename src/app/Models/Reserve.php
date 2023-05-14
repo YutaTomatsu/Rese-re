@@ -21,6 +21,8 @@ class Reserve extends Model
         'id',
     ];
 
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,6 +32,17 @@ class Reserve extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+
+    public function reserveUser()
+    {
+    return $this->belongsTo(User::class, 'user_id','id');
+    }
+
+    public function reserveShop()
+    {
+    return $this->belongsTo(Shop::class, 'shop_id','id');
+    }
+
 
     public function shops_area()
     {

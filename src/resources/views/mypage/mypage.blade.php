@@ -124,12 +124,17 @@ button.addEventListener('click', toggleMenu);
 
 <h2 class="name" >{{ Auth::user()->name }}さん</h2>
 
+<div class="media__btn">
+<button class="reserve__btn" id="toggle-reserve-button" onclick="toggleReservationList()">予約一覧を表示</button>
+<button class="favorite__btn" id="toggle-favorite-button" onclick="toggleFavoriteList()">お気に入りを表示</button>
+</div>
+
 <div class="mypage">
 
 <div class="reserve">
+  <div id="reservation-list">
     <div class="reserve__title">予約状況</div>
 
-    
 @foreach ($reservations as $key => $reservation)
 <div class="reserve__box">
 
@@ -168,25 +173,30 @@ button.addEventListener('click', toggleMenu);
 </div>
 @endforeach
 </div>
-
+</div>
 
 <div class="favorite">
+  
+
+<div id="favorite-list">
 <div class="favorite__title">お気に入り店舗</div>
 <div class="card__row">
-   @foreach ($shops as $shop)
+  @foreach ($shops as $shop)
     <div class="card">
-        <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
-        <div class="under__item">
+      <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
+      <div class="under__box">
+      <div class="under__item">
         <div class="shopname">{{ $shop->name }}</div>
         <div class="hashtag">
-        <p class="tag" > #{{ $shop->area_name }}</p>
-        <p class="tag" >#{{ $shop->genre_name }}</p>
+          <p class="tag">#{{ $shop->area_name }}</p>
+          <p class="tag">#{{ $shop->genre_name }}</p>
         </div>
         <div class="between">
-        <a class="detail" href="{{route('detail', ['id' => $shop->shop_id])}}">詳しく見る</a>
+          <a class="detail" href="{{ route('detail', ['id' => $shop->shop_id]) }}">詳しく見る</a>
+          <div class="between__right">
 
-        
-@if (in_array($shop->shop_id, $favorite_shops))
+          @if (Auth::check())
+              @if (in_array($shop->shop_id, $favorite_shops))
                 <div class="heart">
                   <img class="toggle_img" src="{{ asset('img/redheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
                 </div>
@@ -195,16 +205,81 @@ button.addEventListener('click', toggleMenu);
                   <img class="toggle_img" src="{{ asset('img/grayheart.svg') }}" alt="heart" data-shopid="{{ $shop->shop_id }}" data-userid="{{ Auth::id() }}">
                 </div>
               @endif
+              @else
+  <a href="{{ route('login') }}">
+      <div class="heart">
+        <img src="img/grayheart.svg" alt="heart">
+      </div>
+  </a>
+@endif
+          </div>
         </div>
         </div>
+      </div>
     </div>
-
-    
-@endforeach
+  @endforeach
 </div>
 </div>
 
 </div>
+
+<style>
+    @media (max-width: 768px) {
+    #toggle-reserve-button,
+    #toggle-favorite-button {
+        display: block;
+    }
+    #reservation-list:not(.show),
+    #favorite-list:not(.show) {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    #toggle-reserve-button,
+    #toggle-favorite-button {
+        display: none;
+    }
+    #reservation-list,
+    #favorite-list {
+        display: block;
+    }
+}
+
+</style>
+
+<script>
+function toggleReservationList() {
+    var reservationList = document.getElementById("reservation-list");
+    var favoriteList = document.getElementById("favorite-list");
+    var toggleReserveButton = document.getElementById("toggle-reserve-button");
+
+    if (reservationList.classList.contains("show")) {
+        reservationList.classList.remove("show");
+        toggleReserveButton.innerHTML = "予約一覧を表示";
+    } else {
+        reservationList.classList.add("show");
+        favoriteList.classList.remove("show"); // お気に入りリストを非表示にする
+        toggleReserveButton.innerHTML = "予約一覧をしまう";
+    }
+}
+
+function toggleFavoriteList() {
+    var favoriteList = document.getElementById("favorite-list");
+    var reservationList = document.getElementById("reservation-list");
+    var toggleFavoriteButton = document.getElementById("toggle-favorite-button");
+
+    if (favoriteList.classList.contains("show")) {
+        favoriteList.classList.remove("show");
+        toggleFavoriteButton.innerHTML = "お気に入りを表示";
+    } else {
+        favoriteList.classList.add("show");
+        reservationList.classList.remove("show"); // 予約リストを非表示にする
+        toggleFavoriteButton.innerHTML = "お気に入りをしまう";
+    }
+}
+
+</script>
 
 <script>
 $(document).on('click', '.toggle_img', function(e){

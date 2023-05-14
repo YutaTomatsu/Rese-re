@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 use App\Models\User;
 use App\Mail\CustomMail;
+use App\Jobs\SendEmailJob;
 
 class MailController extends Controller
 {
@@ -20,20 +21,26 @@ class MailController extends Controller
     return view('admins.create-email');
 }
 
+
+
 public function sendEmail(Request $request)
 {
+
+    $validatedData = $request->validate([
+        'subject' => 'required|max:255',
+        'message' => 'required',
+    ], [
+        'subject.required' => '件名を入力してください。',
+        'subject.max' => '件名は255文字以内で入力してください。',
+        'message.required' => 'メッセージを入力してください。',
+    ]);
+
     $subject = $request->input('subject');
     $message = $request->input('message');
 
-    $users = User::whereNotIn('id', function ($query) {
-        $query->select('user_id')->from('admins');
-    })->get();
+    SendEmailJob::dispatch($subject, $message);
 
-    foreach ($users as $user) {
-        Mail::to($user->email)->send(new CustomMail($subject, $message));
-    }
-
-    return redirect()->back()->with('status', 'Email sent successfully');
+    return redirect()->back()->with('success', 'メールが送信されました。');
 }
 
 
