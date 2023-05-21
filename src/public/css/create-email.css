@@ -83,6 +83,8 @@
 
 .item__name {
     width: 20%;
+    display:flex;
+    justify-content:center;
 }
 
 .shop__name__text {

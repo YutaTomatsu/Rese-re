@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{asset('css/owner-edit.css')}}">
     <title>Document</title>
 </head>
+
+
+
 <body>
 
 @if (Auth::check())
@@ -16,7 +19,7 @@
     <div class="menu">
         <button class="close-button" type="button">X</button>
   <div class="menu__all">
-    <a href="{{'owner'}}" class="menu__item">Home</a>
+    <a href="{{route('owner')}}" class="menu__item">Home</a>
     <form class="logout" action="{{ route('logout') }}" method="POST">
     @csrf
     <button type="submit" class="menu__item">Logout</button>
@@ -129,7 +132,8 @@ button.addEventListener('click', toggleMenu);
 
     <div class="line">
         <label class="item__name" for="name">店名</label>
-        <input class="shop__name__text" type="text" name="name" id="name" value="{{ old('name') }}" required>
+        <input class="shop__name__text" type="text" name="name" id="name" value="{{ old('name',$shop->name) }}" required>
+
   </div>
 
   @error('name')
@@ -137,32 +141,32 @@ button.addEventListener('click', toggleMenu);
         @enderror
 
     <div class="line">
-        <label class="item__name" for="area_id">エリア</label>
-        <select class="text" name="area_id" id="area_id" required>
-            <option value="">-- 選択してください --</option>
-            @foreach ($areas as $area)
-                <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area_name }}</option>
-            @endforeach
-        </select>
-  </div>
+    <label class="item__name" for="area_id">エリア</label>
+    <select class="text" name="area_id" id="area_id" required>
+        <option value="">-- 選択してください --</option>
+        @foreach ($areas as $area)
+            <option value="{{ $area->id }}" {{ old('area_id', $shop->area_id) == $area->id ? 'selected' : '' }}>{{ $area->area_name }}</option>
+        @endforeach
+    </select>
+</div>
 
-  @error('area_id')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
+@error('area_id')
+    <p class="text-danger">{{ $message }}</p>
+@enderror
 
-    <div class="line">
-        <label class="item__name" for="genre_id">ジャンル</label>
-        <select class="text" name="genre_id" id="genre_id" required>
-            <option value="">-- 選択してください --</option>
-            @foreach ($genres as $genre)
-                <option value="{{ $genre->id }}" {{ old('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre_name }}</option>
-            @endforeach
-        </select>
-  </div>
+<div class="line">
+    <label class="item__name" for="genre_id">ジャンル</label>
+    <select class="text" name="genre_id" id="genre_id" required>
+        <option value="">-- 選択してください --</option>
+        @foreach ($genres as $genre)
+            <option value="{{ $genre->id }}" {{ old('genre_id', $shop->genre_id) == $genre->id ? 'selected' : '' }}>{{ $genre->genre_name }}</option>
+        @endforeach
+    </select>
+</div>
 
-  @error('genre_id')
-            <p class="text-danger">{{ $message }}</p>
-        @enderror
+@error('genre_id')
+    <p class="text-danger">{{ $message }}</p>
+@enderror
 
     <div class="line">
         <label class="item__name" for="picture">画像</label>
@@ -175,7 +179,7 @@ button.addEventListener('click', toggleMenu);
 
     <div class="about">
         <label class="about__name" for="about">店舗紹介文</label>
-        <textarea name="about" id="about" required>{{ old('about') }}</textarea>
+        <textarea name="about" id="about" required>{{ old('about',$shop->about) }}</textarea>
     </div>
 
     @error('about')

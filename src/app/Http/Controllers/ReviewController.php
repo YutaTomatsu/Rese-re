@@ -76,5 +76,4 @@ public function create(Request $request)
         return view('review.review-done')->with('success', 'レビューを投稿しました');
     }
 
-
 }

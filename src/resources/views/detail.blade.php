@@ -133,7 +133,7 @@ button.addEventListener('click', toggleMenu);
     <div class="detail__top">
     <h2 class="detail__title">{{ $shop->name }}</h2>
     <div clss="rating__avg">
-    <p class="star-rating" data-rate="{{ round($reviews->avg('evaluate')) }}"></p>
+    <p class="star-rating" data-rate="{{ round($reviews->avg('evaluate'),1) }}"></p>
     </div>
 
 
@@ -147,7 +147,10 @@ button.addEventListener('click', toggleMenu);
     <p>#{{ $shop->area_name }}</p>
     <p>#{{ $shop->genre_name }}</p>
     </div>
-    <p>紹介文: {{ $shop->about }}</p>
+    <p class="about">
+        <div class="about__title">紹介文</div>
+        <div class="about__content" >{{ $shop->about }}</div>
+    </p>
 </div>
 
 </div>
@@ -166,8 +169,8 @@ button.addEventListener('click', toggleMenu);
         <div class="item">
             <div class="column">
     <div class="title">予約</div>
-        <input type="hidden" name="shop_id" value="{{ request()->query('id') }}">
-    <input class="date" type="date" name="date" value="{{ date('Y-m-d') }}" min="{{ date('Y-m-d') }}">
+    <input type="hidden" name="shop_id" value="{{ request()->query('id') }}">
+    <input class="date" type="date" name="date" value="{{ old('date', date('Y-m-d')) }}" min="{{ date('Y-m-d') }}">
 <select class="text" name="time" id="time-select">
     @php
         $selected_date = date('Y-m-d', strtotime(request('date', 'now')));
@@ -201,7 +204,7 @@ button.addEventListener('click', toggleMenu);
 </select>
 <select class="text" name="number_of_people">
                     @for ($i = 1; $i <= 20; $i++)
-                        <option value="{{ $i }}">{{ $i }}人</option>
+                        <option value="{{ $i }}" {{ old('number_of_people') == $i ? 'selected' : '' }}>{{ $i }}人</option>
                     @endfor
     </select>
 
@@ -222,16 +225,26 @@ button.addEventListener('click', toggleMenu);
     </div>
 
     </div>
+    
 </div>
+@if ($cources)
+    <select class="text" name="cource" id="cource-select">
+        <option value="">コースを選択</option>
+        <option value="{{ $cources->cource_1 }}">{{ $cources->cource_1 }}</option>
+        @if ($cources->cource_2)
+            <option value="{{ $cources->cource_2 }}">{{ $cources->cource_2 }}</option>
+        @endif
+        @if ($cources->cource_3)
+            <option value="{{ $cources->cource_3 }}">{{ $cources->cource_3 }}</option>
+        @endif
+    </select>
+@endif
+
 @if($errors->has('time'))
     <div class="error">{{ $errors->first('time') }}</div>
 @endif
     </div>
-    @if (Auth::check())
     <button class="button" type="submit" >予約する</button>
-    @else
-    <button class="button" type="submit" ><a class="button__login" href="{{ route('login') }}">予約する</a></button>
-    @endif
 </form>
 
 <script>
@@ -315,7 +328,7 @@ console.log(rate); // レートの平均値が表示される
 <form class="review__write" action="{{route('review')}}" method="get">
     @csrf
     <input type="hidden" name="shop_id" value="{{ request()->query('id') }}">
-    <button type="submit">レビューを書く</button>
+    <button class="review__button" type="submit">レビューを書く</button>
 </form>
 
 @if($errors->has('message'))
@@ -325,19 +338,37 @@ console.log(rate); // レートの平均値が表示される
 
 <h3>レビュー一覧</h3>
 
+<form action="{{ route('review-sort',['id' => $shop->id]) }}" method="GET">
+    <label for="sort">並び替え:</label>
+    <select name="sort" id="sort">
+        <option value="high">評価が高い順</option>
+        <option value="low">評価が低い順</option>
+        <option value="new">投稿が新しい順</option>
+        <option value="old">投稿が古い順</option>
+    </select>
+    <button type="submit">適用</button>
+</form>
 
-
+<div class="review__content">
+@if (count($reviews) === 0)
+    <p>まだレビューがありません</p>
+@else
     @foreach($reviews as $review)
         <div class="review__item">
             <p>投稿者: {{ $review->user->name }}</p>
             <p class="star-rating" data-rate="{{ $review->evaluate }}"></p>
             <p class="comment" data-full-comment="{{ $review->comment }}">{{ $review->comment }}</p>
             <p>投稿日時: {{ $review->created_at }}</p>
-            <button class="toggle-comment">全文を表示</button>
+            @if (strlen($review->comment) > 20)
+                <button class="toggle-comment">全文を表示</button>
+            @endif
         </div>
     @endforeach
 
-    {{ $reviews->appends(array_merge($query_params, ['reviews_page' => $reviews->currentPage()]))->links('owner.reviews') }}
+    {{ $reviews->appends(['sort' => $sortOption])->links('owner.reviews') }}
+
+@endif
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -371,6 +402,7 @@ $(document).ready(function() {
     });
 });
 </script>
+
 
 </div>
 </div>

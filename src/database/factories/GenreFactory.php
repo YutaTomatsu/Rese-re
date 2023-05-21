@@ -9,12 +9,21 @@ class GenreFactory extends Factory
 {
     protected $model = Genre::class;
 
+    private $genres = [
+        ['id' => 1, 'genre_name' => '寿司'],
+        ['id' => 2, 'genre_name' => '焼肉'],
+        ['id' => 3, 'genre_name' => '居酒屋'],
+        ['id' => 4, 'genre_name' => 'イタリアン'],
+        ['id' => 5, 'genre_name' => 'ラーメン'],
+    ];
+
     public function definition()
     {
-        $genreNames = ['寿司', '焼肉', '居酒屋','イタリアン','ラーメン'];
+        $genre = array_shift($this->genres);
 
         return [
-            'genre_name' => $this->faker->unique()->randomElement($genreNames)
+            'id' => $genre['id'],
+            'genre_name' => $genre['genre_name'],
         ];
     }
 }

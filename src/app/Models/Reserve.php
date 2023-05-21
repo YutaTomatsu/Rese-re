@@ -18,7 +18,7 @@ class Reserve extends Model
         'date',
         'time',
         'number_of_people',
-        'id',
+        'id'
     ];
 
 

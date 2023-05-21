@@ -9,10 +9,19 @@ class AreaFactory extends Factory
 {
     protected $model = Area::class;
 
+    private $areas = [
+        ['id' => 1, 'area_name' => '東京都'],
+        ['id' => 2, 'area_name' => '大阪府'],
+        ['id' => 3, 'area_name' => '福岡県'],
+    ];
+
     public function definition()
     {
+        $area = array_shift($this->areas);
+
         return [
-            'area_name' => $this->faker->unique()->randomElement(['東京都', '大阪府', '福岡県']),
+            'id' => $area['id'],
+            'area_name' => $area['area_name'],
         ];
     }
 }

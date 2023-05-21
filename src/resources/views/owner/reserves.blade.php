@@ -1,3 +1,9 @@
+
+
+
+
+
+
 @if ($paginator->hasPages())
     <nav>
         <div class="pagination">

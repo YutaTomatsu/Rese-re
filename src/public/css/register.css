@@ -307,7 +307,7 @@ p {
 
 .under-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     margin: 10px 0 0 0;
     text-decoration: none;
     align-items: center;

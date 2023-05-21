@@ -125,7 +125,7 @@ button.addEventListener('click', toggleMenu);
         <div class="item">
             <div class="column">
     <div class="title">予約</div>
-    <input class="date" type="date" name="date" value="{{ $reservation->date }}" min="{{ date('Y-m-d') }}">
+    <input class="date" type="date" name="date" value="{{ old('date', $reservation->date) }}" min="{{ date('Y-m-d') }}">
 <select class="text" name="time" id="time-select" value="{{ $reservation->time }}">
     @php
         $selected_date = date('Y-m-d', strtotime(request('date', 'now')));
@@ -142,7 +142,7 @@ button.addEventListener('click', toggleMenu);
             @endphp
 
 
-            <option value="{{ $time }}" {{ old('time') == $time ? 'selected' : '' }} {{ $is_today && ($i > 21 || ($i === 21 && $j > 00)) || $i < 17 ? 'disabled' : '' }}>
+            <option value="{{ $time }}" {{ old('time', date('H:i', strtotime($reservation->time))) == $time ? 'selected' : '' }} {{ $is_today && ($i > 21 || ($i === 21 && $j > 00)) || $i < 17 ? 'disabled' : '' }}>
                 {{ $time }}
             </option>
 
@@ -159,7 +159,7 @@ button.addEventListener('click', toggleMenu);
 </select>
 <select class="text" name="number_of_people" value="{{ $reservation->number_of_people }}">
                     @for ($i = 1; $i <= 20; $i++)
-                        <option value="{{ $i }}">{{ $i }}人</option>
+                        <option value="{{ $i }}" {{ old('number_of_people', $reservation->number_of_people) == $i ? 'selected' : '' }}>{{ $i }}人</option>
                     @endfor
     </select>
 
@@ -189,7 +189,7 @@ button.addEventListener('click', toggleMenu);
     </div>
 </div>
     </div>
-    <button class="button" type="submit" >予約する</button>
+    <button class="button" type="submit" >更新する</button>
 </form>
 
 </main>

@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Jetstream\Features;
 
 class UserFactory extends Factory
@@ -28,9 +29,32 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('12345678'),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            if ($user->id === 1) {
+                $user->name = 'ユーザー';
+                $user->email = 'user@example.com';
+            } elseif ($user->id === 2) {
+                $user->name = '管理者';
+                $user->email = 'admin@example.com';
+            } elseif ($user->id === 3) {
+                $user->name = '店舗代表者';
+                $user->email = 'owner@example.com';
+            }
+
+            $user->save();
+        });
     }
 
     /**
@@ -54,14 +78,14 @@ class UserFactory extends Factory
      */
     public function withPersonalTeam()
     {
-        if (! Features::hasTeamFeatures()) {
+        if (!Features::hasTeamFeatures()) {
             return $this->state([]);
         }
 
         return $this->has(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
-                    return ['name' => $user->name.'\'s Team', 'user_id' => $user->id, 'personal_team' => true];
+                    return ['name' => $user->name . "'s Team", 'user_id' => $user->id, 'personal_team' => true];
                 }),
             'ownedTeams'
         );

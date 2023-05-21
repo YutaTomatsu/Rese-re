@@ -55,6 +55,7 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
+    z-index: 1;
   }
 
   .close-button {
@@ -124,16 +125,18 @@ button.addEventListener('click', toggleMenu);
 
 <h2 class="name" >{{ Auth::user()->name }}さん</h2>
 
+
+
 <div class="media__btn">
-<button class="reserve__btn" id="toggle-reserve-button" onclick="toggleReservationList()">予約一覧を表示</button>
-<button class="favorite__btn" id="toggle-favorite-button" onclick="toggleFavoriteList()">お気に入りを表示</button>
+  <button class="toggle__btn" id="toggle-button" onclick="toggleList()">お気に入りを表示</button>
 </div>
 
 <div class="mypage">
 
 <div class="reserve">
-  <div id="reservation-list">
+  <div id="reservation-list" >
     <div class="reserve__title">予約状況</div>
+
 
 @foreach ($reservations as $key => $reservation)
 <div class="reserve__box">
@@ -146,7 +149,8 @@ button.addEventListener('click', toggleMenu);
      </div>
 
      <div class="reserve__right">
-     <a class="reserve__edit" href="{{route('edit', ['id' => $reservation->id])}}">予約日時を変更する</a>
+     <a class="reserve__qr" href="{{route('reserve-qr', ['id' => $reservation->id])}}">qrを表示</a>
+     <a class="reserve__edit" href="{{route('edit', ['id' => $reservation->id])}}">予約の編集</a>
      
         <a class="reserve__delete" href="{{route('delete', ['id' => $reservation->id])}}" onclick="return confirm('本当に予約を削除しますか？')"><img class="delete__img" src="/img/reserve_delete.svg" alt="delete"></a>
       </div>
@@ -156,10 +160,16 @@ button.addEventListener('click', toggleMenu);
     </div>
     <div class="reserve__item__bottom">
         <div class="confirm__left">
-        <div class="confirm__item" >Shop</div>
+        <div class="confirm__item">Shop</div>
         <div class="confirm__item">Date</div>
         <div class="confirm__item">Time</div>
         <div class="confirm__item">Number</div>
+        @php
+            $cource = $cources->where('reserve_id', $reservation->id)->first();
+        @endphp
+        @if($cource)
+        <div class="confirm__item">Cource</div>
+        @endif
         </div>
 
         <div class="confirm__right">
@@ -167,6 +177,9 @@ button.addEventListener('click', toggleMenu);
         <div class="confirm__item">{{ $reservation->date }}</div>
         <div class="confirm__item">{{ $reservation->time }}</div>
         <div class="confirm__item">{{ $reservation->number_of_people }}人</div>
+        @if($cource)
+        <div class="confirm__item">{{ $cource->cource }}</div>
+        @endif
         </div>
     </div>
 </div>
@@ -175,15 +188,18 @@ button.addEventListener('click', toggleMenu);
 </div>
 </div>
 
+
+
+
 <div class="favorite">
   
 
-<div id="favorite-list">
+<div id="favorite-list" class="show">
 <div class="favorite__title">お気に入り店舗</div>
 <div class="card__row">
   @foreach ($shops as $shop)
     <div class="card">
-      <img class="img" src="{{ asset(Storage::url($shop->picture)) }}" alt="{{ $shop->name }}">
+      <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
       <div class="under__box">
       <div class="under__item">
         <div class="shopname">{{ $shop->name }}</div>
@@ -223,62 +239,48 @@ button.addEventListener('click', toggleMenu);
 
 </div>
 
+
 <style>
-    @media (max-width: 768px) {
-    #toggle-reserve-button,
-    #toggle-favorite-button {
-        display: block;
-    }
-    #reservation-list:not(.show),
-    #favorite-list:not(.show) {
-        display: none;
-    }
+@media (max-width: 768px) {
+  #toggle-button {
+    display: block;
+  }
+  #reservation-list.show {
+    display: none;
+  }
+  #favorite-list.show {
+    display: none;
+  }
 }
 
 @media (min-width: 769px) {
-    #toggle-reserve-button,
-    #toggle-favorite-button {
-        display: none;
-    }
-    #reservation-list,
-    #favorite-list {
-        display: block;
-    }
+  #toggle-button {
+    display: none;
+  }
+  #reservation-list,
+  #favorite-list {
+    display: block;
+  }
 }
 
 </style>
 
 <script>
-function toggleReservationList() {
-    var reservationList = document.getElementById("reservation-list");
-    var favoriteList = document.getElementById("favorite-list");
-    var toggleReserveButton = document.getElementById("toggle-reserve-button");
+function toggleList() {
+  var reservationList = document.getElementById("reservation-list");
+  var favoriteList = document.getElementById("favorite-list");
+  var toggleButton = document.getElementById("toggle-button");
 
-    if (reservationList.classList.contains("show")) {
-        reservationList.classList.remove("show");
-        toggleReserveButton.innerHTML = "予約一覧を表示";
-    } else {
-        reservationList.classList.add("show");
-        favoriteList.classList.remove("show"); // お気に入りリストを非表示にする
-        toggleReserveButton.innerHTML = "予約一覧をしまう";
-    }
+  if (reservationList.classList.contains("show")) {
+    reservationList.classList.remove("show");
+    favoriteList.classList.add("show");
+    toggleButton.innerHTML = "お気に入りを表示";
+  } else {
+    reservationList.classList.add("show");
+    favoriteList.classList.remove("show");
+    toggleButton.innerHTML = "予約一覧を表示";
+  }
 }
-
-function toggleFavoriteList() {
-    var favoriteList = document.getElementById("favorite-list");
-    var reservationList = document.getElementById("reservation-list");
-    var toggleFavoriteButton = document.getElementById("toggle-favorite-button");
-
-    if (favoriteList.classList.contains("show")) {
-        favoriteList.classList.remove("show");
-        toggleFavoriteButton.innerHTML = "お気に入りを表示";
-    } else {
-        favoriteList.classList.add("show");
-        reservationList.classList.remove("show"); // 予約リストを非表示にする
-        toggleFavoriteButton.innerHTML = "お気に入りをしまう";
-    }
-}
-
 </script>
 
 <script>

@@ -1,6 +1,5 @@
 .detail {
     width: 100%;
-    border: 1px solid rgb(150, 150, 150);
 }
 
 .header__left {
@@ -59,112 +58,12 @@
 
 }
 
-.detail__left {
-    width: 60%;
-}
 
-.detail__top {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.rating__avg {}
-
-.rating__detail {
-    display: flex;
-
-}
-
-.img {
-    width: 100%;
-}
-
-.hashtag {
-    display: flex;
-    flex-direction: row;
-}
 
 .between {
     display: flex;
     width: 90%;
     margin: 0 auto;
-}
-
-.review {
-    width: 90%;
-    margin: 0 auto;
-}
-
-
-
-
-.star-rating {
-    position: relative;
-    font-size: 18px;
-    z-index: 0;
-}
-
-.star-rating::before,
-.star-rating::after {
-    content: "★★★★★";
-    color: #e1e1e1;
-    position: absolute;
-    top: -22px;
-    left: 0;
-}
-
-.star-rating::after {
-    color: #ffb448;
-    overflow: hidden;
-}
-
-.star-rating[data-rate="0"]::after {
-    width: 0px;
-}
-
-.star-rating[data-rate="0.5"]::after {
-    width: 9px;
-}
-
-.star-rating[data-rate="1"]::after {
-    width: 18px;
-}
-
-.star-rating[data-rate="1.5"]::after {
-    width: 27px;
-}
-
-.star-rating[data-rate="2"]::after {
-    width: 36px;
-}
-
-.star-rating[data-rate="2.5"]::after {
-    width: 45px;
-}
-
-.star-rating[data-rate="3"]::after {
-    width: 54px;
-}
-
-.star-rating[data-rate="3.5"]::after {
-    width: 63px;
-}
-
-.star-rating[data-rate="4"]::after {
-    width: 72px;
-}
-
-.star-rating[data-rate="4.5"]::after {
-    width: 81px;
-}
-
-.star-rating[data-rate="5"]::after {
-    width: 90px;
-}
-
-.review__item {
-    border: 1px solid rgb(150, 150, 150);
 }
 
 svg.w-5.h-5 {
@@ -183,20 +82,31 @@ svg.w-5.h-5 {
 .reserve__right {
     margin: 0 auto;
     width: 40%;
-    border: 1px solid rgb(150, 150, 150);
 }
 
 .reserve__list {
     display: flex;
     flex-direction: column;
+    border: 1px solid rgb(150, 150, 150);
 
 }
 
 .reserve__item {
     font-size: 1.5vw;
     text-align: center
+}
 
+.reserve__title {
+    display: flex;
+    justify-content: space-between;
+}
 
+.nav__links {
+    margin: auto 0;
+}
+
+.shopname {
+    font-size: 3vw;
 }
 
 
@@ -261,113 +171,12 @@ svg.w-5.h-5 {
 
     }
 
-    .detail__left {
-        width: 100%;
-    }
 
-    .detail__top {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .rating__avg {}
-
-    .rating__detail {
-        display: flex;
-
-    }
-
-    .img {
-        width: 100%;
-    }
-
-    .hashtag {
-        display: flex;
-        flex-direction: row;
-    }
 
     .between {
         display: flex;
         width: 90%;
         margin: 0 auto;
-        flex-direction: column
-    }
-
-    .review {
-        width: 90%;
-        margin: 0 auto;
-    }
-
-
-
-
-    .star-rating {
-        position: relative;
-        font-size: 18px;
-        z-index: 0;
-    }
-
-    .star-rating::before,
-    .star-rating::after {
-        content: "★★★★★";
-        color: #e1e1e1;
-        position: absolute;
-        top: -22px;
-        left: 0;
-    }
-
-    .star-rating::after {
-        color: #ffb448;
-        overflow: hidden;
-    }
-
-    .star-rating[data-rate="0"]::after {
-        width: 0px;
-    }
-
-    .star-rating[data-rate="0.5"]::after {
-        width: 9px;
-    }
-
-    .star-rating[data-rate="1"]::after {
-        width: 18px;
-    }
-
-    .star-rating[data-rate="1.5"]::after {
-        width: 27px;
-    }
-
-    .star-rating[data-rate="2"]::after {
-        width: 36px;
-    }
-
-    .star-rating[data-rate="2.5"]::after {
-        width: 45px;
-    }
-
-    .star-rating[data-rate="3"]::after {
-        width: 54px;
-    }
-
-    .star-rating[data-rate="3.5"]::after {
-        width: 63px;
-    }
-
-    .star-rating[data-rate="4"]::after {
-        width: 72px;
-    }
-
-    .star-rating[data-rate="4.5"]::after {
-        width: 81px;
-    }
-
-    .star-rating[data-rate="5"]::after {
-        width: 90px;
-    }
-
-    .review__item {
-        border: 1px solid rgb(150, 150, 150);
     }
 
     svg.w-5.h-5 {
@@ -385,7 +194,7 @@ svg.w-5.h-5 {
 
     .reserve__right {
         margin: 0 auto;
-        width: 100%;
+        width: 40%;
         border: 1px solid rgb(150, 150, 150);
     }
 
@@ -397,7 +206,8 @@ svg.w-5.h-5 {
 
     .reserve__item {
         font-size: 1.5vw;
-
-
+        text-align: center
     }
+
+    .shopname {}
 }

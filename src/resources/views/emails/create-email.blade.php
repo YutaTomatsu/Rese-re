@@ -8,9 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <header class="header">
+<header class="header">
 
-@if (Auth::check())
 <div class="header__left">
     <button class="icon" type="button"></button>
     <div class="under__line"></div>
@@ -22,24 +21,13 @@
     @csrf
     <button type="submit" class="menu__item">Logout</button>
 </form>
-    <a href="{{route('mypage')}}" class="menu__item">Mypage</a>
-  </div>
-@else
-<div class="header__left">
-    <button class="icon" type="button"><div class="third-line"></div></button>
-    <div class="under__line"></div>
-    <div class="menu">
-        <button class="close-button" type="button">X</button>
-  <div class="menu__all">
-    <a href="{{ route('Home') }}" class="menu__item">Home</a>
-    <a href="{{route('register')}}" class="menu__item">Registration</a>
-    <a href="{{route('login')}}" class="menu__item">Login</a>
-  </div>
-@endif
+    <a href="{{route('mail')}}" class="menu__item">Send Mail</a>
+</div>
 </div>
         <div class="header__title">Rese</div>
     </div>
 </div>
+</header>
 
     <style>
   .menu {
@@ -112,14 +100,6 @@ button.addEventListener('click', toggleMenu);
 // 閉じるボタンにクリックイベントを追加
   closeButton.addEventListener('click', toggleMenu);
 </script>
-
-
-
-
-<div class="header__right">
-</div>
-
-</header>
 
 
 

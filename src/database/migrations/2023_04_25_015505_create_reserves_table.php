@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -24,8 +27,6 @@ class CreateReservesTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('shop_id')->references('id')->on('shops');
-            
-            $table->unique(['shop_id', 'date', 'time']);
         });
     }
 

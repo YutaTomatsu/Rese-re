@@ -22,7 +22,7 @@
     <div class="menu">
         <button class="close-button" type="button">X</button>
   <div class="menu__all">
-    <a href="{{'owner'}}" class="menu__item">Home</a>
+    <a href="{{ route('owner') }}" class="menu__item">Home</a>
     <form class="logout" action="{{ route('logout') }}" method="POST">
     @csrf
     <button type="submit" class="menu__item">Logout</button>
@@ -130,7 +130,10 @@ button.addEventListener('click', toggleMenu);
       <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}" >
       <div class="under__box">
       <div class="under__item">
+        <div class="middle__item">
         <div class="shopname">{{ $shop->name }}</div>
+        <a class="shop__edit" href="{{ route('owner-edit', ['id' => $shop->shop_id]) }}">ショップ編集</a>
+        </div>
         <div class="hashtag">
           <p class="tag">#{{ $shop->area_name }}</p>
           <p class="tag">#{{ $shop->genre_name }}</p>
@@ -138,7 +141,7 @@ button.addEventListener('click', toggleMenu);
         <div class="between">
           <a class="detail" href="{{ route('owner-reserve', ['id' => $shop->shop_id]) }}">予約確認</a>
           <div class="between__right">
-            <a class="shop__edit" href="{{ route('owner-edit', ['id' => $shop->shop_id]) }}">ショップ編集</a>
+            <a class="review" href="{{ route('owner-review', ['id' => $shop->shop_id]) }}">ショップ詳細</a>
           </div>
         </div>
         </div>

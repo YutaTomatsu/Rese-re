@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -12,16 +15,21 @@
 
         
     </head>
-    <body class="antialiased">
 
-@if (Auth::check())
+
+
+
+    <body>
+
+<header>
+    @if (Auth::check())
 <div class="header__left">
     <button class="icon" type="button"></button>
     <div class="under__line"></div>
     <div class="menu">
         <button class="close-button" type="button">X</button>
   <div class="menu__all">
-    <a href="{{'owner'}}" class="menu__item">Home</a>
+    <a href="{{ route('owner') }}" class="menu__item">Home</a>
     <form class="logout" action="{{ route('logout') }}" method="POST">
     @csrf
     <button type="submit" class="menu__item">Logout</button>
@@ -59,7 +67,6 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
-    z-index:1;
   }
 
   .close-button {
@@ -120,47 +127,25 @@ button.addEventListener('click', toggleMenu);
 // 閉じるボタンにクリックイベントを追加
   closeButton.addEventListener('click', toggleMenu);
 </script>
-</div>
 
 <div class="between">
 
-
-
-<div class="detail__left">
-
-
-
 <div class="detail">
     <div class="detail__top">
-    <h2>{{ $shop->name }}</h2>
-    <div class="rating__detail">
-      <div clss="rating__avg">
-    <p class="star-rating" data-rate="{{ round($reviews->avg('evaluate')) }}"></p>
-    </div>
-    <p>{{ round($reviewsAvg, 1) }}/5</p>
-    <p>({{ $totalReviews }}件のレビュー)</p>
-    </div>
-    </div>
-    <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
-    <div class="hashtag">
-    <p>#{{ $shop->area_name }}</p>
-    <p>#{{ $shop->genre_name }}</p>
-    </div>
-    <p>紹介文: {{ $shop->about }}</p>
+    <h2 class="shopname">{{ $shop->name }}</h2>
 </div>
-
-
-</div>
-
-
-
-
-
-<div class="reserve__right">
-
 
 <div class="reserve__list">
+  
+  <div class="reserve__title">
     <h3 classa>予約一覧</h3>
+
+    <div class="nav__links">
+<a class="nav__btn" href="{{ route('reserve-date', [ 'id' => $id, 'date' => $prev_date]) }}"><</a>
+<span>{{ $date }}</span>
+<a class="nav__btn" href="{{ route('reserve-date', [ 'id' => $id, 'date' => $next_date]) }}">></a>
+</div>
+</div>
     <table>
         <thead>
             <tr>
@@ -181,73 +166,10 @@ button.addEventListener('click', toggleMenu);
             @endforeach
         </tbody>
     </table>
-    {{ $reserves->appends(array_merge($query_params, ['reserves_page' => $reserves->currentPage()]))->links('owner.reserves') }}
+    {{ $reserves->appends(['date' => $date])->links('owner.reserves') }}
+
 
 </div>
-
-</div>
-
-</div>
-
-
-
-
-<div class="review">
-
-
-<h3>レビュー一覧</h3>
-
-
-
-    @foreach($reviews as $review)
-        <div class="review__item">
-            <p>投稿者: {{ $review->user->name }}</p>
-            <p class="star-rating" data-rate="{{ $review->evaluate }}"></p>
-            <p class="comment" data-full-comment="{{ $review->comment }}">{{ $review->comment }}</p>
-            <p>投稿日時: {{ $review->created_at }}</p>
-            <button class="toggle-comment">全文を表示</button>
-        </div>
-    @endforeach
-
-   {{ $reviews->appends(array_merge($query_params, ['reviews_page' => $reviews->currentPage()]))->links('owner.reviews') }}
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    const truncateComment = (comment) => {
-        if (comment.length > 20) {
-            return comment.substr(0, 20) + '...';
-        }
-        return comment;
-    }
-
-    $('.comment').each(function() {
-        const $this = $(this);
-        const fullComment = $this.data('full-comment');
-        $this.text(truncateComment(fullComment));
-    });
-
-    $('.toggle-comment').on('click', function() {
-        const $this = $(this);
-        const $comment = $this.prevAll('.comment');
-        const fullComment = $comment.data('full-comment');
-        const isTruncated = $comment.text().length < fullComment.length;
-
-        if (isTruncated) {
-            $comment.text(fullComment);
-            $this.text('一部を表示');
-        } else {
-            $comment.text(truncateComment(fullComment));
-            $this.text('全文を表示');
-        }
-    });
-});
-</script>
-<script>
-    const starRating = document.querySelector('.star-rating');
-const rate = starRating.getAttribute('data-rate');
-console.log(rate); // レートの平均値が表示される
-</script>
 
 </div>
 

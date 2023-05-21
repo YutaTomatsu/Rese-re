@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OwnerDashboardController;
 use App\Http\Controllers\OwnerShopController;
 use App\Http\Controllers\OwnerReservationController;
+use App\Http\Controllers\OwnerReviewController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShopController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\CreateOwnerController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -143,6 +145,8 @@ Route::prefix('owner')->group(function () {
 
 Route::get('detail', [DetailController::class, 'index'])->name('detail');
 
+Route::get('review-sort/{id}', [DetailController::class, 'reviewSort'])->name('review-sort');
+
 Route::get('search', [SearchController::class, 'search'])->name('search');
 
 Route::post('reserve', [ReserveController::class, 'reserve']);
@@ -166,14 +170,12 @@ Route::post('/like', 'FavoriteController@like')->name('reviews.like');
 
 Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
 
-Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
-
 
 Route::post('/favorite', [FavoriteController::class, 'favorite'])->name('favorite');
 
 Route::get('/mypage', [MypageController::class, 'mypage'])->name('mypage');
 
-Route::get('/reservations/{id}/qr', [QrCodeController::class, 'generate'])->name('reservations.qr');
+Route::get('/reserve-qr/{id}', [QrCodeController::class,'index'])->name('reserve-qr');
 
 
 
@@ -183,11 +185,15 @@ Route::get('/owner-create', [OwnerShopController::class, 'index'])->name('owner-
 
 Route::post('/owner/shop/create', [OwnerShopController::class, 'store']);
 
+Route::get('/owner-review', [OwnerReviewController::class, 'index'])->name('owner-review');
+
 Route::get('/owner-edit/{id}', [OwnerShopController::class, 'edit'])->name('owner-edit');
 
 Route::put('/owner/shop/{id}', [OwnerShopController::class, 'update'])->name('owner.shop.update');
 
 Route::get('/owner-reserve', [OwnerReservationController::class,'index'])->name('owner-reserve');
+
+Route::get('/reserve-date/{id}/{date}',[OwnerReservationController::class, 'date'])->name('reserve-date');
 
 Route::get('/review', [ReviewController::class, 'create'])->name('review');
 
@@ -200,3 +206,9 @@ Route::get('/mail', [MailController::class, 'mail'])->name('mail');
 Route::get('/admins/create-email', [MailController::class, 'createEmail'])->name('admins.create-email');
 
 Route::post('/admins/send-email', [MailController::class, 'sendEmail'])->name('admins.send-email');
+
+    Route::get('/create', [PaymentController::class, 'create'])->name('payment-create');
+
+
+
+    Route::get('/store', [PaymentController::class, 'store'])->name('payment-store');

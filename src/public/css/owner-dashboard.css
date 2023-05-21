@@ -119,12 +119,11 @@
 }
 
 .card {
-    flex-basis: calc(25% - 6px);
+    flex-basis: calc(50% - 6px);
     margin: 10px 3px;
     border-radius: 10px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
     background-color: white;
-    height: 23vw;
 }
 
 .img {
@@ -151,6 +150,12 @@
     font-size: 1vw;
     font-weight: bold;
     margin: auto 0;
+    word-wrap: break-word;
+}
+
+.middle__item {
+    display: flex;
+    justify-content: space-between;
 }
 
 .hashtag {
@@ -180,23 +185,27 @@
     color: white;
     border-radius: 5px;
     font-size: 1vw;
-    width: 7vw;
-    height: 2.5vw;
+    width: 8vw;
+    height: 3vw;
+    margin: auto 0;
+}
+
+.review {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(65, 65, 255);
+    color: white;
+    border-radius: 5px;
+    font-size: 1vw;
+    width: 9vw;
+    height: 3vw;
     margin: auto 0;
 }
 
 .between__right {
     margin: auto 0;
-}
-
-.heart {
-    cursor: pointer;
-}
-
-.heart img {
-    width: 2.5vw;
-    height: 2.5vw;
-
 }
 
 .heart-image.red {
@@ -343,7 +352,7 @@
     }
 
     .card {
-        flex-basis: 100%;
+        flex-basis: calc(100%);
         margin: 10px 3px;
         border-radius: 10px;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
@@ -372,9 +381,17 @@
     }
 
     .shopname {
-        font-size: 4vw;
+        font-size: 3vw;
         font-weight: bold;
         margin: auto 0;
+        height: 100%;
+        width: 80%;
+        word-wrap: break-word;
+    }
+
+    .middle__item {
+        display: flex;
+        justify-content: space-between;
     }
 
     .hashtag {
@@ -396,6 +413,20 @@
 
 
     .detail {
+        display: flex;
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(65, 65, 255);
+        color: white;
+        border-radius: 5px;
+        font-size: 2vw;
+        width: 17vw;
+        height: 5vw;
+        margin: auto 0;
+    }
+
+    .review {
         display: flex;
         text-decoration: none;
         align-items: center;
@@ -453,6 +484,7 @@
         background-color: white;
         width: 90%;
         margin: 0 auto;
+        min-width: 375px;
     }
 
     .header {
@@ -523,10 +555,10 @@
 
     .header__right__form {
         border: none;
-        width: 55vw;
+        width: 300px;
         display: flex;
         align-items: stretch;
-        height: 8vw;
+        height: 35px;
         border-radius: 7px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
@@ -535,21 +567,19 @@
     .header__right__select1 {
         border: none;
         border-radius: 7px 0 0 7px;
-        font-size: 2vw;
     }
 
     .header__right__select2 {
         border: none;
-        font-size: 2vw;
     }
 
     .header__right__img {
-        width: 2vw;
+        width: 17px;
     }
 
     .header__right__text {
         border: none;
-        width: 20vw;
+        width: 400px;
         border-radius: 0 7px 7px 0;
     }
 
@@ -557,6 +587,8 @@
         background-color: white;
         border: none;
     }
+
+
 
     .card__row {
         width: 100%;
@@ -597,9 +629,17 @@
     }
 
     .shopname {
-        font-size: 4vw;
+        font-size: 3vw;
         font-weight: bold;
         margin: auto 0;
+        height: 100%;
+        width: 70%;
+        word-wrap: break-word;
+    }
+
+    .middle__item {
+        display: flex;
+        justify-content: space-between;
     }
 
     .hashtag {
@@ -628,9 +668,23 @@
         background-color: rgb(65, 65, 255);
         color: white;
         border-radius: 5px;
-        font-size: 1vw;
-        width: 17vw;
-        height: 8vw;
+        font-size: 2vw;
+        width: 20vw;
+        height: 5vw;
+        margin: auto 0;
+    }
+
+    .review {
+        display: flex;
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(65, 65, 255);
+        color: white;
+        border-radius: 5px;
+        font-size: 2vw;
+        width: 20vw;
+        height: 5vw;
         margin: auto 0;
     }
 
@@ -664,9 +718,9 @@
         background-color: rgb(65, 65, 255);
         color: white;
         border-radius: 5px;
-        font-size: 1vw;
-        width: 25vw;
-        height: 8vw;
+        font-size: 2vw;
+        width: 20vw;
+        height: 5vw;
         margin: auto 0;
     }
 }

@@ -36,7 +36,10 @@
     <p>#{{ $shop->area_name }}</p>
     <p>#{{ $shop->genre_name }}</p>
     </div>
-    <p>紹介文: {{ $shop->about }}</p>
+    <p class="about">
+        <div class="about__title">紹介文</div>
+        <div class="about__content">{{ $shop->about }}</div>
+    </p>
 </div>
 
 
@@ -49,14 +52,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('レビューを書く') }}</div>
+                <div class="review">
+                    <div class="review__title">{{ __('レビューを書く') }}</div>
 
-                    <div class="card-body">
+                    <div class="review__body">
 
 
 
-                        <form method="POST" action="{{ route('review.store') }}">
+                        <form class="review__form" method="POST" action="{{ route('review.store') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -84,11 +87,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="comment__group">
                                 <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('コメント') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea name="comment" id="comment" class="form-control" required>{{ old('comment') }}</textarea>
+                                    <textarea class="comment__text" name="comment" id="comment" class="form-control" required>{{ old('comment') }}</textarea>
 
                                     @error('comment')
 <span class="invalid-feedback" role="alert">
@@ -98,8 +101,8 @@
 </div>
 </div>
 <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="button__group">
+                                <button class="review-button" type="submit" class="btn btn-primary">
                                     {{ __('送信する') }}
                                 </button>
                             </div>
