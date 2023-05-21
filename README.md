@@ -4,13 +4,15 @@
 
 ![アプリトップ画像](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%82%A2%E3%83%97%E3%83%AA%E3%83%88%E3%83%83%E3%83%97%E7%94%BB%E5%83%8F.png?raw=true)
 
-##作成した目的 飲食店予約アプリを作成するため。
+## 作成した目的  
 
-アプリケーションURL
+飲食店予約アプリを作成するため。
+
+## アプリケーションURL
 
 13.230.68.76
 
-機能一覧
+## 機能一覧
 
 会員登録機能  
 ログイン機能  
@@ -50,17 +52,17 @@ QRコードによる予約確認機能
 
 ![](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%94.png)
 
-##ER図
+## ER図
 
 ![ER図](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/ER%E5%9B%B3.png)
 
-#環境構築
+## 環境構築
 
-Rese-re プロジェクトの環境構築
+### Rese-re プロジェクトの環境構築
 
 このドキュメントでは、Rese-reプロジェクトのローカル環境をセットアップする方法を説明します。
 
-前提条件
+### 前提条件
 
 PHP 7.4 以上がインストールされていること  
 Composerがインストールされていること  
@@ -68,23 +70,23 @@ MySQLデータベースがセットアップされていること
 AWSのセットアップが完了していること  
 インストール手順  
 
-リポジトリのクローン  
+#### 1,リポジトリのクローン  
 
 git clone https://github.com/YutaTomatsu/Rese-re.git
 
-プロジェクトのディレクトリに移動してビルド  
+#### 2,プロジェクトのディレクトリに移動してビルド  
 
 cd Rese-re docker-compose up -d --build code .
 
-コンテナに移動し必要な依存関係のインストール  
+#### 3,コンテナに移動し必要な依存関係のインストール  
 
 docker-compose exec php bash（以降コンテナに移動するときはプロジェクトディレクトリからこのコマンドを実行して下さい） composer install
 
-環境設定ファイルの作成  
+#### 4,環境設定ファイルの作成  
 
 cp .env.example .env
 
-.envファイルを編集して、データベース接続情報を設定  
+#### 5,.envファイルを編集して、データベース接続情報を設定  
 
 DB_CONNECTION=mysql  
 DB_HOST=mysql  
@@ -93,15 +95,15 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user  
 DB_PASSWORD=laravel_pass
 
-アプリケーションキーの生成
+#### 6,アプリケーションキーの生成
 
 php artisan key:generate
 
-データベースのマイグレーション実行  
+#### 7,データベースのマイグレーション実行  
 
 php artisan migrate
 
-アプリケーションの起動
+#### 8,アプリケーションの起動
 
 php artisan serve
 
@@ -110,7 +112,7 @@ php artisan serve
 
 次に、アプリケーション内の設定をしていきます。
 
-1, .envの編集
+#### 1,.envの編集
 
 以下の例を参考に、自身の環境に合わせて.envを作成して下さい。
 
@@ -177,7 +179,7 @@ STRIPE_SECRET_KEY=*************************************
 
 ※STRIPEの記述はデフォルトでは存在しないため、新たに書き足して下さい ※パブリックキーとシークレットキーは決済機能を提供するサービスであるstripeでアカウントを作成し、テストモードのパブリックキーとシークレットきーを貼り付けて下さい。
 
-２,　マルチログインの設定
+#### ２,マルチログインの設定
 
 laravelのルートディレクトリ/vendor/laravel/fortify/src/Http/Controllers/AuthenticatedSessionController.phpのstore functionを以下のように修正します。
 
@@ -232,7 +234,7 @@ use Laravel\Fortify\Http\Requests\LoginRequest;　※use宣言を追加
  
 これにより、メール認証時にロールに対応したアクセス先にアクセスされるようになります。
 
-3,queueとscheduleの実行
+#### 3,queueとscheduleの実行
 
 以下のコマンドを実行してqueueとscheduleを起動します。 queueを実行することで管理者のメール一斉送信を非同期化し、scheduleを実行することでユーザーの予約に対するリマインダーメール機能を起動します。
 
