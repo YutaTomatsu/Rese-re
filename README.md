@@ -2,7 +2,7 @@
 概要  
 ユーザーは飲食店の予約やお気に入り登録、レビューなどをすることができ、お店側店舗の作成、店舗情報の更新やショップの予約の確認、qrコードによる予約確認などができるアプリ。
 
-[アプリトップ画像](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%82%A2%E3%83%97%E3%83%AA%E3%83%88%E3%83%83%E3%83%97%E7%94%BB%E5%83%8F.png?raw=true)
+![アプリトップ画像](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%82%A2%E3%83%97%E3%83%AA%E3%83%88%E3%83%83%E3%83%97%E7%94%BB%E5%83%8F.png?raw=true)
 
 ##作成した目的 飲食店予約アプリを作成するため。
 
