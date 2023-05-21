@@ -8,7 +8,7 @@
 
 アプリケーションURL
 
-13.230.68.76
+[13.230.68.76](13.230.68.76)
 
 機能一覧
 
@@ -19,6 +19,8 @@
 ##テーブル設計
 
 ##ER図
+
+![ER図](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/ER%E5%9B%B3.png)
 
 #環境構築
 
