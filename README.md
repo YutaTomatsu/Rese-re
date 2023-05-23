@@ -283,14 +283,40 @@ use Laravel\Fortify\Http\Requests\LoginRequest;　※use宣言を追加
         return redirect()->route('dashboard');
     }
 }
- 
+
 これにより、メール認証時にロールに対応したアクセス先にアクセスされるようになります。
 
 #### 3,queueとscheduleの実行
 
-以下のコマンドを実行してqueueとscheduleを起動します。 queueを実行することで管理者のメール一斉送信を非同期化し、scheduleを実行することでユーザーの予約に対するリマインダーメール機能を起動します。
+以下のコマンドを実行してqueueとscheduleを起動します。 
 
 php artisan queue:work  
 php artisan schedule:work
+
+queueを実行することで管理者のメール一斉送信を非同期化し、  
+scheduleを実行することでユーザーの予約に対するリマインダーメール機能を起動することができます。
+
+#### 4, 環境切り替え
+
+環境切り分け用の.envとして、.env.productionをlaravelプロジェクトのルートディレクトリに作成し、本番環境で利用している.envをコピー＆ペーストして下さい。
+そして、APP_ENVを以下のようにproductionに変更して下さい。
+
+APP_ENV=production
+
+次に、コンテナ内で以下のコマンドを実行して下さい。
+
+php artisan config:clear 
+
+php artisan migrate --seed --env=production (本番環境のmigrateとダミーデータの作成を同時に実行）
+
+※利用しているRDSのパブリックアクセスが有効であり、セキュリティグループのインバウンドルールで外部からの接続が有効になっていないとRDSに接続ができないため注意して下さい。
+RDSが接続されているVPCセキュリティグループのインバウンドルールに以下のようなルールを追加することで、外部からのアクセスを有効にするルールを追加することができます。
+
+タイプ：MYSQL/Aurora  
+プロトコル：TCP  
+ポート範囲:3306  
+ソース:0.0.0.0/0
+
+これにより、ローカル環境から本番環境で利用しているデータベースにアクセスが可能になります。
 
 以上の工程を実行することで、ローカルの環境構築が完了します。
