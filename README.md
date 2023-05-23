@@ -92,7 +92,9 @@ git clone https://github.com/YutaTomatsu/Rese-re.git
 
 #### 3,プロジェクトのディレクトリに移動してビルド  
 
-cd Rese-re docker-compose up -d --build code .
+cd Rese-re  
+docker-compose up -d --build  
+code .
 
 #### 4,コンテナに移動し必要な依存関係のインストール  
 
