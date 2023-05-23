@@ -15,9 +15,8 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
-// 追加
 switch ($_SERVER['SERVER_NAME'] ?? 'localhost') {
-    case 'https://13.230.68.76:10000/':
+    case 'http://3.113.25.4':
         $app->loadEnvironmentFrom('.env.production'); // 本番環境用のenvファイル
         break;
         /// 環境の数に応じて増やす

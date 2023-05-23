@@ -30,7 +30,6 @@ class DetailController extends Controller
             $query->orderBy('created_at', 'asc');
             break;
         default:
-            // デフォルトの並び順を指定
             $query->orderBy('created_at', 'desc');
             break;
     }
@@ -46,18 +45,16 @@ class DetailController extends Controller
         ->where('shops.id', $id)
         ->firstOrFail();
     
-    // courceテーブルから該当するセレクトボックスのデータを取得する
     $cources = Cource::where('shop_id', $id)->first();
 
-    // courcesテーブルに対応するshop_idが存在しない場合は$courcesをnullに設定する
     if (!$cources) {
-        $cources = null;
+    $cources = null;
     }
 
     return view('detail', compact('id','shop','reviews','reviewsAvg', 'totalReviews','sortOption','cources'));
 }
 
-public function reviewSort(Request $request,$id)
+    public function reviewSort(Request $request,$id)
 {
     $sortOption = $request->input('sort', 'new');
 
@@ -77,7 +74,6 @@ public function reviewSort(Request $request,$id)
             $query->orderBy('created_at', 'asc');
             break;
         default:
-            // デフォルトの並び順を指定
             $query->orderBy('created_at', 'desc');
             break;
     }

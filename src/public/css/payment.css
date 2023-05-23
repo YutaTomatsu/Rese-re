@@ -1,7 +1,6 @@
 .header {
     display: flex;
     justify-content: space-between;
-
 }
 
 .header__left {
@@ -28,7 +27,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -39,7 +37,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -57,7 +54,6 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
 
 .main {
@@ -71,14 +67,11 @@
     justify-content: center;
 }
 
-.column {}
-
 p {
     color: red;
 }
 
 .form {
-
     border-radius: 7px;
     width: 400px;
     height: 510px;
@@ -93,11 +86,7 @@ p {
     border-top-right-radius: 7px;
     line-height: 50px;
     padding: 0 0 0 10px;
-
-
 }
-
-
 
 .form__item {
     display: flex;
@@ -110,8 +99,6 @@ p {
     border-bottom: 1px solid black;
     width: 250px;
     height: 40px;
-
-
 }
 
 .button {
@@ -122,7 +109,6 @@ p {
     width: 200px;
     height: 30px;
     margin: 20px auto 0 auto;
-
 }
 
 .under-item {
@@ -130,7 +116,6 @@ p {
     justify-content: space-between;
     margin: 10px 0 0 0;
     text-decoration: none;
-
 }
 
 .rink {
@@ -141,8 +126,6 @@ p {
     display: flex;
     justify-content: center;
 }
-
-.payment {}
 
 .line {
     max-height: 40px;
@@ -157,10 +140,6 @@ p {
     justify-content: space-between;
 }
 
-.midlle__line {}
-
-
-
 .middle__item {
     border: none;
     outline: none;
@@ -169,11 +148,7 @@ p {
     height: 20px;
 }
 
-.label {}
-
 .confirm {
-
-
     height: 120px;
     display: flex;
     flex-direction: row;
@@ -193,8 +168,6 @@ p {
     margin: 10px 0 0 10px;
 }
 
-.confirm__item {}
-
 .confirm__title {
     margin: 15px 0;
     font-weight: bold;
@@ -204,12 +177,10 @@ p {
     font-weight: bold;
 }
 
-
 @media screen and (max-width: 768px) {
     .header {
         display: flex;
         justify-content: space-between;
-
     }
 
     .header__left {
@@ -236,7 +207,6 @@ p {
         width: 25%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon::after {
@@ -247,7 +217,6 @@ p {
         width: 50%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon .third-line {
@@ -265,7 +234,6 @@ p {
         font-weight: bolder;
         font-size: 25px;
         margin: 0 15px;
-
     }
 
     .main {
@@ -279,14 +247,11 @@ p {
         justify-content: center;
     }
 
-    .column {}
-
     p {
         color: red;
     }
 
     .form {
-
         border-radius: 7px;
         width: 400px;
         height: 510px;
@@ -301,11 +266,7 @@ p {
         border-top-right-radius: 7px;
         line-height: 50px;
         padding: 0 0 0 10px;
-
-
     }
-
-
 
     .form__item {
         display: flex;
@@ -318,8 +279,6 @@ p {
         border-bottom: 1px solid black;
         width: 250px;
         height: 40px;
-
-
     }
 
     .button {
@@ -330,7 +289,6 @@ p {
         width: 200px;
         height: 30px;
         margin: 20px auto 0 auto;
-
     }
 
     .under-item {
@@ -338,7 +296,6 @@ p {
         justify-content: space-between;
         margin: 10px 0 0 0;
         text-decoration: none;
-
     }
 
     .rink {
@@ -349,8 +306,6 @@ p {
         display: flex;
         justify-content: center;
     }
-
-    .payment {}
 
     .line {
         max-height: 40px;
@@ -365,10 +320,6 @@ p {
         justify-content: space-between;
     }
 
-    .midlle__line {}
-
-
-
     .middle__item {
         border: none;
         outline: none;
@@ -377,11 +328,7 @@ p {
         height: 20px;
     }
 
-    .label {}
-
     .confirm {
-
-
         height: 120px;
         display: flex;
         flex-direction: row;
@@ -400,8 +347,6 @@ p {
         flex-direction: column;
         margin: 10px 0 0 10px;
     }
-
-    .confirm__item {}
 
     .confirm__title {
         margin: 15px 0;

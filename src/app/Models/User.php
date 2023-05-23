@@ -64,36 +64,34 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     public function favorites()
-{
-    return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
-}
+    {
+        return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
+    }
 
-public function favoriteShops()
-{
-    return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
-}
-
-
-
-public function admin()
-{
-    return $this->hasOne(Admin::class, 'user_id');
-}
-
-public function isAdmin()
-{
-    return $this->admin && $this->admin->role === 'admin';
-}
-
-public function isOwner()
-{
-    return $this->admin && $this->admin->role === 'owner';
-}
-
-public function reserves()
-{
-    return $this->belongsTo(Reserve::class);
-}
+    public function favoriteShops()
+    {
+        return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
+    }
 
 
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'user_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin && $this->admin->role === 'admin';
+    }
+
+    public function isOwner()
+    {
+        return $this->admin && $this->admin->role === 'owner';
+    }
+
+    public function reserves()
+    {
+        return $this->belongsTo(Reserve::class);
+    }
 }

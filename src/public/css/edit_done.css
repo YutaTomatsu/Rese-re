@@ -22,7 +22,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -33,7 +32,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -51,7 +49,6 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
 
 .box {

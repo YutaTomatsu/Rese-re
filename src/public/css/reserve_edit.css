@@ -27,7 +27,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -38,7 +37,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -56,7 +54,6 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
 
 .img{
@@ -120,7 +117,6 @@
     border-radius: 8px;
     margin: 7px 0;
     border: none;
-    
 }
 
 .button {

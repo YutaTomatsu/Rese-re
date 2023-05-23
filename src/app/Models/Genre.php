@@ -10,7 +10,7 @@ class Genre extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
+    protected $fillable = [
         'genre_name',
         'id',
     ];
@@ -21,7 +21,7 @@ class Genre extends Model
     }
 
     public function shops()
-{
-    return $this->belongsToMany(Shop::class, 'shops_genres');
-}
+    {
+        return $this->belongsToMany(Shop::class, 'shops_genres');
+    }
 }

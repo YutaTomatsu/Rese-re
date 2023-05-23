@@ -44,7 +44,7 @@ class AdminFactory extends Factory
             } elseif ($admin->id === 2) {
                 $admin->user_id = 3;
                 $admin->role = 'owner';
-            } 
+            }
 
             $admin->save();
         });

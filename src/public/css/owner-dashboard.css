@@ -35,7 +35,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -46,7 +45,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -64,10 +62,7 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
-
-.header__right {}
 
 .header__right__form {
     border: none;
@@ -77,7 +72,6 @@
     height: 45px;
     border-radius: 7px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-
 }
 
 .header__right__select1 {
@@ -174,8 +168,6 @@
     height: 50%;
 }
 
-
-
 .detail {
     display: flex;
     text-decoration: none;
@@ -230,7 +222,6 @@
     margin: auto 0;
 }
 
-
 @media screen and (max-width: 768px) {
     .body {
         background-color: white;
@@ -244,7 +235,6 @@
         justify-content: space-between;
         margin: 25px 0;
         align-items: center;
-
     }
 
     .header__left {
@@ -271,7 +261,6 @@
         width: 25%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon::after {
@@ -282,7 +271,6 @@
         width: 50%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon .third-line {
@@ -300,10 +288,7 @@
         font-weight: bolder;
         font-size: 25px;
         margin: 0 15px;
-
     }
-
-    .header__right {}
 
     .header__right__form {
         border: none;
@@ -313,7 +298,6 @@
         height: 35px;
         border-radius: 7px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-
     }
 
     .header__right__select1 {
@@ -339,8 +323,6 @@
         background-color: white;
         border: none;
     }
-
-
 
     .card__row {
         width: 100%;
@@ -410,8 +392,6 @@
         height: 50%;
     }
 
-
-
     .detail {
         display: flex;
         text-decoration: none;
@@ -451,7 +431,6 @@
     .heart img {
         width: 5vw;
         height: 5vw;
-
     }
 
     .heart-image.red {
@@ -477,8 +456,6 @@
     }
 }
 
-
-
 @media screen and (max-width: 480px) {
     .body {
         background-color: white;
@@ -492,7 +469,6 @@
         justify-content: space-between;
         margin: 25px 0;
         align-items: center;
-
     }
 
     .header__left {
@@ -519,7 +495,6 @@
         width: 25%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon::after {
@@ -530,7 +505,6 @@
         width: 50%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon .third-line {
@@ -548,10 +522,7 @@
         font-weight: bolder;
         font-size: 25px;
         margin: 0 15px;
-
     }
-
-    .header__right {}
 
     .header__right__form {
         border: none;
@@ -561,7 +532,6 @@
         height: 35px;
         border-radius: 7px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-
     }
 
     .header__right__select1 {
@@ -587,8 +557,6 @@
         background-color: white;
         border: none;
     }
-
-
 
     .card__row {
         width: 100%;
@@ -658,8 +626,6 @@
         height: 50%;
     }
 
-
-
     .detail {
         display: flex;
         text-decoration: none;
@@ -699,7 +665,6 @@
     .heart img {
         width: 5vw;
         height: 5vw;
-
     }
 
     .heart-image.red {

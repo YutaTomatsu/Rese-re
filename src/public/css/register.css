@@ -1,7 +1,6 @@
 .header {
     display: flex;
     justify-content: space-between;
-
 }
 
 .header__left {
@@ -28,7 +27,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -39,7 +37,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -57,7 +54,6 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
 
 .main {
@@ -81,12 +77,10 @@ p {
 }
 
 .form {
-
     border-radius: 7px;
     width: 380px;
     height: 270px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-
 }
 
 .title {
@@ -97,11 +91,7 @@ p {
     border-top-right-radius: 7px;
     line-height: 50px;
     padding: 0 0 0 10px;
-
-
 }
-
-
 
 .form__item {
     display: flex;
@@ -114,8 +104,6 @@ p {
     border-bottom: 1px solid black;
     width: 250px;
     height: 40px;
-
-
 }
 
 .button {
@@ -125,10 +113,6 @@ p {
     border: none;
     width: 60px;
     height: 30px;
-    
-    
-
-
 }
 
 .under-item {
@@ -138,7 +122,6 @@ p {
     text-decoration: none;
     display: flex;
     flex-direction: row-reverse;
-
 }
 
 .rink {
@@ -171,12 +154,10 @@ img {
     justify-content: center;
 }
 
-
 @media screen and (max-width: 768px) {
     .header {
     display: flex;
     justify-content: space-between;
-
 }
 
 .header__left {
@@ -203,7 +184,6 @@ img {
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -214,7 +194,6 @@ img {
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -232,7 +211,6 @@ img {
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
 
 .main {
@@ -256,7 +234,6 @@ p {
 }
 
 .form {
-
     border-radius: 7px;
     width: 270px;
     height: 270px;
@@ -271,11 +248,7 @@ p {
     border-top-right-radius: 7px;
     line-height: 50px;
     padding: 0 0 0 10px;
-
-
 }
-
-
 
 .form__item {
     display: flex;
@@ -288,8 +261,6 @@ p {
     border-bottom: 1px solid black;
     width: 200px;
     height: 40px;
-
-
 }
 
 .button {
@@ -299,10 +270,6 @@ p {
     border: none;
     width: 60px;
     height: 30px;
-    
-    
-
-
 }
 
 .under-item {

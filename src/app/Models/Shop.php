@@ -25,16 +25,16 @@ class Shop extends Model
     ];
 
     public function areas()
-{
-    return $this->belongsToMany(Area::class, 'shops_areas');
-}
+    {
+        return $this->belongsToMany(Area::class, 'shops_areas');
+    }
 
     public function genres()
-{
-    return $this->belongsToMany( Genre::class, 'shops_genres');
-}
+    {
+        return $this->belongsToMany(Genre::class, 'shops_genres');
+    }
 
-public function reserve()
+    public function reserve()
     {
         return $this->belongsTo(Reserve::class, 'reserves');
     }
@@ -65,8 +65,9 @@ public function reserve()
         return $this->hasMany('App\Favorite');
     }
     //後でViewで使う、いいねされているかを判定するメソッド。
-    public function isLikedBy($user): bool {
-        return Favorite::where('user_id', $user->id)->where('shop_id', $this->id)->first() !==null;
+    public function isLikedBy($user): bool
+    {
+        return Favorite::where('user_id', $user->id)->where('shop_id', $this->id)->first() !== null;
     }
 
     public function shops_areas()
@@ -76,13 +77,11 @@ public function reserve()
 
     public function shops_genres()
     {
-        return $this->belongsToMany(Genre::class,'shops_genres');
+        return $this->belongsToMany(Genre::class, 'shops_genres');
     }
 
     public function reviews()
     {
         return $this->hasmany(Review::class);
     }
-
-
 }

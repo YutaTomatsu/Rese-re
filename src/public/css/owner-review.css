@@ -27,7 +27,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -38,7 +37,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -56,7 +54,6 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
 
 .detail__left {
@@ -69,11 +66,8 @@
     justify-content: space-between;
 }
 
-.rating__avg {}
-
 .rating__detail {
     display: flex;
-
 }
 
 .img {
@@ -95,9 +89,6 @@
     width: 90%;
     margin: 0 auto;
 }
-
-
-
 
 .star-rating {
     position: relative;
@@ -163,8 +154,6 @@
     width: 90px;
 }
 
-.review__item {}
-
 svg.w-5.h-5 {
     width: 30px;
     height: 30px;
@@ -174,9 +163,7 @@ svg.w-5.h-5 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
 }
-
 
 .reserve__right {
     margin: 0 auto;
@@ -187,7 +174,6 @@ svg.w-5.h-5 {
 .reserve__list {
     display: flex;
     flex-direction: column;
-
 }
 
 .reserve__item {
@@ -239,7 +225,6 @@ svg.w-5.h-5 {
         width: 25%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon::after {
@@ -250,7 +235,6 @@ svg.w-5.h-5 {
         width: 50%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon .third-line {
@@ -268,7 +252,6 @@ svg.w-5.h-5 {
         font-weight: bolder;
         font-size: 25px;
         margin: 0 15px;
-
     }
 
     .detail__left {
@@ -281,11 +264,8 @@ svg.w-5.h-5 {
         justify-content: space-between;
     }
 
-    .rating__avg {}
-
     .rating__detail {
         display: flex;
-
     }
 
     .img {
@@ -308,9 +288,6 @@ svg.w-5.h-5 {
         width: 90%;
         margin: 0 auto;
     }
-
-
-
 
     .star-rating {
         position: relative;
@@ -385,9 +362,7 @@ svg.w-5.h-5 {
         display: flex;
         flex-direction: row;
         justify-content: center;
-
     }
-
 
     .reserve__right {
         margin: 0 auto;
@@ -398,16 +373,9 @@ svg.w-5.h-5 {
     .reserve__list {
         display: flex;
         flex-direction: column;
-
     }
 
     .reserve__item {
         font-size: 1.5vw;
-
-
     }
-
-    .shopname {}
-
-    .about__content {}
 }

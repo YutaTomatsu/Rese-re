@@ -25,24 +25,22 @@ class OwnerReservationController extends Controller
         ->where('shops.id', $id)
         ->firstOrFail();
 
-        $query_params = $request->query();
+    $query_params = $request->query();
     $reserves_query = Reserve::query();
 
     $date = request()->query('date', date('Y-m-d'));
-        $prev_date = Carbon::parse($date)->subDay()->toDateString();
-        $next_date = Carbon::parse($date)->addDay()->toDateString();
+    $prev_date = Carbon::parse($date)->subDay()->toDateString();
+    $next_date = Carbon::parse($date)->addDay()->toDateString();
     
-        $reserves = Reserve::join('users', 'reserves.user_id', '=', 'users.id')
-    ->where('reserves.shop_id', $id)
-    ->where('reserves.date', $date)
-    ->paginate(1, ['*'], 'reserve-page');
-        $reserves_paginator = $reserves->appends($query_params);
+    $reserves = Reserve::join('users', 'reserves.user_id', '=', 'users.id')
+        ->where('reserves.shop_id', $id)
+        ->where('reserves.date', $date)
+        ->paginate(1, ['*'], 'reserve-page');
+    $reserves_paginator = $reserves->appends($query_params);
 
-        $reserves->appends(['date' => $date])->links();
+    $reserves->appends(['date' => $date])->links();
 
-
-
-        return view('owner.owner-reserve', compact('id','shop','reserves', 'reserves_paginator', 'query_params','date','prev_date','next_date'));
+    return view('owner.owner-reserve', compact('id','shop','reserves', 'reserves_paginator', 'query_params','date','prev_date','next_date'));
 }
 
 public function date(Request $request, $id, $date)
@@ -72,7 +70,4 @@ public function date(Request $request, $id, $date)
 
     return view('owner.owner-reserve', compact('id', 'shop', 'reserves', 'reserves_paginator', 'query_params', 'date', 'prev_date', 'next_date'));
 }
-
-
-
 }

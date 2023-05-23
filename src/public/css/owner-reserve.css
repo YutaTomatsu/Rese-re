@@ -26,7 +26,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -37,7 +36,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -55,10 +53,7 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
-
-
 
 .between {
     display: flex;
@@ -75,9 +70,7 @@ svg.w-5.h-5 {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
 }
-
 
 .reserve__right {
     margin: 0 auto;
@@ -88,7 +81,6 @@ svg.w-5.h-5 {
     display: flex;
     flex-direction: column;
     border: 1px solid rgb(150, 150, 150);
-
 }
 
 .reserve__item {
@@ -109,8 +101,8 @@ svg.w-5.h-5 {
     font-size: 3vw;
 }
 
-
 @media screen and (max-width: 768px) {
+
     .detail {
         width: 100%;
     }
@@ -139,7 +131,6 @@ svg.w-5.h-5 {
         width: 25%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon::after {
@@ -150,7 +141,6 @@ svg.w-5.h-5 {
         width: 50%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon .third-line {
@@ -168,10 +158,7 @@ svg.w-5.h-5 {
         font-weight: bolder;
         font-size: 25px;
         margin: 0 15px;
-
     }
-
-
 
     .between {
         display: flex;
@@ -188,7 +175,6 @@ svg.w-5.h-5 {
         display: flex;
         flex-direction: row;
         justify-content: center;
-
     }
 
 
@@ -201,13 +187,10 @@ svg.w-5.h-5 {
     .reserve__list {
         display: flex;
         flex-direction: column;
-
     }
 
     .reserve__item {
         font-size: 1.5vw;
         text-align: center
     }
-
-    .shopname {}
 }

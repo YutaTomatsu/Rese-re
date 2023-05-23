@@ -11,16 +11,12 @@ use App\Models\Favorite;
 
 class ShopController extends Controller
 {
-
-
     public function index()
     {
 
         $areas=Area::all();
         $genres=Genre::all();
 
-        
-         // ショップ情報を取得し、area_name と genre_name を関連付ける
         $shops = Shop::select(
                 'shops.id as shop_id',
                 'shops.name',
@@ -34,9 +30,9 @@ class ShopController extends Controller
             ->leftJoin('genres', 'shops_genres.genre_id', '=', 'genres.id')
             ->get();
 
-            $favorite_shops = array();
+        $favorite_shops = array();
         if (Auth::check()) {
-            $favorite_shops = Auth::user()->favoriteShops()->pluck('shop_id')->toArray();
+        $favorite_shops = Auth::user()->favoriteShops()->pluck('shop_id')->toArray();
         }
 
         return view('welcome', compact('shops','areas','genres','favorite_shops'));

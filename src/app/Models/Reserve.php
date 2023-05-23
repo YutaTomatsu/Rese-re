@@ -35,12 +35,12 @@ class Reserve extends Model
 
     public function reserveUser()
     {
-    return $this->belongsTo(User::class, 'user_id','id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function reserveShop()
     {
-    return $this->belongsTo(Shop::class, 'shop_id','id');
+        return $this->belongsTo(Shop::class, 'shop_id', 'id');
     }
 
 
@@ -66,12 +66,12 @@ class Reserve extends Model
 
     protected static function booted()
     {
-        static::created(function($reserve){
-            DB::transaction (function () use ($reserve) {
+        static::created(function ($reserve) {
+            DB::transaction(function () use ($reserve) {
                 $reserveTime = Carbon::parse($reserve->date . ' ' . $reserve->time);
                 $visitTime = $reserveTime->copy()->addMinutes(30)->diffInSeconds(Carbon::now());
                 CreateVisitJob::dispatch($reserve) // ジョブをディスパッチ
-            ->visitTime($visitTime); // 遅延時間を設定
+                    ->visitTime($visitTime); // 遅延時間を設定
                 $visit = new Visit([
                     'user_id' => $reserve->user_id,
                     'shop_id' => $reserve->shop_id,
@@ -80,8 +80,7 @@ class Reserve extends Model
                 $visit->setCreatedAt($visitTime);
                 $visit->setUpdatedAt($visitTime);
                 $visit->save();
-            },0);
+            }, 0);
         });
     }
 }
-

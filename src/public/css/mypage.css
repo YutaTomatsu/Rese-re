@@ -27,7 +27,6 @@
     width: 25%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon::after {
@@ -38,7 +37,6 @@
     width: 50%;
     height: 1px;
     background-color: white;
-
 }
 
 .icon .third-line {
@@ -56,13 +54,11 @@
     font-weight: bolder;
     font-size: 25px;
     margin: 0 15px;
-
 }
 
 .visit {
     color: black;
     font-weight: bold;
-
 }
 
 .name {
@@ -267,8 +263,6 @@
     height: 50%;
 }
 
-
-
 .detail {
     display: flex;
     text-decoration: none;
@@ -294,7 +288,6 @@
 .heart img {
     width: 2.5vw;
     height: 2.5vw;
-
 }
 
 .heart-image.red {
@@ -313,8 +306,6 @@
 .hide {
     display: none;
 }
-
-
 
 @media screen and (max-width: 768px) {
     .header {
@@ -346,7 +337,6 @@
         width: 25%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon::after {
@@ -357,7 +347,6 @@
         width: 50%;
         height: 1px;
         background-color: white;
-
     }
 
     .icon .third-line {
@@ -375,13 +364,11 @@
         font-weight: bolder;
         font-size: 25px;
         margin: 0 15px;
-
     }
 
     .visit {
         color: black;
         font-weight: bold;
-
     }
 
     .name {
@@ -581,8 +568,6 @@
         height: 50%;
     }
 
-
-
     .detail {
         font-size: 1vw;
         display: flex;
@@ -608,7 +593,6 @@
     .heart img {
         width: 7vw;
         height: 7vw;
-
     }
 
     .heart-image.red {
@@ -650,7 +634,6 @@
         background-color: white;
         color: rgb(70, 98, 236);
 
-
         &:after {
             position: absolute;
             transition: .3s;
@@ -662,16 +645,12 @@
             background: rgba(70, 98, 236, 0.65);
         }
 
-
-
         &:hover {
             cursor: pointer;
-
             &:after {
                 width: 100%;
                 left: 0;
             }
         }
     }
-
 }

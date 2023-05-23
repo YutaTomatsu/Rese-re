@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,108 +12,110 @@
 <header class="header">
     <div class="header__left">
 
-@if (Auth::check())
-<div class="header__left">
-    <button class="icon" type="button"></button>
-    <div class="under__line"></div>
-    <div class="menu">
-        <button class="close-button" type="button">X</button>
-  <div class="menu__all">
-    <a href="{{ url('/dashboard') }}" class="menu__item">Home</a>
-    <form class="logout" action="{{ route('logout') }}" method="POST">
-    @csrf
-    <button type="submit" class="menu__item">Logout</button>
-</form>
-    <a href="{{route('login')}}" class="menu__item">Mypage</a>
-  </div>
-@else
-<div class="header__left">
-    <button class="icon" type="button"><div class="third-line"></div></button>
-    <div class="under__line"></div>
-    <div class="menu">
-        <button class="close-button" type="button">X</button>
-  <div class="menu__all">
-    <a href="{{ route('Home') }}" class="menu__item">Home</a>
-    <a href="{{route('register')}}" class="menu__item">Registration</a>
-    <a href="{{route('login')}}" class="menu__item">Login</a>
-  </div>
-@endif
-</div>
-        <div class="header__title">Rese</div>
+        @if (Auth::check())
+            <div class="header__left">
+                <button class="icon" type="button"></button>
+                <div class="under__line"></div>
+                <div class="menu">
+                    <button class="close-button" type="button">X</button>
+                    <div class="menu__all">
+                        <a href="{{ url('/dashboard') }}" class="menu__item">Home</a>
+                        <form class="logout" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="menu__item">Logout</button>
+                        </form>
+                        <a href="{{ route('login') }}" class="menu__item">Mypage</a>
+                    </div>
+                @else
+                    <div class="header__left">
+                        <button class="icon" type="button">
+                            <div class="third-line"></div>
+                        </button>
+                        <div class="under__line"></div>
+                        <div class="menu">
+                            <button class="close-button" type="button">X</button>
+                            <div class="menu__all">
+                                <a href="{{ route('Home') }}" class="menu__item">Home</a>
+                                <a href="{{ route('register') }}" class="menu__item">Registration</a>
+                                <a href="{{ route('login') }}" class="menu__item">Login</a>
+                            </div>
+        @endif
     </div>
-</div>
+    <div class="header__title">Rese</div>
+    </div>
+    </div>
 
     <style>
-  .menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
 
-  .close-button {
-    background-color:rgb(72, 72, 255);
-    color:white;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    border:none;
-    width: 40px;
-    height: 40px;
-    border-radius:7px;
-    margin: 50px 100px;
+        .close-button {
+            background-color: rgb(72, 72, 255);
+            color: white;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 7px;
+            margin: 50px 100px;
 
-  }
+        }
 
-  .menu__all {
-    margin: 200px 0;
-  }
+        .menu__all {
+            margin: 200px 0;
+        }
 
-  .logout {
-    display:flex;
-    justify-content: center;
-  }
+        .logout {
+            display: flex;
+            justify-content: center;
+        }
 
-  .menu__item {
-    display: flex;
-    justify-content: center;
-    color: rgb(72, 72, 255);
-    font-size: 30px;
-    margin: 15px 0 ;
-    text-decoration: none;
-    border:none;
-    background-color:white;
-  }
+        .menu__item {
+            display: flex;
+            justify-content: center;
+            color: rgb(72, 72, 255);
+            font-size: 30px;
+            margin: 15px 0;
+            text-decoration: none;
+            border: none;
+            background-color: white;
+        }
 
-  .menu-open {
-    transform: translateX(0%);
-  }
-</style>
+        .menu-open {
+            transform: translateX(0%);
+        }
+    </style>
 
     <script>
-    // ボタン要素を取得
-const button = document.querySelector('.icon');
+        // ボタン要素を取得
+        const button = document.querySelector('.icon');
 
-// メニュー要素を取得
-const menu = document.querySelector('.menu');
+        // メニュー要素を取得
+        const menu = document.querySelector('.menu');
 
-// 閉じるボタン要素を取得
-  const closeButton = document.querySelector('.close-button');
+        // 閉じるボタン要素を取得
+        const closeButton = document.querySelector('.close-button');
 
-// ボタンがクリックされたときにメニューをスライドイン/アウトする関数
-function toggleMenu() {
-  menu.classList.toggle('menu-open');
-}
+        // ボタンがクリックされたときにメニューをスライドイン/アウトする関数
+        function toggleMenu() {
+            menu.classList.toggle('menu-open');
+        }
 
-// ボタンにクリックイベントを追加
-button.addEventListener('click', toggleMenu);
+        // ボタンにクリックイベントを追加
+        button.addEventListener('click', toggleMenu);
 
-// 閉じるボタンにクリックイベントを追加
-  closeButton.addEventListener('click', toggleMenu);
-</script>
+        // 閉じるボタンにクリックイベントを追加
+        closeButton.addEventListener('click', toggleMenu);
+    </script>
 
 </header>
 
@@ -121,10 +124,10 @@ button.addEventListener('click', toggleMenu);
 
 
 
-<main class="main">
+    <main class="main">
 
         <form class="form" id="card-form" action="{{ route('payment-store') }}" method="get">
-                        @csrf
+            @csrf
 
             <div class="title">決済画面</div>
 
@@ -136,61 +139,61 @@ button.addEventListener('click', toggleMenu);
 
             <div class="center">
 
-            <div class="column">
+                <div class="column">
 
-<div class="confirm__title">予約詳細</div>
+                    <div class="confirm__title">予約詳細</div>
 
-<div class="confirm">
-        <div class="confirm__left">
-        <div class="confirm__item">Date</div>
-        <div class="confirm__item">Time</div>
-        <div class="confirm__item">Number</div>
-        <div class="confirm__item">Cource</div>
-        </div>
+                    <div class="confirm">
+                        <div class="confirm__left">
+                            <div class="confirm__item">Date</div>
+                            <div class="confirm__item">Time</div>
+                            <div class="confirm__item">Number</div>
+                            <div class="confirm__item">Cource</div>
+                        </div>
 
-        <div class="confirm__right">
-        <div class="confirm__item">{{$reserve->date}}</div>
-        <div class="confirm__item">{{$reserve->time}}</div>
-        <div class="confirm__item">{{$reserve->number_of_people}}</div>
-        <div class="confirm__item">{{$reserve->cource}}</div>
-        </div>
-</div>
+                        <div class="confirm__right">
+                            <div class="confirm__item">{{ $reserve->date }}</div>
+                            <div class="confirm__item">{{ $reserve->time }}</div>
+                            <div class="confirm__item">{{ $reserve->number_of_people }}</div>
+                            <div class="confirm__item">{{ $reserve->cource }}</div>
+                        </div>
+                    </div>
 
-<div class="payment__title">カード情報</div>
-<div class="payment">
-            <div class="line">
-                <label class="label" for="card_number">カード番号</label>
-                <div id="card-number" class="item"></div>
+                    <div class="payment__title">カード情報</div>
+                    <div class="payment">
+                        <div class="line">
+                            <label class="label" for="card_number">カード番号</label>
+                            <div id="card-number" class="item"></div>
+                        </div>
+
+                        <div class="middle__box">
+                            <div class="middle__line">
+                                <label class="label" for="card_expiry">有効期限</label>
+                                <div id="card-expiry" class="middle__item"></div>
+                            </div>
+
+                            <div class="middle__line">
+                                <label class="label" for="card-cvc">セキュリティコード</label>
+                                <div id="card-cvc" class="middle__item"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="card-errors" class="text-danger"></div>
+                    <div class="under-item">
+                        <button class="button">決済して予約を完了する</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="middle__box">
-            <div class="middle__line">
-                <label class="label" for="card_expiry">有効期限</label>
-                <div id="card-expiry" class="middle__item"></div>
-            </div>
-
-            <div class="middle__line">
-                <label class="label" for="card-cvc">セキュリティコード</label>
-                <div id="card-cvc" class="middle__item"></div>
-            </div>
-            </div>
-</div>
-
-            <div id="card-errors" class="text-danger"></div>
-            <div class="under-item">
-                <button class="button">決済して予約を完了する</button>
-            </div>
-            </div>
-</div>
         </form>
-</main>
-        @if (session('flash_alert'))
-            <div class="alert alert-danger">{{ session('flash_alert') }}</div>
-        @elseif(session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
+    </main>
+    @if (session('flash_alert'))
+        <div class="alert alert-danger">{{ session('flash_alert') }}</div>
+    @elseif(session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
 
     <script src="https://js.stripe.com/v3/"></script>
     <script>
@@ -262,4 +265,5 @@ button.addEventListener('click', toggleMenu);
         }
     </script>
 </body>
+
 </html>

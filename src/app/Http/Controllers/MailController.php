@@ -12,9 +12,9 @@ use App\Jobs\SendEmailJob;
 class MailController extends Controller
 {
     public function mail(Request $request)
-    {
-        return view('emails.create-email');
-    }
+{
+    return view('emails.create-email');
+}
 
     public function createEmail()
 {
@@ -23,7 +23,7 @@ class MailController extends Controller
 
 
 
-public function sendEmail(Request $request)
+    public function sendEmail(Request $request)
 {
 
     $validatedData = $request->validate([
@@ -43,21 +43,15 @@ public function sendEmail(Request $request)
     return redirect()->back()->with('success', 'メールが送信されました。');
 }
 
-
-
-
-
-
-
     public function send(Request $request)
-    {
-        $name = 'テスト ユーザー';
-        $email = 'test@example.com';
+{
+    $name = 'テスト ユーザー';
+    $email = 'test@example.com';
 
-        Mail::send(new TestMail($name, $email));
+    Mail::send(new TestMail($name, $email));
 
-        return view('welcome');
-    }
+    return view('welcome');
+}
 
 
 }

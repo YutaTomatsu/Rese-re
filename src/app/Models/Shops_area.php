@@ -11,7 +11,7 @@ class Shops_area extends Model
 {
     use HasFactory;
 
-        protected $fillable = [
+    protected $fillable = [
         'id',
         'shop_id',
         'area_id',

@@ -72,8 +72,6 @@
     flex-direction: column;
 }
 
-.text-danger {}
-
 .line {
     display: flex;
     flex-direction: row;

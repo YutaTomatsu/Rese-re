@@ -13,10 +13,6 @@ use App\Models\Reserves_cource;
 
 class MypageController extends Controller
 {
-
-
-
-    
     public function mypage()
 {
     $user_id = auth()->id();
@@ -29,13 +25,11 @@ class MypageController extends Controller
 
     $favorite_shops = array();
     if (Auth::check()) {
-        $favorite_shops = Auth::user()->favorites()->pluck('shop_id')->toArray();
+    $favorite_shops = Auth::user()->favorites()->pluck('shop_id')->toArray();
     }
 
-    // Get corresponding course data
     $cources = Reserves_cource::whereIn('reserve_id', $reservations->pluck('id'))->get();
 
-    // ショップ情報を取得し、area_name と genre_name を関連付ける
     $shops = Shop::select(
             'shops.id as shop_id',
             'shops.name',

@@ -10,7 +10,7 @@ class ShopFactory extends Factory
     protected $model = Shop::class;
 
     private $records = [
-            [
+        [
             'name' => '仙人',
             'about' => '料理長厳選の食材から作る寿司を用いたコースをぜひお楽しみください。食材・味・価格、お客様の満足度を徹底的に追及したお店です。特別な日のお食事、ビジネス接待まで気軽に使用することができます。',
             'picture' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
@@ -110,9 +110,9 @@ class ShopFactory extends Factory
             'about' => '毎日店主自ら市場等に出向き、厳選した魚介類が、お鮨をはじめとした繊細な料理に仕立てられます。また、選りすぐりの種類豊富なドリンクもご用意しております。',
             'picture' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
         ],
-        ];
+    ];
 
-            public function definition()
+    public function definition()
     {
         $record = array_shift($this->records);
 

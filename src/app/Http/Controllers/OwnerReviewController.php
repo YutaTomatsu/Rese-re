@@ -26,18 +26,13 @@ class OwnerReviewController extends Controller
         ->where('shops.id', $id)
         ->firstOrFail();
 
-        $query_params = $request->query();
-    $reserves_query = Reserve::query();
+    $query_params = $request->query();
+    $reserves_query = Reserve::query();    
+    $reserves = Reserve::join('users', 'reserves.user_id', '=', 'users.id')
+        ->where('reserves.shop_id', $id)
+        ->paginate(10, ['*'], 'reserve-page');
+    $reserves_paginator = $reserves->appends($query_params);
 
-
-    
-        $reserves = Reserve::join('users', 'reserves.user_id', '=', 'users.id')
-    ->where('reserves.shop_id', $id)
-    ->paginate(5, ['*'], 'reserve-page');
-        $reserves_paginator = $reserves->appends($query_params);
-
-
-
-        return view('owner.owner-review', compact('shop','reviews','reserves','reviewsAvg', 'totalReviews', 'reserves_paginator', 'query_params'));
+    return view('owner.owner-review', compact('shop','reviews','reserves','reviewsAvg', 'totalReviews', 'reserves_paginator', 'query_params'));
 }
 }

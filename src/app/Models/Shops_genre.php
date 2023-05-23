@@ -11,9 +11,7 @@ class Shops_genre extends Model
 {
     use HasFactory;
 
-        use HasFactory;
-
-        protected $fillable = [
+    protected $fillable = [
         'id',
         'shop_id',
         'genre_id',
@@ -26,6 +24,6 @@ class Shops_genre extends Model
 
     public function genre()
     {
-        return $this->belongsTo( Genre::class);
+        return $this->belongsTo(Genre::class);
     }
 }

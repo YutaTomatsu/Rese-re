@@ -27,13 +27,13 @@ class ReviewFactory extends Factory
         shuffle($userIds);
         $userId = array_pop($userIds);
 
-        $comment = 
+        $comment =
             'ここにコメントが表示されます';
 
         return [
             'user_id' => $userId,
             'shop_id' => $shopId,
-            'comment' => $comment, 
+            'comment' => $comment,
             'evaluate' => $this->faker->numberBetween(1, 5),
         ];
     }
