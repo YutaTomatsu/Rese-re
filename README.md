@@ -70,6 +70,7 @@ Laravel 8.83.27
 - Composerがインストールされていること  
 - MySQLデータベースがセットアップされていること  
 - AWSのセットアップが完了していること  
+- vs Codeがインストールであること
 
 ### インストール手順  
 
@@ -95,8 +96,13 @@ git clone https://github.com/YutaTomatsu/Rese-re.git
 #### 3,プロジェクトのディレクトリに移動してビルド  
 
 cd Rese-re  
+
+デスクトップからdockerを実行した後に以下のコマンドを実行して下さい。
+
 docker-compose up -d --build  
 code .
+
+code .を実行するとvscodeが開き、信用するか聞かれるので信用するをクリックして下さい。
 
 #### 4,コンテナに移動し必要な依存関係のインストール  
 
