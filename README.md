@@ -152,7 +152,7 @@ password:12345678
 
 ・店舗代表者アカウント
 
-name:店舗代表者
+name:店舗代表者  
 email:owner@example.com  
 password:12345678  
 
