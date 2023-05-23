@@ -44,7 +44,7 @@ QRコードによる予約確認機能
 
 ##テーブル設計
 
-![テーブル設計](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%94.png)
+![テーブル設計](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%91.png?raw=true)
 
 ![](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB2.png)
 
