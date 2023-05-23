@@ -58,35 +58,51 @@ QRコードによる予約確認機能
 
 ## 環境構築
 
-### Rese-re プロジェクトの環境構築
+### Reseプロジェクトの環境構築
 
-このドキュメントでは、Rese-reプロジェクトのローカル環境をセットアップする方法を説明します。
+このドキュメントでは、Reseプロジェクトのローカル環境をセットアップする方法を説明します。
 
 ### 前提条件
 
-PHP 7.4 以上がインストールされていること  
-Composerがインストールされていること  
-MySQLデータベースがセットアップされていること  
-AWSのセットアップが完了していること  
-インストール手順  
+- PHP 7.4 以上がインストールされていること  
+- Composerがインストールされていること  
+- MySQLデータベースがセットアップされていること  
+- AWSのセットアップが完了していること  
 
-#### 1,リポジトリのクローン  
+### インストール手順  
+
+### 1, Dockerのインストール
+
+以下のリンクからDockerをダウンロードします。
+
+[https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+
+ダウンロードが完了したら、エクスプローラのダウンロードフォルダにインストーラが保存されているので、ダブルクリックしインストールします。  
+インストールが完了したらpcを再起動し、以下のコマンドでバージョン情報が返ってくるか確認して下さい。
+
+docker -v
+
+以下のようにバージョン情報が返ってきたらインストール完了です。
+
+Docker version 20.10.22, build 3a2c30b
+
+#### 2,リポジトリのクローン  
 
 git clone https://github.com/YutaTomatsu/Rese-re.git
 
-#### 2,プロジェクトのディレクトリに移動してビルド  
+#### 3,プロジェクトのディレクトリに移動してビルド  
 
 cd Rese-re docker-compose up -d --build code .
 
-#### 3,コンテナに移動し必要な依存関係のインストール  
+#### 4,コンテナに移動し必要な依存関係のインストール  
 
 docker-compose exec php bash（以降コンテナに移動するときはプロジェクトディレクトリからこのコマンドを実行して下さい） composer install
 
-#### 4,環境設定ファイルの作成  
+#### 5,環境設定ファイルの作成  
 
 cp .env.example .env
 
-#### 5,.envファイルを編集して、データベース接続情報を設定  
+#### 6,.envファイルを編集して、データベース接続情報を設定  
 
 DB_CONNECTION=mysql  
 DB_HOST=mysql  
@@ -95,26 +111,46 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user  
 DB_PASSWORD=laravel_pass
 
-#### 6,アプリケーションキーの生成
+#### 7,アプリケーションキーの生成
 
 php artisan key:generate
 
-#### 7,データベースのマイグレーション実行  
+#### 8,データベースのマイグレーション実行  
 
 php artisan migrate
 
-#### 8,アプリケーションの起動
+#### 9,アプリケーションの起動
 
 php artisan serve
 
 アプリケーションが正常に起動すると、[http://localhost:10000](http://localhost:10000) でアクセスできます。  
 またデータベースは[http://localhost:8080](http://localhost:8080) からアクセスすることができます。
 
-### 9, ダミーデータの作成
+### 10, ダミーデータの作成
 
 php artisan db:seed
 
 これにより、ダミーのショップやユーザーアカウント、管理者アカウント、店舗代表者アカウントなどが作成されます。  
+
+※ダミーアカウントを利用する場合は以下のアカウントからそれぞれの権限にログインすることができます。
+
+・ユーザーアカウント
+
+name:ユーザー  
+email:user@example.com  
+password:12345678  
+
+・管理者アカウント
+
+name:管理者  
+email:admin@example.com  
+password:12345678  
+
+・店舗代表者アカウント
+
+name:店舗代表者
+email:owner@example.com  
+password:12345678  
 
 次に、アプリケーション内の設定をしていきます。
 
