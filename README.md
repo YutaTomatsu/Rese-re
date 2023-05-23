@@ -40,11 +40,13 @@
 QRコードによる予約確認機能  
 決済機能
 
-##使用技術 Laravel 8.83.27
+## 使用技術 
 
-##テーブル設計
+Laravel 8.83.27
 
-![テーブル設計](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%91.png?raw=true)
+## テーブル設計
+
+![](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%EF%BC%91.png?raw=true)
 
 ![](https://github.com/YutaTomatsu/Rese-re/blob/main/Readme%E7%94%A8%E7%94%BB%E5%83%8F/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB2.png)
 
@@ -285,4 +287,4 @@ use Laravel\Fortify\Http\Requests\LoginRequest;　※use宣言を追加
 php artisan queue:work  
 php artisan schedule:work
 
-
+以上の工程を実行することで、ローカルの環境構築が完了します。
