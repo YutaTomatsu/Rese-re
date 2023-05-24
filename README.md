@@ -17,7 +17,6 @@
 会員登録機能  
 ログイン機能  
 ログアウト機能  
-パスワードリセット機能  
 飲食店のお気に入り追加機能  
 飲食店のお気に入り削除機能  
 飲食店の予約機能  
@@ -145,6 +144,9 @@ php artisan serve
 
 アプリケーションが正常に起動すると、[http://localhost:10000](http://localhost:10000) からアプリのホーム画面にアクセスできるようになります。  
 また、データベースは[http://localhost:8080](http://localhost:8080) からアクセスすることができます。
+
+※アプリが重くなっているため、ローカル環境でページを移動する際にお使いの環境によってはサーバーエラーが発生する場合があります。
+その場合、ページを再読み込みする、もしくはアクションを再度実行していただくことで解決できます。
 
 ### 10, ダミーデータの作成
 
@@ -306,12 +308,19 @@ use Laravel\Fortify\Http\Requests\LoginRequest;　※use宣言を追加
 以下のコマンドを実行してqueueとscheduleを起動します。 
 
 php artisan queue:work  
-php artisan schedule:work
 
 queueを実行することで管理者のメール一斉送信を非同期化し、  
+
+### 4,scheduleの実行
+
 scheduleを実行することでユーザーの予約に対するリマインダーメール機能を起動することができます。
 
-#### 4, 環境切り替え
+php artisan schedule:work
+
+また、デフォルトでは予約当日の午前9時にメールが送信されるようになっていますが、  
+app/Console/Kernel.phpのschedule fuction内の->dailyAt('09:00');という記述を変更することで送信日時を変更することができます。
+
+#### 5,環境切り替え
 
 環境切り分け用の.envとして、.env.productionをlaravelプロジェクトのルートディレクトリに作成し、本番環境で利用している.envをコピー＆ペーストして下さい。
 そして、APP_ENVを以下のようにproductionに変更して下さい。
