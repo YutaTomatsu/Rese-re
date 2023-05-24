@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Reserve;
 
 class QrCodeController extends Controller

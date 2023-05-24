@@ -21,7 +21,14 @@ class DatabaseSeeder extends Seeder
         \App\Models\Shops_area::factory(20)->create();
         \App\Models\Shops_genre::factory(20)->create();
         \App\Models\Review::factory(20)->create();
-        $this->call([CourcesTableSeeder::class,]);
-        
+        $this->call([
+            CourcesTableSeeder::class,
+        ]);
+        $this->call([
+            ReviewSeeder::class,
+        ]);
+        $this->call([
+            Owners_reservationTableSeeder::class,
+        ]);
     }
 }

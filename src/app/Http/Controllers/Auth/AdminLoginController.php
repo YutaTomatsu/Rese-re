@@ -1,17 +1,10 @@
 <?php
- 
+
 namespace App\Http\Controllers\Auth;
- 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Pipeline;
-use App\Actions\Admin\AttemptToAuthenticate;
-use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
-use App\Responses\AdminLoginResponse;
-use Laravel\Fortify\Contracts\LogoutResponse;
-use Laravel\Fortify\Http\Requests\LoginRequest;
- 
+
 class AdminLoginController extends Controller
 {
     /**
@@ -20,7 +13,7 @@ class AdminLoginController extends Controller
      * @var \Illuminate\Contracts\Auth\StatefulGuard
      */
     protected $guard;
- 
+
     /**
      * Create a new controller instance.
      *
@@ -31,7 +24,7 @@ class AdminLoginController extends Controller
     {
         $this->guard = $guard;
     }
- 
+
     /**
      * Show the login view.
      *
@@ -46,5 +39,4 @@ class AdminLoginController extends Controller
     {
         return view('admin.dashboard', ['guard' => 'admin']);
     }
-
 }

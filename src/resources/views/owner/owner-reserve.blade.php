@@ -5,13 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/owner-reserve.css') }}">
-
     <title>Laravel</title>
-
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-
 </head>
 
 
@@ -21,37 +16,37 @@
 
     <header>
         @if (Auth::check())
-            <div class="header__left">
-                <button class="icon" type="button"></button>
-                <div class="under__line"></div>
-                <div class="menu">
-                    <button class="close-button" type="button">X</button>
-                    <div class="menu__all">
-                        <a href="{{ route('owner') }}" class="menu__item">Home</a>
-                        <form class="logout" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="menu__item">Logout</button>
-                        </form>
-                        <a href="{{ route('owner-create') }}" class="menu__item">Create New Shop</a>
-                    </div>
+        <div class="header__left">
+            <button class="icon" type="button"></button>
+            <div class="under__line"></div>
+            <div class="menu">
+                <button class="close-button" type="button">X</button>
+                <div class="menu__all">
+                    <a href="{{ route('owner') }}" class="menu__item">Home</a>
+                    <form class="logout" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="menu__item">Logout</button>
+                    </form>
+                    <a href="{{ route('owner-create') }}" class="menu__item">Create New Shop</a>
+                </div>
                 @else
-                    <div class="header__left">
-                        <button class="icon" type="button">
-                            <div class="third-line"></div>
-                        </button>
-                        <div class="under__line"></div>
-                        <div class="menu">
-                            <button class="close-button" type="button">X</button>
-                            <div class="menu__all">
-                                <a href="{{ route('Home') }}" class="menu__item">Home</a>
-                                <a href="{{ route('register') }}" class="menu__item">Registration</a>
-                                <a href="{{ route('login') }}" class="menu__item">Login</a>
-                            </div>
-        @endif
-        </div>
-        <div class="header__title">Rese</div>
-        </div>
-        </div>
+                <div class="header__left">
+                    <button class="icon" type="button">
+                        <div class="third-line"></div>
+                    </button>
+                    <div class="under__line"></div>
+                    <div class="menu">
+                        <button class="close-button" type="button">X</button>
+                        <div class="menu__all">
+                            <a href="{{ route('Home') }}" class="menu__item">Home</a>
+                            <a href="{{ route('register') }}" class="menu__item">Registration</a>
+                            <a href="{{ route('login') }}" class="menu__item">Login</a>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="header__title">Rese</div>
+                </div>
+            </div>
     </header>
 
     <style>
@@ -105,24 +100,14 @@
     </style>
 
     <script>
-        // ボタン要素を取得
         const button = document.querySelector('.icon');
-
-        // メニュー要素を取得
         const menu = document.querySelector('.menu');
-
-        // 閉じるボタン要素を取得
         const closeButton = document.querySelector('.close-button');
 
-        // ボタンがクリックされたときにメニューをスライドイン/アウトする関数
         function toggleMenu() {
             menu.classList.toggle('menu-open');
         }
-
-        // ボタンにクリックイベントを追加
         button.addEventListener('click', toggleMenu);
-
-        // 閉じるボタンにクリックイベントを追加
         closeButton.addEventListener('click', toggleMenu);
     </script>
 
@@ -142,8 +127,7 @@
                         <a class="nav__btn" href="{{ route('reserve-date', ['id' => $id, 'date' => $prev_date]) }}">
                             <</a>
                                 <span>{{ $date }}</span>
-                                <a class="nav__btn"
-                                    href="{{ route('reserve-date', ['id' => $id, 'date' => $next_date]) }}">></a>
+                                <a class="nav__btn" href="{{ route('reserve-date', ['id' => $id, 'date' => $next_date]) }}">></a>
                     </div>
                 </div>
                 <table>
@@ -157,12 +141,12 @@
                     </thead>
                     <tbody>
                         @foreach ($reserves as $reserve)
-                            <tr>
-                                <td class="reserve__item">{{ $reserve->name }}</td>
-                                <td class="reserve__item">{{ $reserve->date }}</td>
-                                <td class="reserve__item">{{ $reserve->time }}</td>
-                                <td class="reserve__item">{{ $reserve->number_of_people }}</td>
-                            </tr>
+                        <tr>
+                            <td class="reserve__item">{{ $reserve->name }}</td>
+                            <td class="reserve__item">{{ $reserve->date }}</td>
+                            <td class="reserve__item">{{ $reserve->time }}</td>
+                            <td class="reserve__item">{{ $reserve->number_of_people }}</td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>

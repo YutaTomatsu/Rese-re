@@ -82,24 +82,14 @@
     </style>
 
     <script>
-        // ボタン要素を取得
         const button = document.querySelector('.icon');
-
-        // メニュー要素を取得
         const menu = document.querySelector('.menu');
-
-        // 閉じるボタン要素を取得
         const closeButton = document.querySelector('.close-button');
 
-        // ボタンがクリックされたときにメニューをスライドイン/アウトする関数
         function toggleMenu() {
             menu.classList.toggle('menu-open');
         }
-
-        // ボタンにクリックイベントを追加
         button.addEventListener('click', toggleMenu);
-
-        // 閉じるボタンにクリックイベントを追加
         closeButton.addEventListener('click', toggleMenu);
     </script>
 
@@ -118,12 +108,11 @@
 
                         <div class="line">
                             <label class="item__name" for="subject">Subject</label>
-                            <input class="shop__name__text" type="text" name="subject" id="subject"
-                                value="{{ old('subject') }}" required>
+                            <input class="shop__name__text" type="text" name="subject" id="subject" value="{{ old('subject') }}" required>
                         </div>
 
                         @error('subject')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
                         <div class="about">
@@ -132,7 +121,7 @@
                         </div>
 
                         @error('message')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
                     </div>
@@ -141,9 +130,9 @@
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
 
         <button class="button" type="submit">Send Email</button>

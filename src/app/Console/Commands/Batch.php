@@ -53,9 +53,10 @@ class Batch extends Command
         $user = $reservation->reserveUser;
         $shop = $reservation->reserveShop;
 
-        $text = "予約日時：{$reservation->date} {$reservation->time}\n";
-        $text .= "店名：{$shop->name}\n";
-        $text .= "予約人数：{$reservation->number_of_people}\n";
+        $text = 
+        "予約日時：$reservation->date $reservation->time\n
+        店名：$shop->name\n
+        予約人数：$reservation->number_of_people\n";
 
         Mail::to($user->email)->send(new ReservationReminder($text));
     }

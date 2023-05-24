@@ -10,22 +10,20 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
 
 class AdminRegisterController extends Controller
 {
     public function create()
     {
-        return view('admin.auth.register',['guard' =>'admin']);
+        return view('admin.auth.register', ['guard' => 'admin']);
     }
 
 
-       public function store(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Admin::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . Admin::class],
             'password' => ['required', 'confirmed'],
         ]);
 
@@ -39,12 +37,6 @@ class AdminRegisterController extends Controller
 
         Auth::guard('admin')->login($admin);
 
-         return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME);
     }
 }
-
-
-
-
-
-

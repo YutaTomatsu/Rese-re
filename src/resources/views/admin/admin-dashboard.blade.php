@@ -9,8 +9,6 @@
     <link href="{{ asset('css/admin-dashboard.css') }}" rel="stylesheet">
 
     <title>Laravel</title>
-
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
 
@@ -90,24 +88,14 @@
     </style>
 
     <script>
-        // ボタン要素を取得
         const button = document.querySelector('.icon');
-
-        // メニュー要素を取得
         const menu = document.querySelector('.menu');
-
-        // 閉じるボタン要素を取得
         const closeButton = document.querySelector('.close-button');
 
-        // ボタンがクリックされたときにメニューをスライドイン/アウトする関数
         function toggleMenu() {
             menu.classList.toggle('menu-open');
         }
-
-        // ボタンにクリックイベントを追加
         button.addEventListener('click', toggleMenu);
-
-        // 閉じるボタンにクリックイベントを追加
         closeButton.addEventListener('click', toggleMenu);
     </script>
 
@@ -125,22 +113,20 @@
 
                         <div class="line">
                             <label class="item__name" for="name">Name</label>
-                            <input class="shop__name__text" type="text" name="name" id="name"
-                                value="{{ old('name') }}" required>
+                            <input class="shop__name__text" type="text" name="name" id="name" value="{{ old('name') }}" required>
                         </div>
 
                         @error('name')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
                         <div class="line">
                             <label class="item__name" for="email">Email</label>
-                            <input class="shop__name__text" type="email" name="email" id="email"
-                                value="{{ old('email') }}" required>
+                            <input class="shop__name__text" type="email" name="email" id="email" value="{{ old('email') }}" required>
                         </div>
 
                         @error('email')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
 
@@ -149,17 +135,16 @@
                             <input class="shop__name__text" type="password" name="password" id="password" required>
                         </div>
                         @error('password')
-                            <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                         @enderror
 
 
                         <div class="line">
                             <label class="item__name" for="password_confirmation">Confirm Password</label>
-                            <input class="shop__name__text" type="password" name="password_confirmation"
-                                id="password_confirmation" required>
+                            <input class="shop__name__text" type="password" name="password_confirmation" id="password_confirmation" required>
                         </div>
                         @error('password_confirmation')
-                            <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ $message }}</div>
                         @enderror
 
 
@@ -169,9 +154,9 @@
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
 
         <button class="button" type="submit">create user</button>

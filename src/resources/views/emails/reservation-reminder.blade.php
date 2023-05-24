@@ -3,12 +3,17 @@
 
 <head>
     <meta charset="utf-8">
-    <title>予約情報のリマインダー</title>
+    <title>ご予約当日のお知らせ</title>
 </head>
 
 <body>
-    <h2>予約情報のリマインダー</h2>
-    <p>{!! $text !!}</p>
+    <p>ご予約ありがとうございます！</p>
+    <p>以下にご予約内容を記載させていただきましたので、確認のほどよろしくお願い致しします。</p>
+    <div>
+        <p>{!! nl2br(e($text)) !!}
+            <br>Rese
+        </p>
+    </div>
 </body>
 
 </html>

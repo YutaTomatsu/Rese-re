@@ -1,17 +1,10 @@
 <?php
- 
+
 namespace App\Http\Controllers\Auth;
- 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Pipeline;
-use App\Actions\Owner\AttemptToAuthenticate;
-use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
-use App\Responses\OwnerLoginResponse;
-use Laravel\Fortify\Contracts\LogoutResponse;
-use Laravel\Fortify\Http\Requests\LoginRequest;
- 
+
 class OwnerLoginController extends Controller
 {
     /**
@@ -20,7 +13,7 @@ class OwnerLoginController extends Controller
      * @var \Illuminate\Contracts\Auth\StatefulGuard
      */
     protected $guard;
- 
+
     /**
      * Create a new controller instance.
      *
@@ -31,7 +24,7 @@ class OwnerLoginController extends Controller
     {
         $this->guard = $guard;
     }
- 
+
     /**
      * Show the login view.
      *
@@ -41,5 +34,4 @@ class OwnerLoginController extends Controller
     {
         return view('auth.login', ['guard' => 'owner']);
     }
-
 }

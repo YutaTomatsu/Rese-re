@@ -13,37 +13,37 @@
     <header class="header">
 
         @if (Auth::check())
-            <div class="header__left">
-                <button class="icon" type="button"></button>
-                <div class="under__line"></div>
-                <div class="menu">
-                    <button class="close-button" type="button">X</button>
-                    <div class="menu__all">
-                        <a href="{{ 'owner' }}" class="menu__item">Home</a>
-                        <form class="logout" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="menu__item">Logout</button>
-                        </form>
-                        <a href="{{ route('owner-create') }}" class="menu__item">Create New Shop</a>
-                    </div>
+        <div class="header__left">
+            <button class="icon" type="button"></button>
+            <div class="under__line"></div>
+            <div class="menu">
+                <button class="close-button" type="button">X</button>
+                <div class="menu__all">
+                    <a href="{{ 'owner' }}" class="menu__item">Home</a>
+                    <form class="logout" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="menu__item">Logout</button>
+                    </form>
+                    <a href="{{ route('owner-create') }}" class="menu__item">Create New Shop</a>
+                </div>
                 @else
-                    <div class="header__left">
-                        <button class="icon" type="button">
-                            <div class="third-line"></div>
-                        </button>
-                        <div class="under__line"></div>
-                        <div class="menu">
-                            <button class="close-button" type="button">X</button>
-                            <div class="menu__all">
-                                <a href="{{ route('Home') }}" class="menu__item">Home</a>
-                                <a href="{{ route('register') }}" class="menu__item">Registration</a>
-                                <a href="{{ route('login') }}" class="menu__item">Login</a>
-                            </div>
-        @endif
-        </div>
-        <div class="header__title">Rese</div>
-        </div>
-        </div>
+                <div class="header__left">
+                    <button class="icon" type="button">
+                        <div class="third-line"></div>
+                    </button>
+                    <div class="under__line"></div>
+                    <div class="menu">
+                        <button class="close-button" type="button">X</button>
+                        <div class="menu__all">
+                            <a href="{{ route('Home') }}" class="menu__item">Home</a>
+                            <a href="{{ route('register') }}" class="menu__item">Registration</a>
+                            <a href="{{ route('login') }}" class="menu__item">Login</a>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="header__title">Rese</div>
+                </div>
+            </div>
     </header>
 
     <style>
@@ -97,28 +97,16 @@
     </style>
 
     <script>
-        // ボタン要素を取得
         const button = document.querySelector('.icon');
-
-        // メニュー要素を取得
         const menu = document.querySelector('.menu');
-
-        // 閉じるボタン要素を取得
         const closeButton = document.querySelector('.close-button');
 
-        // ボタンがクリックされたときにメニューをスライドイン/アウトする関数
         function toggleMenu() {
             menu.classList.toggle('menu-open');
         }
-
-        // ボタンにクリックイベントを追加
         button.addEventListener('click', toggleMenu);
-
-        // 閉じるボタンにクリックイベントを追加
         closeButton.addEventListener('click', toggleMenu);
     </script>
-
-
 
     <form class="form" method="POST" action="/owner/shop/create" enctype="multipart/form-data">
         @csrf
@@ -133,12 +121,11 @@
 
                         <div class="line">
                             <label class="item__name" for="name">店名</label>
-                            <input class="shop__name__text" type="text" name="name" id="name"
-                                value="{{ old('name') }}" required>
+                            <input class="shop__name__text" type="text" name="name" id="name" value="{{ old('name') }}" required>
                         </div>
 
                         @error('name')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
                         <div class="line">
@@ -146,15 +133,14 @@
                             <select class="text" name="area_id" id="area_id" required>
                                 <option value="">-- 選択してください --</option>
                                 @foreach ($areas as $area)
-                                    <option value="{{ $area->id }}"
-                                        {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area_name }}
-                                    </option>
+                                <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area_name }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
 
                         @error('area_id')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
                         <div class="line">
@@ -162,15 +148,14 @@
                             <select class="text" name="genre_id" id="genre_id" required>
                                 <option value="">-- 選択してください --</option>
                                 @foreach ($genres as $genre)
-                                    <option value="{{ $genre->id }}"
-                                        {{ old('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre_name }}
-                                    </option>
+                                <option value="{{ $genre->id }}" {{ old('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre_name }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
 
                         @error('genre_id')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
                         <div class="line">
@@ -179,7 +164,7 @@
                         </div>
 
                         @error('picture')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
 
                         <div class="about">
@@ -188,31 +173,19 @@
                         </div>
 
                         @error('about')
-                            <p class="text-danger">{{ $message }}</p>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
-
-
                     </div>
                 </div>
             </div>
         </div>
-
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
-
         <button class="button" type="submit">登録する</button>
     </form>
-
-
-
-
-
-
-
-
 </body>
 
 </html>

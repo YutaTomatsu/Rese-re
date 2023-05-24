@@ -25,7 +25,7 @@ class SearchController extends Controller
         if ($area_name) {
             $shops->whereHas('areas', function ($query) use ($area_name) {
                 $query->where('areas.area_name', $area_name);
-            })
+            });
         }
         if ($genre_name) {
             $shops->whereHas('genres', function ($query) use ($genre_name) {

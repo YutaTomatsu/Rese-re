@@ -108,11 +108,10 @@ class OwnerShopController extends Controller
 
     public function update(Request $request, $id)
     {
-        // バリデーションチェック
         $this->validate($request, [
             'name' => 'required|string|max:50',
             'about' => 'required|string|max:255',
-            'picture' => 'required|image|max:2048', // 最大サイズを2MB（2048KB）に制限
+            'picture' => 'required|image|max:2048',
             'area_id' => 'required|exists:areas,id',
             'genre_id' => 'required|exists:genres,id'
         ], [
@@ -139,7 +138,6 @@ class OwnerShopController extends Controller
 
 
         if ($request->hasFile('picture')) {
-            // 画像ファイルがアップロードされた場合は、画像を保存する
             $path = Storage::disk('s3')->putFile('shops', new File($request->file('picture')));
             $shop->picture = Storage::disk('s3')->url($path);
         }
