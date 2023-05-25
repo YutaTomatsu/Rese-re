@@ -75,6 +75,6 @@ class ReviewController extends Controller
         $review->comment = $validatedData['comment'];
         $review->save();
 
-        return view('review.review-done')->with('success', 'レビューを投稿しました');
+        return view('review.review_done')->with('success', 'レビューを投稿しました');
     }
 }

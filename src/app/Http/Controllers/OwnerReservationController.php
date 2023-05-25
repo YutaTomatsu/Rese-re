@@ -37,7 +37,7 @@ class OwnerReservationController extends Controller
 
         $reserves->appends(['date' => $date])->links();
 
-        return view('owner.owner-reserve', compact('id', 'shop', 'reserves', 'reserves_paginator', 'query_params', 'date', 'prev_date', 'next_date'));
+        return view('owner.owner_reserve', compact('id', 'shop', 'reserves', 'reserves_paginator', 'query_params', 'date', 'prev_date', 'next_date'));
     }
 
     public function date(Request $request, $id, $date)
@@ -65,6 +65,6 @@ class OwnerReservationController extends Controller
 
         $reserves->appends(['date' => $date])->links();
 
-        return view('owner.owner-reserve', compact('id', 'shop', 'reserves', 'reserves_paginator', 'query_params', 'date', 'prev_date', 'next_date'));
+        return view('owner.owner_reserve', compact('id', 'shop', 'reserves', 'reserves_paginator', 'query_params', 'date', 'prev_date', 'next_date'));
     }
 }

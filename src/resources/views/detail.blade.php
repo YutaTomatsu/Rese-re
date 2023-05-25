@@ -16,100 +16,100 @@
 
     <header class="header">
         @if (Auth::check())
-        <div class="header__left">
-            <button class="icon" type="button"></button>
-            <div class="under__line"></div>
-            <div class="menu">
-                <button class="close-button" type="button">X</button>
-                <div class="menu__all">
-                    <a href="{{ url('/dashboard') }}" class="menu__item">Home</a>
-                    <form class="logout" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="menu__item">Logout</button>
-                    </form>
-                    <a href="{{route('mypage')}}" class="menu__item">Mypage</a>
-                </div>
-                @else
-                <div class="header__left">
-                    <button class="icon" type="button">
-                        <div class="third-line"></div>
-                    </button>
-                    <div class="under__line"></div>
-                    <div class="menu">
-                        <button class="close-button" type="button">X</button>
-                        <div class="menu__all">
-                            <a href="{{ route('Home') }}" class="menu__item">Home</a>
-                            <a href="{{route('register')}}" class="menu__item">Registration</a>
-                            <a href="{{route('login')}}" class="menu__item">Login</a>
-                        </div>
-                        @endif
+            <div class="header__left">
+                <button class="icon" type="button"></button>
+                <div class="under__line"></div>
+                <div class="menu">
+                    <button class="close-button" type="button">X</button>
+                    <div class="menu__all">
+                        <a href="{{ url('/dashboard') }}" class="menu__item">Home</a>
+                        <form class="logout" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="menu__item">Logout</button>
+                        </form>
+                        <a href="{{ route('mypage') }}" class="menu__item">Mypage</a>
                     </div>
-                    <div class="header__title">Rese</div>
-                </div>
-            </div>
+                @else
+                    <div class="header__left">
+                        <button class="icon" type="button">
+                            <div class="third-line"></div>
+                        </button>
+                        <div class="under__line"></div>
+                        <div class="menu">
+                            <button class="close-button" type="button">X</button>
+                            <div class="menu__all">
+                                <a href="{{ route('Home') }}" class="menu__item">Home</a>
+                                <a href="{{ route('register') }}" class="menu__item">Registration</a>
+                                <a href="{{ route('login') }}" class="menu__item">Login</a>
+                            </div>
+        @endif
+        </div>
+        <div class="header__title">Rese</div>
+        </div>
+        </div>
 
-            <style>
-                .menu {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: #fff;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                    transform: translateX(-100%);
-                    transition: transform 0.3s ease-in-out;
-                    z-index: 1;
-                }
+        <style>
+            .menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1;
+            }
 
-                .close-button {
-                    background-color: rgb(72, 72, 255);
-                    color: white;
-                    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-                    border: none;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 7px;
-                    margin: 50px 100px;
+            .close-button {
+                background-color: rgb(72, 72, 255);
+                color: white;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 7px;
+                margin: 50px 100px;
 
-                }
+            }
 
-                .menu__all {
-                    margin: 200px 0;
-                }
+            .menu__all {
+                margin: 200px 0;
+            }
 
-                .logout {
-                    display: flex;
-                    justify-content: center;
-                }
+            .logout {
+                display: flex;
+                justify-content: center;
+            }
 
-                .menu__item {
-                    display: flex;
-                    justify-content: center;
-                    color: rgb(72, 72, 255);
-                    font-size: 30px;
-                    margin: 15px 0;
-                    text-decoration: none;
-                    border: none;
-                    background-color: white;
-                }
+            .menu__item {
+                display: flex;
+                justify-content: center;
+                color: rgb(72, 72, 255);
+                font-size: 30px;
+                margin: 15px 0;
+                text-decoration: none;
+                border: none;
+                background-color: white;
+            }
 
-                .menu-open {
-                    transform: translateX(0%);
-                }
-            </style>
+            .menu-open {
+                transform: translateX(0%);
+            }
+        </style>
 
-            <script>
-                const button = document.querySelector('.icon');
-                const menu = document.querySelector('.menu');
-                const closeButton = document.querySelector('.close-button');
+        <script>
+            const button = document.querySelector('.icon');
+            const menu = document.querySelector('.menu');
+            const closeButton = document.querySelector('.close-button');
 
-                function toggleMenu() {
-                    menu.classList.toggle('menu-open');
-                }
-                button.addEventListener('click', toggleMenu);
-                closeButton.addEventListener('click', toggleMenu);
-            </script>
+            function toggleMenu() {
+                menu.classList.toggle('menu-open');
+            }
+            button.addEventListener('click', toggleMenu);
+            closeButton.addEventListener('click', toggleMenu);
+        </script>
     </header>
 
     <div class="content__box">
@@ -151,63 +151,72 @@
                             <div class="column">
                                 <div class="title">予約</div>
                                 <input type="hidden" name="shop_id" value="{{ request()->query('id') }}">
-                                <input class="date" type="date" name="date" value="{{ old('date', date('Y-m-d')) }}" min="{{ date('Y-m-d') }}">
+                                <input class="date" type="date" name="date"
+                                    value="{{ old('date', date('Y-m-d')) }}" min="{{ date('Y-m-d') }}">
                                 <select class="text" name="time" id="time-select">
                                     @php
-                                    $selected_date = date('Y-m-d', strtotime(request('date', 'now')));
-                                    $is_today = $selected_date == date('Y-m-d');
-                                    $time_range = $is_today ? range(date('H') + 1, 23) : range(0, 23);
-                                    if ($is_today && date('H') == 20) {
-                                    array_push($time_range, 21);
-                                    }
+                                        $selected_date = date('Y-m-d', strtotime(request('date', 'now')));
+                                        $is_today = $selected_date == date('Y-m-d');
+                                        $time_range = $is_today ? range(date('H') + 1, 23) : range(0, 23);
+                                        if ($is_today && date('H') == 20) {
+                                            array_push($time_range, 21);
+                                        }
                                     @endphp
                                     @foreach ($time_range as $i)
-                                    @for ($j = 0; $j < 60; $j +=15) @php $time=str_pad($i, 2, '0' , STR_PAD_LEFT) . ':' . str_pad($j, 2, '0' , STR_PAD_LEFT); @endphp <option value="{{ $time }}" {{ old('time') == $time ? 'selected' : '' }} {{ ($is_today && ($i > 21 || ($i === 21 && $j > 00))) || $i < 17 ? 'disabled' : '' }}>
-                                        {{ $time }}
+                                        @for ($j = 0; $j < 60; $j += 15)
+                                            @php $time=str_pad($i, 2, '0' , STR_PAD_LEFT) . ':' . str_pad($j, 2, '0' , STR_PAD_LEFT); @endphp <option value="{{ $time }}"
+                                                {{ old('time') == $time ? 'selected' : '' }}
+                                                {{ ($is_today && ($i > 21 || ($i === 21 && $j > 00))) || $i < 17 ? 'disabled' : '' }}>
+                                                {{ $time }}
+                                            </option>
+
+                                            timeRange = timeRange.filter(time => {
+                                            const hour = Math.floor(time / 4);
+                                            const minute = (time % 4) * 15;
+                                            return hour >= 17 && (hour < 21 || (hour===21 && minute <=00)); });
+                                                @endfor
+                                        @endforeach
+                                </select>
+                                <select class="text" name="number_of_people">
+                                    @for ($i = 1; $i <= 20; $i++)
+                                        <option value="{{ $i }}"
+                                            {{ old('number_of_people') == $i ? 'selected' : '' }}>{{ $i }}人
                                         </option>
+                                    @endfor
+                                </select>
 
-                                        timeRange = timeRange.filter(time => {
-                                        const hour = Math.floor(time / 4);
-                                        const minute = (time % 4) * 15;
-                                        return hour >= 17 && (hour < 21 || (hour===21 && minute <=00)); }); @endfor @endforeach </select>
-                                            <select class="text" name="number_of_people">
-                                                @for ($i = 1; $i <= 20; $i++) <option value="{{ $i }}" {{ old('number_of_people') == $i ? 'selected' : '' }}>{{ $i }}人
-                                                    </option>
-                                                    @endfor
-                                            </select>
+                                <div class="confirm">
+                                    <div class="confirm__left">
+                                        <div class="confirm__item">Shop</div>
+                                        <div class="confirm__item">Date</div>
+                                        <div class="confirm__item">Time</div>
+                                        <div class="confirm__item">Number</div>
+                                    </div>
 
-                                            <div class="confirm">
-                                                <div class="confirm__left">
-                                                    <div class="confirm__item">Shop</div>
-                                                    <div class="confirm__item">Date</div>
-                                                    <div class="confirm__item">Time</div>
-                                                    <div class="confirm__item">Number</div>
-                                                </div>
-
-                                                <div class="confirm__right">
-                                                    <div class="confirm__item">{{ $shop->name }}</div>
-                                                    <div class="confirm__item" id="dateDisplay"></div>
-                                                    <div class="confirm__item" id="timeDisplay"></div>
-                                                    <div class="confirm__item" id="numberOfPeopleDisplay"></div>
-                                                </div>
-                                            </div>
-                                            @if ($cources)
-                                            <select class="text" name="cource" id="cource-select">
-                                                <option value="">コースを選択</option>
-                                                <option value="{{ $cources->cource_1 }}">{{ $cources->cource_1 }}</option>
-                                                @if ($cources->cource_2)
-                                                <option value="{{ $cources->cource_2 }}">{{ $cources->cource_2 }}
-                                                </option>
-                                                @endif
-                                                @if ($cources->cource_3)
-                                                <option value="{{ $cources->cource_3 }}">{{ $cources->cource_3 }}
-                                                </option>
-                                                @endif
-                                            </select>
-                                            @endif
-                                            @if ($errors->has('time'))
-                                            <div class="error">{{ $errors->first('time') }}</div>
-                                            @endif
+                                    <div class="confirm__right">
+                                        <div class="confirm__item">{{ $shop->name }}</div>
+                                        <div class="confirm__item" id="dateDisplay"></div>
+                                        <div class="confirm__item" id="timeDisplay"></div>
+                                        <div class="confirm__item" id="numberOfPeopleDisplay"></div>
+                                    </div>
+                                </div>
+                                @if ($cources)
+                                    <select class="text" name="cource" id="cource-select">
+                                        <option value="">コースを選択</option>
+                                        <option value="{{ $cources->cource_1 }}">{{ $cources->cource_1 }}</option>
+                                        @if ($cources->cource_2)
+                                            <option value="{{ $cources->cource_2 }}">{{ $cources->cource_2 }}
+                                            </option>
+                                        @endif
+                                        @if ($cources->cource_3)
+                                            <option value="{{ $cources->cource_3 }}">{{ $cources->cource_3 }}
+                                            </option>
+                                        @endif
+                                    </select>
+                                @endif
+                                @if ($errors->has('time'))
+                                    <div class="error">{{ $errors->first('time') }}</div>
+                                @endif
                             </div>
                             <button class="button" type="submit">予約する</button>
                 </form>
@@ -301,7 +310,7 @@
             </form>
 
             @if ($errors->has('message'))
-            <div class="alert alert-danger">{{ $errors->first('message') }}</div>
+                <div class="alert alert-danger">{{ $errors->first('message') }}</div>
             @endif
 
             <h3>レビュー一覧</h3>
@@ -319,24 +328,24 @@
 
             <div class="review__content">
                 @if (count($reviews) === 0)
-                <p>まだレビューがありません</p>
+                    <p>まだレビューがありません</p>
                 @else
-                @foreach ($reviews as $review)
-                <div class="review__item">
-                    <p>投稿者: {{ $review->user->name }}</p>
-                    <p class="star-rating" data-rate="{{ $review->evaluate }}"></p>
-                    <p class="comment" data-full-comment="{{ $review->comment }}">{{ $review->comment }}</p>
-                    <p>投稿日時: {{ $review->created_at }}</p>
-                    @php
-                    $commentLength = mb_strlen($review->comment, 'UTF-8');
-                    @endphp
-                    @if ($commentLength > 20)
-                    <button class="toggle-comment">全文を表示</button>
-                    @endif
-                </div>
-                @endforeach
+                    @foreach ($reviews as $review)
+                        <div class="review__item">
+                            <p>投稿者: {{ $review->user->name }}</p>
+                            <p class="star-rating" data-rate="{{ $review->evaluate }}"></p>
+                            <p class="comment" data-full-comment="{{ $review->comment }}">{{ $review->comment }}</p>
+                            <p>投稿日時: {{ $review->created_at }}</p>
+                            @php
+                                $commentLength = mb_strlen($review->comment, 'UTF-8');
+                            @endphp
+                            @if ($commentLength > 20)
+                                <button class="toggle-comment">全文を表示</button>
+                            @endif
+                        </div>
+                    @endforeach
 
-                {{ $reviews->appends(array_merge($query_params, ['reviews_page' => $reviews->currentPage()]))->links('owner.reviews') }}
+                    {{ $reviews->appends(array_merge($query_params, ['reviews_page' => $reviews->currentPage()]))->links('owner.reviews') }}
                 @endif
             </div>
 

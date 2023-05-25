@@ -8,7 +8,7 @@ use App\Models\Favorite;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Shop;
-use App\Models\Reserves_cource;
+use App\Models\ReservesCource;
 
 class MypageController extends Controller
 {
@@ -27,7 +27,7 @@ class MypageController extends Controller
             $favorite_shops = Auth::user()->favorites()->pluck('shop_id')->toArray();
         }
 
-        $cources = Reserves_cource::whereIn('reserve_id', $reservations->pluck('id'))->get();
+        $cources = ReservesCource::whereIn('reserve_id', $reservations->pluck('id'))->get();
 
         $shops = Shop::select(
             'shops.id as shop_id',

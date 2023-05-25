@@ -10,6 +10,6 @@ class AdminDashboardController extends Controller
     {
         $admins = Admin::all();
 
-        return view('admin.dashboard', ['admins' => $admins,]);
+        return view('admin.admin_dashboard', ['admins' => $admins,]);
     }
 }

@@ -20,7 +20,7 @@ class ReservationReminder extends Mailable
 
     public function build()
     {
-        return $this->view('emails.reservation-reminder')
+        return $this->view('emails.reservation_reminder')
                     ->subject('ご予約当日のお知らせ');
     }
 }

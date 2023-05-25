@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Stripe;
 use App\Models\Reserve;
-use App\Models\Reserves_cource;
+use App\Models\ReservesCource;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PaymentController extends Controller
@@ -57,7 +57,7 @@ class PaymentController extends Controller
         $reserve->number_of_people = $request->input('number_of_people');
         $reserve->save();
 
-        $reserve_cource = new Reserves_cource();
+        $reserve_cource = new ReservesCource();
         $reserve_cource->reserve_id = $reserve->id;
         $reserve_cource->cource = $request->input('cource');
 
@@ -75,6 +75,6 @@ class PaymentController extends Controller
 
         $reserve_cource->save();
 
-        return view('payment.payment-done', compact('reserve'));
+        return view('payment.payment_done', compact('reserve'));
     }
 }

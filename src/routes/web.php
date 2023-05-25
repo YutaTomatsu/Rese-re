@@ -59,12 +59,8 @@ Route::middleware([
 
     Route::get('/dashboard', function () {
 
-
         $areas = Area::all();
         $genres = Genre::all();
-
-
-        // ショップ情報を取得し、area_name と genre_name を関連付ける
         $shops = Shop::select(
             'shops.id as shop_id',
             'shops.name',
@@ -87,7 +83,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/admin', function () {
-        return view('admin.admin-dashboard');
+        return view('admin.admin_dashboard');
     })->middleware(['can:admin'])->name('admin');
 
     Route::get('/owner', function () {
@@ -96,7 +92,7 @@ Route::middleware([
         $genres = Genre::all();
         $shops = Shop::whereIn('shops.id', function ($query) {
             $query->select('shop_id')
-                ->from('owners_reservations')
+                ->from('owners_shops')
                 ->where('user_id', Auth::user()->id);
         })
             ->select('shops.id as shop_id', 'shops.name', 'shops.about', 'shops.picture', 'areas.id as area_id', 'areas.area_name', 'genres.id as genre_id', 'genres.genre_name')
@@ -106,11 +102,9 @@ Route::middleware([
             ->leftJoin('genres', 'sg.genre_id', '=', 'genres.id')
             ->get();
 
-
-        return view('owner.owner-dashboard', compact('shops', 'areas', 'genres'));
+        return view('owner.owner_dashboard', compact('shops', 'areas', 'genres'));
     })->middleware(['can:owner'])->name('owner');
 });
-
 
 Route::prefix('admin')->group(function () {
     Route::get('login', [AdminLoginController::class, 'create'])->name('admin.login');
@@ -124,7 +118,6 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-
 Route::prefix('owner')->group(function () {
     Route::get('login', [OwnerLoginController::class, 'create'])->name('owner.login');
     Route::post('login', [OwnerLoginController::class, 'store']);
@@ -136,7 +129,6 @@ Route::prefix('owner')->group(function () {
         Route::get('dashboard', [OwnerDashboardController::class, 'index']);
     });
 });
-
 
 Route::get('detail', [DetailController::class, 'index'])->name('detail');
 

@@ -23,6 +23,6 @@ class OwnerReviewController extends Controller
             ->where('shops.id', $id)
             ->firstOrFail();
 
-        return view('owner.owner-review', compact('shop', 'reviews', 'reviewsAvg', 'totalReviews'));
+        return view('owner.owner_review', compact('shop', 'reviews', 'reviewsAvg', 'totalReviews'));
     }
 }

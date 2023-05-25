@@ -10,9 +10,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
-use App\Models\Shops_area;
-use App\Models\Shops_genre;
-use App\Models\Owners_reservation;
+use App\Models\ShopsArea;
+use App\Models\ShopsGenre;
+use App\Models\OwnersShop;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -24,7 +24,7 @@ class OwnerShopController extends Controller
     {
         $areas = Area::all();
         $genres = Genre::all();
-        return view('owner.owner-create', compact('areas', 'genres'));
+        return view('owner.owner_create', compact('areas', 'genres'));
     }
 
     public function store(Request $request)
@@ -68,18 +68,18 @@ class OwnerShopController extends Controller
         $shop->picture = Storage::disk('s3')->url($path);
         $shop->save();
 
-        $shop_area = new Shops_area();
+        $shop_area = new ShopsArea();
         $shop_area->shop_id = $shop->id;
         $shop_area->area_id = $request->input('area_id');
         $shop_area->save();
 
 
-        $shop_genre = new Shops_genre();
+        $shop_genre = new ShopsGenre();
         $shop_genre->shop_id = $shop->id;
         $shop_genre->genre_id = $request->input('genre_id');
         $shop_genre->save();
 
-        $ownerReservation = new Owners_reservation();
+        $ownerReservation = new OwnersShop();
         $ownerReservation->user_id = Auth::user()->id;
         $ownerReservation->shop_id = $shop->id;
         $ownerReservation->save();
@@ -100,7 +100,7 @@ class OwnerShopController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('owner.owner-edit', compact('shop', 'areas', 'genres'));
+        return view('owner.owner_edit', compact('shop', 'areas', 'genres'));
     }
 
 

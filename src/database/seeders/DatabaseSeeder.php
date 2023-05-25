@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Shop::factory(20)->create();
         \App\Models\Area::factory(3)->create();
         \App\Models\Genre::factory(5)->create();
-        \App\Models\Shops_area::factory(20)->create();
-        \App\Models\Shops_genre::factory(20)->create();
+        \App\Models\ShopsArea::factory(20)->create();
+        \App\Models\ShopsGenre::factory(20)->create();
         \App\Models\Review::factory(20)->create();
         $this->call([
             CourcesTableSeeder::class,
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
         ]);
         $this->call([
-            Owners_reservationTableSeeder::class,
+            OwnersShopTableSeeder::class,
         ]);
     }
 }

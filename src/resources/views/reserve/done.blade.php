@@ -106,18 +106,11 @@
         </script>
 
         <div class="center">
-
             <div class="box">
-
                 <div class="qr">{!! QrCode::size(150)->generate(route('owner-reserve', ['id' => $reserve->shop_id])) !!}</div>
-
                 <div class="thanks">ご予約ありがとうございます。こちらのQRコードを店舗で提示して下さい。</div>
-
                 <a href="{{ url('/dashboard') }}" class="back">戻る</a>
-
             </div>
-
         </div>
 </body>
-
 </html>
