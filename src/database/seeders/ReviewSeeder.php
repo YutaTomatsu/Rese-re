@@ -37,5 +37,21 @@ class ReviewSeeder extends Seeder
             'comment' => '100000円は高い。',
             'evaluate' => 1,
         ]);
+
+        Review::factory()->create([
+            'id' => 24,
+            'user_id' => rand(4, 20),
+            'shop_id' => 1,
+            'comment' => '1000円コースを食べました！100000円コースと比較したら劣りますがお値段以上だと思いました。。',
+            'evaluate' => 4,
+        ]);
+
+        Review::factory()->create([
+            'id' => 25,
+            'user_id' => rand(4, 20),
+            'shop_id' => 1,
+            'comment' => 'リピします。',
+            'evaluate' => 5,
+        ]);
     }
 }
