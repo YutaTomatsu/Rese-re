@@ -100,7 +100,7 @@
                                 <div class="review__img" id="drop-zone">
                                     <div class="img__text">クリックして写真を追加</div>
                                     <div class="img__sub__text">またはドラッグアンドドロップ</div>
-                                    <div id="filename" style="display: none;"></div>
+                                    <div class="filename" id="filename" style="display: none;"></div>
                                     <div id="file-error" style="display: none; color: red;"></div>
                                 </div>
                             </label>
@@ -132,7 +132,17 @@
 </body>
 
 <script>
+    var originalFilename = "{{ basename($review->image) }}";
+</script>
+<script>
     $(document).ready(function() {
+        if (originalFilename) {
+            $("#filename").text(originalFilename).show();
+            $(".img__text").hide();
+            $(".img__sub__text").hide();
+        }
+
+
         var dropZone = $('#drop-zone');
         var fileInput = $('#file-input');
 

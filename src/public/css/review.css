@@ -270,6 +270,10 @@
 .img__sub__text{
     text-align:center;
 }
+
+.filename{
+    word-break:break-all
+}
 @media screen and (max-width: 768px) {
 
     .detail {

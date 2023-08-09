@@ -136,6 +136,8 @@ class ReviewController extends Controller
             })
             ->get();
 
+        $image_filename = basename($review->image); 
+
         $favorite_shops = array();
         if (Auth::check()) {
             $favorite_shops = Auth::user()->favorites()->pluck('shop_id')->toArray();
@@ -145,7 +147,7 @@ class ReviewController extends Controller
         if ($past_reserves->isEmpty()) {
             return back()->withErrors(['message' => '来店したユーザーのみレビューすることができます']);
         } else {
-            return view('review.review_edit', compact('shop_id', 'shop', 'favorite_shops','review'));
+            return view('review.review_edit', compact('shop_id', 'shop', 'favorite_shops','review', 'image_filename'));
         }
     }
 
