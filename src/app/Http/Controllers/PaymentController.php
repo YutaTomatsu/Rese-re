@@ -77,4 +77,5 @@ class PaymentController extends Controller
 
         return view('payment.payment_done', compact('reserve'));
     }
+
 }

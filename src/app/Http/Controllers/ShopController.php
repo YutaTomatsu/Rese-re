@@ -33,6 +33,12 @@ class ShopController extends Controller
             $favorite_shops = Auth::user()->favoriteShops()->pluck('shop_id')->toArray();
         }
 
-        return view('welcome', compact('shops', 'areas', 'genres', 'favorite_shops'));
+        $reviewsAvg = array();
+        foreach ($shops as $shop) {
+            $shop_reviews = \DB::table('reviews')->where('shop_id', $shop->shop_id)->get();
+            $shop->reviewsAvg = $shop_reviews->avg('evaluate');
+        }
+
+        return view('welcome', compact('shops', 'areas', 'genres', 'favorite_shops', 'reviewsAvg'));
     }
 }

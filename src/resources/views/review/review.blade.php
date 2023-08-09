@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/review.css') }}">
     <title>Laravel</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 @extends('layouts.common')
@@ -14,91 +16,235 @@
 @section('content')
 
 <body class="antialiased">
-    <div class="between">
-        <div class="detail__left">
-            <div class="detail">
-                <h2>{{ $shop->name }}</h2>
-                <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
-                <div class="hashtag">
-                    <p>#{{ $shop->area_name }}</p>
-                    <p>#{{ $shop->genre_name }}</p>
-                </div>
-                <p class="about">
-                <div class="about__title">紹介文</div>
-                <div class="about__content">{{ $shop->about }}</div>
-                </p>
-            </div>
-        </div>
-        <div class="review__right">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="review">
-                            <div class="review__title">{{ __('レビューを書く') }}</div>
-                            <div class="review__body">
-                                <form class="review__form" method="POST" action="{{ route('review.store') }}">
-                                    @csrf
-                                    <div class="form-group row">
-                                        <label for="evaluate" class="col-md-4 col-form-label text-md-right">{{ __('評価') }}</label>
-                                        <input type="hidden" name="shop_id" value="{{ $shop_id }}">
-                                        <div class="rate-form">
-                                            <input id="star5" type="radio" name="evaluate" value="5">
-                                            <label for="star5">★</label>
-                                            <input id="star4" type="radio" name="evaluate" value="4">
-                                            <label for="star4">★</label>
-                                            <input id="star3" type="radio" name="evaluate" value="3">
-                                            <label for="star3">★</label>
-                                            <input id="star2" type="radio" name="evaluate" value="2">
-                                            <label for="star2">★</label>
-                                            <input id="star1" type="radio" name="evaluate" value="1">
-                                            <label for="star1">★</label>
-                                            @error('evaluate')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
+    <form class="review__form" method="POST" action="{{ route('review.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="between">
+            <div class="detail__left">
+                <div class="detail__left__box">
+                    <div class="text">
+                        今回のご利用はいかがでしたか？
+                    </div>
+                    <div class="card__row">
+                        <div class="card">
+                            <img class="img" src="{{ $shop->picture }}" alt="{{ $shop->name }}">
+                            <div class="under__box">
+                                <div class="under__item">
+                                    <div class="shopname">{{ $shop->name }}</div>
+                                    <div class="hashtag">
+                                        <p class="tag">#{{ $shop->area_name }}</p>
+                                        <p class="tag">#{{ $shop->genre_name }}</p>
                                     </div>
-                                    <div class="comment__group">
-                                        <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('コメント') }}</label>
-                                        <div class="col-md-6">
-                                            <textarea class="comment__text" name="comment" id="comment" class="form-control" required>{{ old('comment') }}</textarea>
+                                    <div class="card__between">
+                                        <a class="detail" href="{{ route('detail', ['id' => $shop_id]) }}">詳しく見る</a>
+                                        <div class="between__right">
 
-                                            @error('comment')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                                            @if (Auth::check())
+                                            @if (in_array($shop_id, $favorite_shops))
+                                            <div class="heart">
+                                                <img class="toggle_img" src="{{ asset('img/redheart.svg') }}" alt="heart" data-shopid="{{ $shop_id }}" data-userid="{{ Auth::id() }}">
+                                            </div>
+                                            @else
+                                            <div class="heart">
+                                                <img class="toggle_img" src="{{ asset('img/grayheart.svg') }}" alt="heart" data-shopid="{{ $shop_id }}" data-userid="{{ Auth::id() }}">
+                                            </div>
+                                            @endif
+                                            @else
+                                            <a href="{{ route('login') }}">
+                                                <div class="heart">
+                                                    <img src="img/grayheart.svg" alt="heart">
+                                                </div>
+                                            </a>
+                                            @endif
                                         </div>
                                     </div>
-                                    <div class="form-group row mb-0">
-                                        <div class="button__group">
-                                            <button class="review-button" type="submit" class="btn btn-primary">
-                                                {{ __('送信する') }}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                                @if ($errors->any())
-                                <div class="alert alert-danger mt-3">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
                                 </div>
-                                @endif
-                                @if (session('success'))
-                                <div class="alert alert-success mt-3">
-                                    {{ session('success') }}
-                                </div>
-                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="review__right">
+                <div class="review">
+                    <div class="review__title">体験を評価して下さい</div>
+                    <div class="review__body">
+                        <div class="form-group row">
+                            <input type="hidden" name="shop_id" value="{{ $shop_id }}">
+                            <div class="rate-form">
+                                <input id="star5" type="radio" name="evaluate" value="5">
+                                <label for="star5">★</label>
+                                <input id="star4" type="radio" name="evaluate" value="4">
+                                <label for="star4">★</label>
+                                <input id="star3" type="radio" name="evaluate" value="3">
+                                <label for="star3">★</label>
+                                <input id="star2" type="radio" name="evaluate" value="2">
+                                <label for="star2">★</label>
+                                <input id="star1" type="radio" name="evaluate" value="1">
+                                <label for="star1">★</label>
+                            </div>
+                        </div>
+                        <div class="comment__group">
+                            <div for="comment" class="title">口コミを投稿</div>
+                            <div class="comment__box">
+                                <textarea class="comment__text" name="comment" id="comment" class="form-control" required placeholder="カジュアルな夜のお出かけにおすすめのスポット">{{ old('comment') }}</textarea>
+                                <div class="max__text">0/400(最高文字数)</div>
+                            </div>
+                            @error('comment')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="img__group">
+                            <div for="img" class="title">画像の追加</div>
+                            <label for="image" class="img__box">
+                                <div class="review__img" id="drop-zone">
+                                    <div class="img__text">クリックして写真を追加</div>
+                                    <div class="img__sub__text">またはドラッグアンドドロップ</div>
+                                    <div id="filename" style="display: none;"></div>
+                                    <div id="file-error" style="display: none; color: red;"></div>
+                                </div>
+                            </label>
+                            <input type="file" name="image" id="file-input" style="display: none;">
+                        </div>
+
+                        @if ($errors->any())
+                        <div class="alert alert-danger mt-3">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success mt-3">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+        <button class="review__button" type="submit" class="btn btn-primary">
+            口コミを投稿
+        </button>
+    </form>
 </body>
+<script>
+    window.onload = function() {
+        var comment = document.getElementById("comment");
+        var textCounter = document.querySelector(".max__text");
+        var maxLength = 400;
+
+        textCounter.innerHTML = (comment.value.length || 0) + '/400(最高文字数)';
+
+        comment.addEventListener("input", function() {
+            var currentLength = comment.value.length;
+
+            if (currentLength > maxLength) {
+
+                comment.value = comment.value.slice(0, maxLength);
+                currentLength = maxLength;
+
+                textCounter.innerHTML = currentLength + '/400(最高文字数)<br><span class=\"text-danger\">口コミは400文字までです</span>';
+            } else {
+
+                textCounter.innerHTML = currentLength + '/400(最高文字数)';
+            }
+        });
+    }
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        var dropZone = $('#drop-zone');
+        var fileInput = $('#file-input');
+        var fileError = $('#file-error');
+
+        function updateUI(files) {
+            if (files && files[0]) {
+
+                var filename = files[0].name;
+                var ext = filename.split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['jpeg', 'png']) == -1) {
+                    fileError.text('JPEG, PNG ファイルのみアップロード可能です。').show();
+                    return;
+                }
+
+                $(".img__text").hide();
+                $(".img__sub__text").hide();
+                fileError.hide();
+
+                $("#filename").text(filename).show();
+            }
+        }
+
+        dropZone.click(function() {
+            fileInput.click();
+        });
+
+        fileInput.on('change', function(e) {
+            updateUI(this.files);
+        });
+
+        dropZone.on('dragover', function(e) {
+            e.preventDefault();
+            dropZone.addClass('dragging');
+        });
+
+        dropZone.on('dragleave', function(e) {
+            dropZone.removeClass('dragging');
+        });
+
+        dropZone.on('drop', function(e) {
+            e.preventDefault();
+            dropZone.removeClass('dragging');
+
+            var files = e.originalEvent.dataTransfer.files;
+            fileInput.prop('files', files);
+
+            updateUI(files);
+        });
+    });
+</script>
+
+
+<script>
+    $(document).on('click', '.toggle_img', function(e) {
+        e.preventDefault();
+
+        var shop_id = $(this).data('shopid');
+        var user_id = $(this).data('userid');
+        var img = $(this).attr('src');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
+        $.ajax({
+            url: "{{ route('favorite') }}",
+            method: "POST",
+            data: {
+                shop_id: shop_id,
+                user_id: user_id
+            },
+        }).done(function(data) {
+            if (data.status == 'success') {
+                if (img.includes('grayheart.svg')) {
+                    $('.toggle_img[data-shopid="' + shop_id + '"]').attr('src',
+                        "{{ asset('img/redheart.svg') }}");
+                } else {
+                    $('.toggle_img[data-shopid="' + shop_id + '"]').attr('src',
+                        "{{ asset('img/grayheart.svg') }}");
+                }
+                console.log(data.message);
+            }
+        }).fail(function() {
+            console.log('Error: the request was not sent!!!.');
+        });
+    });
+</script>
 @endsection

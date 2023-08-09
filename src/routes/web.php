@@ -4,7 +4,7 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\AdminRegisterController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminReviewController;
 use App\Http\Controllers\OwnerDashboardController;
 use App\Http\Controllers\OwnerShopController;
 use App\Http\Controllers\OwnerReservationController;
@@ -22,6 +22,7 @@ use App\Http\Controllers\CreateOwnerController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ImportController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -79,7 +80,13 @@ Route::middleware([
             $favorite_shops = Auth::user()->favorites()->pluck('shop_id')->toArray();
         }
 
-        return view('welcome', compact('shops', 'areas', 'genres', 'favorite_shops'));
+        $reviewsAvg = array();
+        foreach ($shops as $shop) {
+            $shop_reviews = \DB::table('reviews')->where('shop_id', $shop->shop_id)->get();
+            $shop->reviewsAvg = $shop_reviews->avg('evaluate');
+        }
+
+        return view('welcome', compact('shops', 'areas', 'genres', 'favorite_shops','reviewsAvg'));
     })->name('dashboard');
 
     Route::get('/admin', function () {
@@ -133,6 +140,12 @@ Route::prefix('owner')->group(function () {
 Route::get('detail', [DetailController::class, 'index'])->name('detail');
 
 Route::get('review-sort/{id}', [DetailController::class, 'reviewSort'])->name('review-sort');
+
+Route::delete('review-delete/{id}', [ReviewController::class,'destroy'])->name('review.delete');
+
+Route::get('review-edit/{id}', [ReviewController::class, 'reviewEditForm'])->name('review.edit');
+
+Route::post('review-edit/{id}', [ReviewController::class, 'reviewEdit'])->name('review.edit.store');
 
 Route::get('search', [SearchController::class, 'search'])->name('search');
 
@@ -191,3 +204,13 @@ Route::post('/admins/send-email', [MailController::class, 'sendEmail'])->name('a
 Route::get('/create', [PaymentController::class, 'create'])->name('payment-create');
 
 Route::get('/store', [PaymentController::class, 'store'])->name('payment-store');
+
+Route::get('shop/import', [ImportController::class, 'showImportForm'])->name('import-form');
+
+Route::post('shop/import', [ImportController::class, 'import'])->name('import');
+
+Route::get('/admin/shop', [AdminReviewController::class, 'showShop'])->name('shop-all');
+
+Route::get('/admin/review', [AdminReviewController::class, 'showReview'])->name('admin-review');
+
+Route::get('/admin/review/sort/{id}', [AdminReviewController::class, 'reviewSorting'])->name('admin-review-sort');

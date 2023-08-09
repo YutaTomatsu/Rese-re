@@ -7,10 +7,6 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reserve;
-use App\Models\Area;
-use App\Models\Genre;
-use App\Models\Shop;
-use Carbon\Carbon;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReserveController extends Controller
@@ -127,39 +123,5 @@ class ReserveController extends Controller
         $reservation->save();
 
         return view('reserve.edit_done');
-    }
-
-
-
-    public function pastReserves()
-    {
-        $areas = Area::all();
-        $genres = Genre::all();
-        $pastReserves = Shop::select(
-            'shops.id as shop_id',
-            'shops.name',
-            'shops.picture',
-            'areas.area_name',
-            'genres.genre_name'
-        )
-            ->leftJoin('shops_areas', 'shops.id', '=', 'shops_areas.shop_id')
-            ->leftJoin('areas', 'shops_areas.area_id', '=', 'areas.id')
-            ->leftJoin('shops_genres', 'shops.id', '=', 'shops_genres.shop_id')
-            ->leftJoin('genres', 'shops_genres.genre_id', '=', 'genres.id')
-            ->get();
-
-        $user = Auth::user();
-        $pastReserves = Reserve::where('user_id', $user->id)
-            ->where(function ($query) {
-                $query->where('date', '<', Carbon::today())
-                    ->orWhere(function ($query) {
-                        $query->where('date', '=', Carbon::today())
-                            ->where('time', '<', Carbon::now()->format('H:i:s'));
-                    });
-            })
-            ->with('shop', 'shops_area', 'shops_genre', 'area', 'genre')
-            ->get();
-
-        return view('reserve.past', compact('areas', 'genres', 'pastReserves'));
     }
 }

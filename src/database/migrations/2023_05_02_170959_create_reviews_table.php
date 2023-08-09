@@ -19,8 +19,8 @@ class CreateReviewsTable extends Migration
             $table->unsignedBigInteger('shop_id');
             $table->text('comment');
             $table->integer('evaluate');
+            $table->text('image')->nullable();
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('shop_id')->references('id')->on('shops');
         });

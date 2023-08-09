@@ -64,6 +64,7 @@
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
                 transform: translateX(-100%);
                 transition: transform 0.3s ease-in-out;
+                z-index: 100;
             }
 
             .close-button {

@@ -24,6 +24,8 @@
                         <button type="submit" class="menu__item">Logout</button>
                     </form>
                     <a href="{{ route('mail') }}" class="menu__item">Send Mail</a>
+                    <a href="{{ route('import-form') }}" class="menu__item">Shop Import</a>
+                    <a href="{{ route('shop-all') }}" class="menu__item">Show Review</a>
                 </div>
             </div>
             <div class="header__title">Rese</div>
